@@ -1,0 +1,161 @@
+db.bos311Hex.insertMany(
+	[
+		{ 
+			"HEX_600" : 12, 
+			"results":[
+				{
+					"User_types": "non_gov",
+					"Frequency": "all",
+					"HEX_weighted_average_distance" : 0.12, 
+					"HEX_weighted_mean_home_distance" : 20, 
+					"HEX_weighted_max_home_distance" : 39
+
+				},
+				{
+					"User_types":"non_gov_unsure",
+					"Frequency": "all",
+					"HEX_weighted_average_distance" : 11, 
+					"HEX_weighted_mean_home_distance" : 12, 
+					"HEX_weighted_max_home_distance" : 13
+				},
+
+				{
+					"User_types":"all",
+					"Frequency": "all",
+					"HEX_weighted_average_distance" : 12, 
+					"HEX_weighted_mean_home_distance" : 13, 
+					"HEX_weighted_max_home_distance" : 14
+				},
+
+				{
+					"User_types": "non_gov",
+					"Frequency": "heavy",
+					"HEX_weighted_average_distance" : 15, 
+					"HEX_weighted_mean_home_distance" : 16, 
+					"HEX_weighted_max_home_distance" : 17
+
+				},
+				{
+					"User_types":"non_gov_unsure",
+					"Frequency": "heavy",
+					"HEX_weighted_average_distance" : 18, 
+					"HEX_weighted_mean_home_distance" : 19, 
+					"HEX_weighted_max_home_distance" : 20
+				},
+
+				{
+					"User_types":"all",
+					"Frequency": "heavy",
+					"HEX_weighted_average_distance" : 21, 
+					"HEX_weighted_mean_home_distance" : 22, 
+					"HEX_weighted_max_home_distance" : 23
+				}
+			]
+		},
+		{
+			"HEX_600" : 11, 
+			"results":[
+				{
+					"User_types": "non_gov",
+					"Frequency": "all",
+					"HEX_weighted_average_distance" : 0.11, 
+					"HEX_weighted_mean_home_distance" : 20, 
+					"HEX_weighted_max_home_distance" : 39
+
+				},
+				{
+					"User_types":"non_gov_unsure",
+					"Frequency": "all",
+					"HEX_weighted_average_distance" : 11, 
+					"HEX_weighted_mean_home_distance" : 12, 
+					"HEX_weighted_max_home_distance" : 13
+				},
+
+				{
+					"User_types":"all",
+					"Frequency": "all",
+					"HEX_weighted_average_distance" : 12, 
+					"HEX_weighted_mean_home_distance" : 13, 
+					"HEX_weighted_max_home_distance" : 14
+				},
+
+				{
+					"User_types": "non_gov",
+					"Frequency": "heavy",
+					"HEX_weighted_average_distance" : 15, 
+					"HEX_weighted_mean_home_distance" : 16, 
+					"HEX_weighted_max_home_distance" : 17
+
+				},
+				{
+					"User_types":"non_gov_unsure",
+					"Frequency": "heavy",
+					"HEX_weighted_average_distance" : 18, 
+					"HEX_weighted_mean_home_distance" : 19, 
+					"HEX_weighted_max_home_distance" : 20
+				},
+
+				{
+					"User_types":"all",
+					"Frequency": "heavy",
+					"HEX_weighted_average_distance" : 21, 
+					"HEX_weighted_mean_home_distance" : 22, 
+					"HEX_weighted_max_home_distance" : 23
+				}
+			]
+		},
+
+		{
+			"HEX_600" : 26, 
+			"results":[
+				{
+					"User_types": "non_gov",
+					"Frequency": "all",
+					"HEX_weighted_average_distance" : 0.26, 
+					"HEX_weighted_mean_home_distance" : 20, 
+					"HEX_weighted_max_home_distance" : 39
+
+				},
+				{
+					"User_types":"non_gov_unsure",
+					"Frequency": "all",
+					"HEX_weighted_average_distance" : 11, 
+					"HEX_weighted_mean_home_distance" : 12, 
+					"HEX_weighted_max_home_distance" : 13
+				},
+
+				{
+					"User_types":"all",
+					"Frequency": "all",
+					"HEX_weighted_average_distance" : 12, 
+					"HEX_weighted_mean_home_distance" : 13, 
+					"HEX_weighted_max_home_distance" : 14
+				},
+
+				{
+					"User_types": "non_gov",
+					"Frequency": "heavy",
+					"HEX_weighted_average_distance" : 15, 
+					"HEX_weighted_mean_home_distance" : 16, 
+					"HEX_weighted_max_home_distance" : 17
+
+				},
+				{
+					"User_types":"non_gov_unsure",
+					"Frequency": "heavy",
+					"HEX_weighted_average_distance" : 18, 
+					"HEX_weighted_mean_home_distance" : 19, 
+					"HEX_weighted_max_home_distance" : 20
+				},
+
+				{
+					"User_types":"all",
+					"Frequency": "heavy",
+					"HEX_weighted_average_distance" : 21, 
+					"HEX_weighted_mean_home_distance" : 22, 
+					"HEX_weighted_max_home_distance" : 23
+				}
+			]
+		}
+	]
+)

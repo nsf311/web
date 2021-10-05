@@ -3,6 +3,13 @@ var app = express();
 
 const db = require("./models/");
 
+const cors = require("cors");
+
+var corsOptions = {
+  origin: "http://localhost:3000"
+};
+app.use(cors(corsOptions));
+
 db.mongoose.connect(db.url, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(()=>{
     console.log('Connected to the database!');
@@ -22,7 +29,7 @@ app.get('/', (req, res) => {
   }
   res.send(data);
 });
-
+require("./routers/bos311.routes")(app)
 app.listen('3000', () => {
   console.log('Listening on port 3000');
 });
