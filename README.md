@@ -25,8 +25,8 @@ The back-end server uses Node.js + Express for REST APIs, and front-end side is 
     3. src/controllers
 
 * Vagrant:
-1. ./Vagrantfile
-2. provision/provision.sh
+    1. ./Vagrantfile
+    2. provision/provision.sh
 
 ### To run the system locally:
 - Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads) and [Vagrant](https://www.vagrantup.com/downloads)
