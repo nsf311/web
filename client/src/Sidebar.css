@@ -1,0 +1,13 @@
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.sidebar {
+    border: 3px solid black;
+    padding: 15px;
+    background-color: #fff;
+    /* position: -webkit-sticky; */
+    position: sticky;
+    top: 0;
+}

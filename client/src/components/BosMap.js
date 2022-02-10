@@ -2,6 +2,7 @@ import React, { Component,useState } from 'react';
 import "leaflet/dist/leaflet.css";
 import {MapContainer, GeoJSON, TileLayer} from 'react-leaflet';
 import bosHexes from '../data/hexagon_600m_311_pop_20200707.json';
+import Sidebar from 'Sidebar.js'
 
 import ReactDOMServer from 'react-dom/server';
 import HexRegression from './HexRegression';
@@ -10,10 +11,14 @@ import bos311Service from '../services/bos311.service';
 const BosMap =()=>{
     const [selectedHex, setSelectedHex] = useState({});
     const [regressionData, setRegressionData] = useState({});
+    const [showSidebar, setShowSidebar] = React.useState(false)
+
     const bosCenter = [42.360081, -71.058884];
     const hexStyle = {
         fillColor:"yellow",
     };
+    const HEX_600 = 0;
+    const total_popu = 0;
     
     const hexRegData = (hex)=>{
       console.log("load data")
@@ -26,29 +31,40 @@ const BosMap =()=>{
                 console.log(e)
             });
     };
-    const Popup = ({hex}) =>{
-        return(
-            <div>
-                <p>{`Hexagon ${hex.properties.HEX_600}`}</p>
-                <p>{`total_popu: ${hex.properties.total_popu}`}</p>
-            </div>
-        );
-    };
+    // const Popup = ({hex}) =>{
+    //     return(
+    //         <div>
+    //             {/* <p>{`Hexagon ${hex.properties.HEX_600}`}</p>
+    //             <p>{`total_popu: ${hex.properties.total_popu}`}</p> */}
+    //             <Sidebar HEX_600={hex} />
+    //         </div>
+    //     );
+    // };
 
 
-    const onEachHex = (hex, layer)=>{
-        layer.on('click',function(e){
-            setSelectedHex(hex);
-            hexRegData(hex);
+    // const onEachHex = (hex, layer)=>{
+    //     layer.on('click',function(e){
+    //         setSelectedHex(hex);
+    //         hexRegData(hex);
+    //     });
+    //     const popupContent = ReactDOMServer.renderToString( 
+    //         <div>
+    //             <Popup hex={hex} />
+    //         </div>
+            
+            
+    //     );
+    //     layer.bindPopup(popupContent);   
+    // }
+
+    const onEachHex = (hex, layer) => {
+        layer.on({
+            click: () => {
+                setSelectedHex(hex)
+                hexRegData(hex)
+                setShowSidebar(true);
+            }
         });
-        const popupContent = ReactDOMServer.renderToString( 
-            <div>
-                <Popup hex={hex} />
-            </div>
-            
-            
-        );
-        layer.bindPopup(popupContent);   
     }
 
     return (
@@ -64,6 +80,8 @@ const BosMap =()=>{
             
             <HexRegression selectedHex = {selectedHex}
                 regressionData = {regressionData} />
+
+            { showSidebar ? <Sidebar hex={hex} /> : null }
         </div>
     )
 
