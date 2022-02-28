@@ -6,7 +6,7 @@ import { scaleLinear, max, min, axisLeft, axisBottom, select } from "d3";
 import RenderCircles from './RenderCircles';
 import Axis from './Axis';
 
-const RegressionPlt = ({allRegData}) => {
+const RegressionPlt = ({RegDataSelectedUser}) => {
    
 
     function getPovertyIndex(hexagon){
@@ -28,9 +28,9 @@ const RegressionPlt = ({allRegData}) => {
         }
         return xy_data;
     }
-    const listHex = allRegData.map( (d) => d.HEX_600);
-    const hexResults = allRegData.map( (d) => d.results);
-    const variables_data = allRegData.map((d) => d.results)
+    const listHex = RegDataSelectedUser.map( (d) => d.HEX_600);
+    const hexResults = RegDataSelectedUser.map( (d) => d.results);
+    const variables_data = RegDataSelectedUser.map((d) => d.results)
 
     const poverty_index_data = variables_data.map(getPovertyIndex);
     const total_reporting_data = variables_data.map(getHexTotalReporting);

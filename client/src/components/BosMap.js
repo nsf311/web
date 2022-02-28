@@ -22,7 +22,7 @@ import Button from 'react-bootstrap/Button'
 const BosMap =()=>{
     const [selectedHex, setSelectedHex] = useState({});
     const [regressionData, setRegressionData] = useState({});
-    const [allRegData, setAllRegData] = useState({});
+    const [RegData, setRegData] = useState({});
     const [regressionGraph, setRegressionGraph] = useState(false);
     const [selectedUser, setUser] = useState({});
     const [selectedFrequency, setFrequency] = useState({});
@@ -53,11 +53,11 @@ const BosMap =()=>{
         );
     };
 
-    const AllRegData = ()=>{
+    const GetAllRegData = ()=>{
         console.log("load all reg data")
           bos311Service.findAll()
               .then(response=>{
-                  setAllRegData(response.data);
+                  setRegData(response.data);
                   setRegressionGraph(true);
                 
               })
@@ -72,7 +72,7 @@ const BosMap =()=>{
   
           bos311Service.findByUserTypeFreq(selectedUser, selectedFrequency)
               .then(response=>{
-                  setAllRegData(response.data);
+                  setRegData(response.data);
                   setRegressionGraph(true);
                 
               })
@@ -166,7 +166,7 @@ const BosMap =()=>{
                 </button>
             </div>
             <div>
-                {regressionGraph === true && <RegressionPlt allRegData = {allRegData}/>}
+                {regressionGraph === true && <RegressionPlt RegDataSelectedUser = {RegData}/>}
             </div>
 
         </div>
