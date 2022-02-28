@@ -8,6 +8,9 @@ The back-end server uses Node.js + Express for REST APIs, and front-end side is 
 * React UI components: src/components
     1. BosMap.js
     2. HexRegression.js
+    3. RegressionPlt.js
+    4. Axis.js
+    5. RenderCircles.js
 * GeoJson of Boston hexagons: src/data/
     1. hexagon_600m_311_pop_20200707.json
 * Http request and response using Axios:

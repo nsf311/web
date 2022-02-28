@@ -3,8 +3,8 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import "leaflet/dist/leaflet.css";
 // import * as d3 from "d3";
 import { scaleLinear, max, min, axisLeft, axisBottom, select } from "d3";
-import RenderCircles from './RenderCircles';
-import Axis from './Axis';
+import RenderCircles from './graph/RenderCircles';
+import Axis from './graph/Axis';
 
 const RegressionPlt = ({RegDataSelectedUser}) => {
    
