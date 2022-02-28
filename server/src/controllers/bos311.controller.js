@@ -5,9 +5,6 @@ exports.create = (req, res) =>{
     
 };
 
-// exports.findAll = (req, res) =>{
-    
-// };
 
 exports.findOne = (req, res) =>{
     const hex_600_id = req.params.id;
@@ -36,6 +33,52 @@ exports.findByHexNum = (req, res) =>{
         res.status(500).send({message: "Error retrieving hexagon data with number= "+ hex_600});
     });
 };
+
+exports.findAll = (req, res) =>{
+    bos311Hex.find({}).select({})
+    .then(data =>{
+        if(!data)
+            res.status(404).send({message:"Cannot find any data"});
+        else
+            res.send(data);
+    })
+    .catch(err=>{
+        res.status(500).send({message: "Error retrieving hexagon data with number= "+ hex_600});
+    });
+} 
+
+exports.findByUserTypeFreq = (req, res) =>{
+    const userType = req.params.user_type;
+    const frequency = req.params.frequency;
+    bos311Hex.aggregate( [
+        {
+            "$project": {
+                "HEX_600":1,
+                "results":{
+                    "$filter":{
+                        "input":"$results",
+                        "as":"results",
+                        "cond":{
+                            "$and":[
+                                {"$eq":["$$results.user_type", userType ]},
+                                {"$eq":["$$results.frequency", frequency] }
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    ])
+    .then(data =>{
+        if(!data)
+            res.status(404).send({message:"Cannot find any data"});
+        else
+            res.send(data);
+    })
+    .catch(err=>{
+        res.status(500).send({message: "Error retrieving hexagon data with number= "+ hex_600});
+    });
+} 
 // exports.update = (req, res) =>{
 
 // };

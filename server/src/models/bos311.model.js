@@ -3,8 +3,8 @@ module.exports = mongoose =>{
         {
             HEX_600: Number,
             results:[{
-                User_type: String,
-                Frequency: String,
+                user_type: String,
+                frequency: String,
                 HEX_weighted_average_distance: Number,
                 HEX_weighted_mean_home_distance: Number,
                 HEX_weighted_max_home_distance: Number,

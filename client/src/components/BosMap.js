@@ -1,15 +1,33 @@
 import React, { Component,useState } from 'react';
 import "leaflet/dist/leaflet.css";
 import {MapContainer, GeoJSON, TileLayer} from 'react-leaflet';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+
 import bosHexes from '../data/hexagon_600m_311_pop_20200707.json';
 
 import ReactDOMServer from 'react-dom/server';
 import HexRegression from './HexRegression';
 import bos311Service from '../services/bos311.service';
+import RegressionPlt from './RegressionPlt';
+import DropdownToggle from '@restart/ui/esm/DropdownToggle';
+import DropdownItem from '@restart/ui/esm/DropdownItem';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Dropdown from 'react-bootstrap/Dropdown'
+import SplitButton from 'react-bootstrap/SplitButton'
+import ButtonGroup from 'react-bootstrap/ButtonGroup'
+import Button from 'react-bootstrap/Button'
+
 
 const BosMap =()=>{
     const [selectedHex, setSelectedHex] = useState({});
     const [regressionData, setRegressionData] = useState({});
+    const [allRegData, setAllRegData] = useState({});
+    const [regressionGraph, setRegressionGraph] = useState(false);
+    const [selectedUser, setUser] = useState({});
+    const [selectedFrequency, setFrequency] = useState({});
+
+    const [dropdownUser, setDropdownUser] = useState({value:'select user type'});
     const bosCenter = [42.360081, -71.058884];
     const hexStyle = {
         fillColor:"yellow",
@@ -35,6 +53,35 @@ const BosMap =()=>{
         );
     };
 
+    const AllRegData = ()=>{
+        console.log("load all reg data")
+          bos311Service.findAll()
+              .then(response=>{
+                  setAllRegData(response.data);
+                  setRegressionGraph(true);
+                
+              })
+              .catch(e=>{
+                  console.log(e)
+              });
+              
+      };
+
+    const RegDataByUserTypeFreq = (user_type, frequency)=>{
+        console.log("load reg data by user type and frequency")
+  
+          bos311Service.findByUserTypeFreq(selectedUser, selectedFrequency)
+              .then(response=>{
+                  setAllRegData(response.data);
+                  setRegressionGraph(true);
+                
+              })
+              .catch(e=>{
+                  console.log(e)
+              });
+              
+      };
+
 
     const onEachHex = (hex, layer)=>{
         layer.on('click',function(e){
@@ -50,6 +97,40 @@ const BosMap =()=>{
         );
         layer.bindPopup(popupContent);   
     }
+    const changeDropdownText =(e) =>{
+        console.log(e);
+        setDropdownUser(e);
+    }
+    const selectUserType=(e)=>{
+        
+        if (e == 'Non-gov; all'){
+            setUser("non_gov");
+            setFrequency("all");
+        }
+        else if (e == 'Non-gov and unsure; all'){
+            setUser("non_gov_unsure");
+            setFrequency("all");
+        }
+
+        else if (e == 'All users; all'){
+            setUser("all");
+            setFrequency("all");
+        }
+        else if (e == 'Non-gov; heavy'){
+            setUser("non_gov");
+            setFrequency("heavy");
+        }
+        else if (e == 'Non-gov and unsure; heavy'){
+            setUser("non_gov_unsure");
+            setFrequency("heavy");
+        }
+        else if (e == 'All users; heavy'){
+            setUser("all");
+            setFrequency("heavy");
+        }
+
+        
+    }
 
     return (
         <div>
@@ -64,6 +145,30 @@ const BosMap =()=>{
             
             <HexRegression selectedHex = {selectedHex}
                 regressionData = {regressionData} />
+
+            <div>
+            <DropdownButton id="dropdown-item-button" 
+                            title= {dropdownUser.value}
+                            onSelect={selectUserType}>
+            
+                <Dropdown.Item as="button" eventKey="Non-gov; all"> Non-gov; all</Dropdown.Item>
+                <Dropdown.Item as="button" eventKey = "Non-gov and unsure; all">Non-gov and unsure; all</Dropdown.Item>
+                <Dropdown.Item as="button" eventKey="All users; all">All users; all</Dropdown.Item>
+                <Dropdown.Item as="button" eventKey="Non-gov; heavy">Non-gov; heavy</Dropdown.Item>
+                <Dropdown.Item as="button" eventKey = "Non-gov and unsure; heavy">Non-gov and unsure; heavy</Dropdown.Item>
+                <Dropdown.Item as="button" eventKey = "All users; heavy">All users; heavy</Dropdown.Item>
+
+            </DropdownButton>
+            </div>
+            <div>
+                <button onClick={()=> RegDataByUserTypeFreq (selectedUser, selectedFrequency)}>
+                    Show Regression Graph
+                </button>
+            </div>
+            <div>
+                {regressionGraph === true && <RegressionPlt allRegData = {allRegData}/>}
+            </div>
+
         </div>
     )
 
