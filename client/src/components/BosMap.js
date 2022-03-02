@@ -149,30 +149,34 @@ const BosMap =()=>{
                     <HexRegression selectedHex = {selectedHex}
                     regressionData = {regressionData} />
 
-                    <div>
-                    <DropdownButton id="dropdown-item-button" 
-                                    title= {dropdownUser.value}
-                                    onSelect={selectUserType}>
                     
-                        <Dropdown.Item as="button" eventKey="Non-gov; all"> Non-gov; all</Dropdown.Item>
-                        <Dropdown.Item as="button" eventKey = "Non-gov and unsure; all">Non-gov and unsure; all</Dropdown.Item>
-                        <Dropdown.Item as="button" eventKey="All users; all">All users; all</Dropdown.Item>
-                        <Dropdown.Item as="button" eventKey="Non-gov; heavy">Non-gov; heavy</Dropdown.Item>
-                        <Dropdown.Item as="button" eventKey = "Non-gov and unsure; heavy">Non-gov and unsure; heavy</Dropdown.Item>
-                        <Dropdown.Item as="button" eventKey = "All users; heavy">All users; heavy</Dropdown.Item>
-
-                    </DropdownButton>
-                    </div>
-                    <div>
-                        <button onClick={()=> RegDataByUserTypeFreq (selectedUser, selectedFrequency)}>
-                            Show Regression Graph
-                        </button>
-                    </div>
-                    <div>
-                        {regressionGraph === true && <RegressionPlt RegDataSelectedUser = {RegData}/>}
-                    </div>
                 </OffcanvasBody>
             </Offcanvas>
+
+            <div>
+                <DropdownButton id="dropdown-item-button" 
+                                title= {dropdownUser.value}
+                                onSelect={selectUserType}>
+                
+                    <Dropdown.Item as="button" eventKey="Non-gov; all"> Non-gov; all</Dropdown.Item>
+                    <Dropdown.Item as="button" eventKey = "Non-gov and unsure; all">Non-gov and unsure; all</Dropdown.Item>
+                    <Dropdown.Item as="button" eventKey="All users; all">All users; all</Dropdown.Item>
+                    <Dropdown.Item as="button" eventKey="Non-gov; heavy">Non-gov; heavy</Dropdown.Item>
+                    <Dropdown.Item as="button" eventKey = "Non-gov and unsure; heavy">Non-gov and unsure; heavy</Dropdown.Item>
+                    <Dropdown.Item as="button" eventKey = "All users; heavy">All users; heavy</Dropdown.Item>
+
+                </DropdownButton>
+            </div>
+
+            <div>
+                <button onClick={()=> RegDataByUserTypeFreq (selectedUser, selectedFrequency)}>
+                    Show Regression Graph
+                </button>
+            </div>
+            
+            <div>
+                {regressionGraph === true && <RegressionPlt RegDataSelectedUser = {RegData}/>}
+            </div>
 
         </div>
     )
