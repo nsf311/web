@@ -17,6 +17,7 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import SplitButton from 'react-bootstrap/SplitButton'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import Button from 'react-bootstrap/Button'
+import { Offcanvas, OffcanvasBody, OffcanvasHeader, OffcanvasTitle } from 'react-bootstrap';
 
 
 const BosMap =()=>{
@@ -27,6 +28,10 @@ const BosMap =()=>{
     const [selectedUser, setUser] = useState({});
     const [selectedFrequency, setFrequency] = useState({});
 
+    const [showOffcanvas, setShowOffcanvas] = useState(false);
+    const handleOffcanvasClose = () => setShowOffcanvas(false);
+    const handleOffcanvasShow = () => setShowOffcanvas(true);
+ 
     const [dropdownUser, setDropdownUser] = useState({value:'select user type'});
     const bosCenter = [42.360081, -71.058884];
     const hexStyle = {
@@ -44,14 +49,14 @@ const BosMap =()=>{
                 console.log(e)
             });
     };
-    const Popup = ({hex}) =>{
-        return(
-            <div>
-                <p>{`Hexagon ${hex.properties.HEX_600}`}</p>
-                <p>{`total_popu: ${hex.properties.total_popu}`}</p>
-            </div>
-        );
-    };
+    // const Popup = ({hex}) =>{
+    //     return(
+    //         <div>
+    //             <p>{`Hexagon ${hex.properties.HEX_600}`}</p>
+    //             <p>{`total_popu: ${hex.properties.total_popu}`}</p>
+    //         </div>
+    //     );
+    // };
 
     const GetAllRegData = ()=>{
         console.log("load all reg data")
@@ -87,15 +92,8 @@ const BosMap =()=>{
         layer.on('click',function(e){
             setSelectedHex(hex);
             hexRegData(hex);
-        });
-        const popupContent = ReactDOMServer.renderToString( 
-            <div>
-                <Popup hex={hex} />
-            </div>
-            
-            
-        );
-        layer.bindPopup(popupContent);   
+            handleOffcanvasShow();
+        }); 
     }
     const changeDropdownText =(e) =>{
         console.log(e);
@@ -143,31 +141,38 @@ const BosMap =()=>{
                 <GeoJSON style = {hexStyle} data = {bosHexes.features} onEachFeature = {onEachHex}></GeoJSON>
             </MapContainer>      
             
-            <HexRegression selectedHex = {selectedHex}
-                regressionData = {regressionData} />
+            <Offcanvas show={showOffcanvas} onHide={handleOffcanvasClose} placement='end'>
+                <OffcanvasHeader closeButton>
+                    <OffcanvasTitle>Hexagon Regression</OffcanvasTitle>
+                </OffcanvasHeader>
+                <OffcanvasBody>
+                    <HexRegression selectedHex = {selectedHex}
+                    regressionData = {regressionData} />
 
-            <div>
-            <DropdownButton id="dropdown-item-button" 
-                            title= {dropdownUser.value}
-                            onSelect={selectUserType}>
-            
-                <Dropdown.Item as="button" eventKey="Non-gov; all"> Non-gov; all</Dropdown.Item>
-                <Dropdown.Item as="button" eventKey = "Non-gov and unsure; all">Non-gov and unsure; all</Dropdown.Item>
-                <Dropdown.Item as="button" eventKey="All users; all">All users; all</Dropdown.Item>
-                <Dropdown.Item as="button" eventKey="Non-gov; heavy">Non-gov; heavy</Dropdown.Item>
-                <Dropdown.Item as="button" eventKey = "Non-gov and unsure; heavy">Non-gov and unsure; heavy</Dropdown.Item>
-                <Dropdown.Item as="button" eventKey = "All users; heavy">All users; heavy</Dropdown.Item>
+                    <div>
+                    <DropdownButton id="dropdown-item-button" 
+                                    title= {dropdownUser.value}
+                                    onSelect={selectUserType}>
+                    
+                        <Dropdown.Item as="button" eventKey="Non-gov; all"> Non-gov; all</Dropdown.Item>
+                        <Dropdown.Item as="button" eventKey = "Non-gov and unsure; all">Non-gov and unsure; all</Dropdown.Item>
+                        <Dropdown.Item as="button" eventKey="All users; all">All users; all</Dropdown.Item>
+                        <Dropdown.Item as="button" eventKey="Non-gov; heavy">Non-gov; heavy</Dropdown.Item>
+                        <Dropdown.Item as="button" eventKey = "Non-gov and unsure; heavy">Non-gov and unsure; heavy</Dropdown.Item>
+                        <Dropdown.Item as="button" eventKey = "All users; heavy">All users; heavy</Dropdown.Item>
 
-            </DropdownButton>
-            </div>
-            <div>
-                <button onClick={()=> RegDataByUserTypeFreq (selectedUser, selectedFrequency)}>
-                    Show Regression Graph
-                </button>
-            </div>
-            <div>
-                {regressionGraph === true && <RegressionPlt RegDataSelectedUser = {RegData}/>}
-            </div>
+                    </DropdownButton>
+                    </div>
+                    <div>
+                        <button onClick={()=> RegDataByUserTypeFreq (selectedUser, selectedFrequency)}>
+                            Show Regression Graph
+                        </button>
+                    </div>
+                    <div>
+                        {regressionGraph === true && <RegressionPlt RegDataSelectedUser = {RegData}/>}
+                    </div>
+                </OffcanvasBody>
+            </Offcanvas>
 
         </div>
     )
