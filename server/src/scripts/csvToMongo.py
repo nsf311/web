@@ -8,16 +8,28 @@ def decorateRow(row):
     record = row[2:].to_frame().transpose()
     return record
 
+#Connect to client
 client = MongoClient('localhost', 27017)
 db = client['hexData']
 coll = db['hexagon']
 
+#Initialize collection
+data = pd.read_csv("/vagrant/src/data/poverty_added_01_hex_variables_non_gov_regardless_of_reporting_frequency_20210209.csv", sep='\t', header=0)
+#Adding object for each hexagon
+#Object has 2 values: hexagon number and array of objects for data from each user type and frequency on hexagon
+for index, row in data.iterrows():
+    coll.insert_one({
+        'HEX_600': row.HEX_600,
+        'results': []
+    })
+
+#Populating with data
 directory = "/vagrant/src/data"
 for filename in os.listdir(directory):
     if filename.endswith(".csv"):
-        data = pd.read_csv(os.path.join(directory, filename), sep='\t')
+        data = pd.read_csv(os.path.join(directory, filename), sep='\t', header=0)
         for index, row in data.iterrows():
-            # print(json.loads(decorateRow(row).to_json(orient='records'))[0])
+            # Append new object from file to existing hexagon's array
             coll.update_one({
                 'HEX_600': row.HEX_600,
             },
