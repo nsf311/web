@@ -6,7 +6,7 @@ import { scaleLinear, max, min, axisLeft, axisBottom, select } from "d3";
 import RenderCircles from './graph/RenderCircles';
 import Axis from './graph/Axis';
 
-const RegressionPlt = ({RegDataSelectedUser}) => {
+const RegressionPlt = ({RegDataSelectedUser, RegDataDV}) => {
    
 
     function getPovertyIndex(hexagon){
@@ -20,6 +20,11 @@ const RegressionPlt = ({RegDataSelectedUser}) => {
             return hexagon[0]["HEX_total_reporting"];
         }
     }
+    function getHexDV(hexagon){
+      if(hexagon[0]!==undefined){
+        return hexagon[0][RegDataDV];
+      }
+    }
     function getXYData(x_data, y_data){
         const xy_data = [];
 
@@ -28,32 +33,38 @@ const RegressionPlt = ({RegDataSelectedUser}) => {
         }
         return xy_data;
     }
-    const listHex = RegDataSelectedUser.map( (d) => d.HEX_600);
-    const hexResults = RegDataSelectedUser.map( (d) => d.results);
+    // const listHex = RegDataSelectedUser.map( (d) => d.HEX_600);
+    // const hexResults = RegDataSelectedUser.map( (d) => d.results);
     const variables_data = RegDataSelectedUser.map((d) => d.results)
 
     const poverty_index_data = variables_data.map(getPovertyIndex);
-    const total_reporting_data = variables_data.map(getHexTotalReporting);
+    // const total_reporting_data = variables_data.map(getHexTotalReporting);
 
-    const margin = { top: 20, right: 15, bottom: 60, left: 60 }
-    const width = 800 - margin.left - margin.right
-    const height = 600 - margin.top - margin.bottom
-    
-    
-    const x_axis = scaleLinear()
-      .domain([
-        min(poverty_index_data),
-        max(poverty_index_data)
-      ])
-      .range([0, width])
+    const hexDV = variables_data.map(getHexDV);
 
-      const y_axis = scaleLinear()
+    
+
+    const margin = { top: 20, right: 30, bottom: 60, left: 60 }
+    const width = 400 - margin.left - margin.right
+    const height = 300 - margin.top - margin.bottom
+    
+    let x_axis = scaleLinear()
+    .domain([
+      min(poverty_index_data),
+      max(poverty_index_data)
+    ])
+    .range([0, width])
+
+    let y_axis = scaleLinear()
       .domain([
-        0,
-        max(total_reporting_data)
+        min(hexDV),
+        max(hexDV)
       ])
       .range([height, 0])
-    let xy_data = getXYData(poverty_index_data, total_reporting_data)
+      
+  
+
+    let xy_data = getXYData(poverty_index_data, hexDV )
 
     return (
         <div>
@@ -61,11 +72,12 @@ const RegressionPlt = ({RegDataSelectedUser}) => {
             {/* {JSON.stringify(allRegData)} */}
             {/* {JSON.stringify(hexResults)} */}
             {/* {allRegData.forEach(element => console.log(element))} */}
-            {console.log(variables_data)}
-            {console.log(poverty_index_data)}
-            {console.log(total_reporting_data)}
+            {/* {console.log(variables_data)} */}
+            {/* {console.log(x_axis)}
+            {console.log(y_axis)} */}
 
             {/* {console.log(allHeavyUsers)} */}
+
         <h3> Scatter Plot </h3>
         <svg
           width={width + margin.right + margin.left}
