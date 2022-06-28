@@ -236,11 +236,6 @@ const BosMap =()=>{
                 </div>
             </div>
             {/* <Filters dropdownUser = {dropdownUser} selectUserType ={} dropdownSubjectText = {dropdownSubjectText} dropdownDVtext = {dropdownDVtext} dropdownIVtext = {dropdownIVtext}></Filters> */}
-            <div class = "col-sm">
-                        <button onClick={()=> RegDataByUserTypeFreq (selectedUser, selectedFrequency)}>
-                                    Show Regression Graph
-                        </button>
-                    </div>
             <div>
                 <div>
                 <Offcanvas class = "offcanvas-xxl offcanvas-start" show={showRegOffcanvas} onHide={handleRegOffcanvasClose}>
