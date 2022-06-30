@@ -9,7 +9,9 @@ const Axis = ({axis, transform, scale}) =>{
     useEffect(() => {
         select(ref.current).call(scale);
       }, [scale])
+      
 
+    
     
 
     return(

@@ -4,14 +4,68 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import BosMap from './BosMap';
 // import {selectUserType, selectSubject, selectRegDV } from './BosMap';
 
-const Filters = ({dropdownUser,selectUserType, dropdownSubjectText, selectSubject, dropdownDVtext, selectRegDV, dropdownIVtext,selectRegIV }) =>{
+
+const Filters = ({ selectedUser, selectedFrequency, selectUserType, dropdownUser, getDropdownUserText}) =>{
+
+    // const [dropdownUser, setDropdownUserText] = useState('select user type');
+    const [dropdownSubjectText, setDropdowSubjectText] = useState('select subject');
+    const [dropdownIVtext, setDropdownIVtext] = useState('select independent variable');
+    const [dropdownDVtext, setDropdownDVtext] = useState('select dependent variable');
+    const filterUserType = (e)=>{
+        getDropdownUserText(e);
+        
+        if (e == 'Non-gov; all'){
+            selectedUser = "non_gov"
+            selectedFrequency = "all"
+            
+        }
+        else if (e == 'Non-gov and unsure; all'){
+            selectedUser = "non_gov_unsure"
+            selectedFrequency = "all"
+        }
+
+        else if (e == 'All users; all'){
+            selectedUser = "all"
+            selectedFrequency = "all"
+
+        }
+        else if (e == 'Non-gov; heavy'){
+            selectedUser = "non_gov"
+            selectedFrequency = "heavy"
+        }
+        else if (e == 'Non-gov and unsure; heavy'){
+            selectedUser = "non_gov_unsure"
+            selectedFrequency = "heavy"
+        }
+        else if (e == 'All users; heavy'){
+            selectedUser = "all"
+            selectedFrequency = "heavy"
+        }
+        selectUserType(selectedUser, selectedFrequency);
+        dropdownUser = selectedUser + "; " + selectedFrequency
+        
+    }
+
+    const selectSubject=(e)=>{
+        // setRegDV(regDVDict[e]);
+        setDropdowSubjectText(e);
+    }
+    const selectRegDV=(e)=>{
+        // setRegDV(regDVDict[e]);
+        setDropdownDVtext(e);
+    }
+
+    const selectRegIV=(e)=>{
+        // setRegDV(regDVDict[e]);
+        setDropdownIVtext(e);
+    }
     return(
         <div class = "container">
                 <div class = "row">
                     <div class = "col-sm">
                         <DropdownButton id="dropdown-item-button" 
                                         title= {dropdownUser}
-                                        onSelect={selectUserType}>
+                                        onSelect={filterUserType}>
                         
                             <Dropdown.Item as="button" eventKey="Non-gov; all" > Non-gov; all</Dropdown.Item>
                             <Dropdown.Item as="button" eventKey = "Non-gov and unsure; all">Non-gov and unsure; all</Dropdown.Item>

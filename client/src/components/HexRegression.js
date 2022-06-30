@@ -2,7 +2,7 @@ import React, { Component, useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import "leaflet/dist/leaflet.css";
 
-const HexRegression = ({ selectedHex, hexRegVars, selectedUser, selectedFrequency }) => {
+const HexRegression = ({ selectedHex, hexRegVars }) => {
     // console.log(hexRegVars)
     // function getVarsByFilter(hexRegVarsAll){
     //     for (let i = hexRegVarsAll)
@@ -12,8 +12,7 @@ const HexRegression = ({ selectedHex, hexRegVars, selectedUser, selectedFrequenc
 
     return (
         <div>
-            {console.log("show hexagon regression data")}
-            {console.log(hexRegVarsAll)}
+
             <p>
                 <b>Hexagon number: </b>
                 {selectedHex.properties.HEX_600}

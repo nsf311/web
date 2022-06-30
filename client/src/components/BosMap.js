@@ -10,6 +10,8 @@ import HexRegression from './HexRegression';
 import bos311Service from '../services/bos311.service';
 import RegressionPlt from './RegressionPlt';
 import Filters from './filters';
+import Filter from './filter';
+
 import DropdownToggle from '@restart/ui/esm/DropdownToggle';
 import DropdownItem from '@restart/ui/esm/DropdownItem';
 
@@ -24,13 +26,18 @@ import { makeKey } from "../lib/makeKey"
 const BosMap =()=>{
       // GeoJson Key to handle updating geojson inside react-leaflet
     const [geoJsonKey, setGeoJsonKey] = useState("initialKey123abc")
-    const [selectedHex, setSelectedHex] = useState({});
+    const [selectedHex, setSelectedHex] = useState([]);
+    const [hexNum, setHexNum] = useState(-1);
     const [hexRegVars, setHexRegVars] = useState([]);
     const [RegData, setRegData] = useState({});
     const [regressionGraph, setRegressionGraph] = useState(false);
 
     const [selectedUser, setUser] = useState('non_gov');
     const [selectedFrequency, setFrequency] = useState('all');
+    const [selectedDV, setDV] = useState('HEX_total_reporting');
+    const [selectedIV, setIV] = useState('poverty_index');
+    const [selectedSubject, setSubject] = useState('all');
+
 
     const [showHexOffcanvas, setShowHexOffcanvas] = useState(false);
     const handleHexOffcanvasClose = () => setShowHexOffcanvas(false);
@@ -40,13 +47,14 @@ const BosMap =()=>{
     const handleRegOffcanvasClose = () => setShowRegOffcanvas(false);
     const handleRegOffcanvasShow = () => setShowRegOffcanvas(true);
  
-    const [dropdownUser, setDropdownUserText] = useState('select user type');
-    const [dropdownSubjectText, setDropdowSubjectText] = useState('select subject');
-    const [dropdownIVtext, setDropdownIVtext] = useState('select independent variable');
-    const [dropdownDVtext, setDropdownDVtext] = useState('select dependent variable');
+    const [dropdownUser, setDropdownUserText] = useState('Non-gov');
+    const [dropdownFreq, setDropdownFreqText] = useState('All');
+    const [dropdownDVtext, setDropdownDVText] = useState('total number of reports');
+    const [dropdownIVtext, setDropdownIVText] = useState('Poverty Index');
+    const [dropdownSubjectText, setDropdowSubjectText] = useState('All subjects');
 
 
-    const [regDV, setRegDV] = useState('HEX_total_reporting');
+   
     const bosCenter = [42.360081, -71.058884];
     const hexStyle = {
         fillColor:"yellow",
@@ -59,10 +67,44 @@ const BosMap =()=>{
         'max home distance': 'HEX_weighted_max_home_distance'
     }
 
+    const userTypeDict = [
+        {Name : "Non-gov", Value: "non_gov"},
+        {Name: "Non-gov and unsure", Value: "non_gov_unsure"},
+        {Name: "All users", Value: "all"}
+    ]
+    const freqDict = [
+        {Name: "all", Value: "all"},
+        {Name: "heavy", Value: "heavy"}
+    ]
+
+    const DVDict = [
+        {Name: "total number of reports", Value: "HEX_total_reporting" },
+        {Name: "total number of users", Value: "HEX_total_user"},
+        {Name: 'radius of gyration', Value: 'HEX_weighted_radius_of_gyration'},
+        {Name: 'max home distance', Value: 'HEX_weighted_max_home_distance'}
+    ]
+
+    const IVDict = [
+        {Name: "Poverty Index", Value: "povertyIndex" }
+    ]
+
+    const SubjectDict = [
+        {Name: "All subjects", Value: "all" },
+        {Name: "Animals", Value: "Animals" },
+        {Name: "Parking", Value: "Parking" },
+    ]
+    
+
     useEffect(() => {
         const newKey = makeKey(10)
         setGeoJsonKey(newKey)
       }, [selectedUser, selectedFrequency])
+
+    useEffect(() => {
+        RegDataByUserTypeFreq();
+        getHexRegVarsByFilter(hexNum);
+    }, [selectedUser, selectedFrequency])
+
     
     const hexRegData = async (hex)=>{
     
@@ -77,18 +119,14 @@ const BosMap =()=>{
             setHexRegVars(hex_vars);
     };
 
-    const getHexRegVarsByFilter = (hex)=>{
-    
-        console.log("load hexagon regression vars")
-        console.log(selectedUser)
-        bos311Service.findHexByUserTypeFreq(hex.properties.HEX_600, selectedUser, selectedFrequency)
-            .then(response=>{
-                setHexRegVars(response.data);
-            })
-            .catch(e=>{
-                console.log(e)
-            });
-            
+    const getHexRegVarsByFilter = (hexNum)=>{
+        bos311Service.findHexByUserTypeFreq(hexNum, selectedUser, selectedFrequency)
+        .then(response=>{
+            setHexRegVars(response.data);
+        })
+        .catch(e=>{
+            console.log(e)
+        });    
     };
 
 
@@ -106,7 +144,7 @@ const BosMap =()=>{
               
       };
 
-    const RegDataByUserTypeFreq = (user_type, frequency)=>{
+    const RegDataByUserTypeFreq = ()=>{
         console.log("load reg data by user type and frequency")
   
         bos311Service.findByUserTypeFreq(selectedUser, selectedFrequency)
@@ -118,187 +156,107 @@ const BosMap =()=>{
               .catch(e=>{
                   console.log(e)
               });
-        handleRegOffcanvasShow();
+        
               
       };
 
     const onEachHex = (hex, layer)=>{
         layer.on('click',function(e){
             setSelectedHex(hex);
+            setHexNum(hex.properties.HEX_600);
             // console.log("hexagon is clicked");
-            console.log(hex.properties.HEX_600)
-            getHexRegVarsByFilter(hex);
+            // console.log(hex.properties.HEX_600)
+            getHexRegVarsByFilter(hex.properties.HEX_600);
             handleHexOffcanvasShow();
+            
         }); 
     }
+
+    const graphBtnOnclick = ()=>{
+        RegDataByUserTypeFreq();
+        handleRegOffcanvasShow();
+    }
   
-    const selectUserType = (e)=>{
-        setDropdownUserText(e);
-        
-        if (e == 'Non-gov; all'){
-            setUser("non_gov");
-            setFrequency("all");
-            
-        }
-        else if (e == 'Non-gov and unsure; all'){
-            setUser("non_gov_unsure");
-            setFrequency("all");
-        }
+    
 
-        else if (e == 'All users; all'){
-            setUser("all");
-            setFrequency("all");
-        }
-        else if (e == 'Non-gov; heavy'){
-            setUser("non_gov");
-            setFrequency("heavy");
-        }
-        else if (e == 'Non-gov and unsure; heavy'){
-            setUser("non_gov_unsure");
-            setFrequency("heavy");
-        }
-        else if (e == 'All users; heavy'){
-            setUser("all");
-            setFrequency("heavy");
-        } 
-    }
-
-    const selectSubject=(e)=>{
-        // setRegDV(regDVDict[e]);
-        setDropdowSubjectText(e);
-    }
-    const selectRegDV=(e)=>{
-        setRegDV(regDVDict[e]);
-        setDropdownDVtext(e);
-    }
-
-    const selectRegIV=(e)=>{
-        // setRegDV(regDVDict[e]);
-        setDropdownIVtext(e);
-    }
-
+    // console.log(selectedHex);
     return (
+       
         <div>
             <h1 style ={{ textAlign: "center"}}>Bos 311 Viz</h1>
             <div class = "container">
-                <div class = "row">
+            {showRegOffcanvas === false && showHexOffcanvas === false &&
+                <div class = "row"> 
                     <div class = "col-sm">
-                        <DropdownButton id="dropdown-item-button" 
-                                        title= {dropdownUser}
-                                        onSelect={selectUserType}>
-                        
-                            <Dropdown.Item as="button" eventKey="Non-gov; all" > Non-gov; all</Dropdown.Item>
-                            <Dropdown.Item as="button" eventKey = "Non-gov and unsure; all">Non-gov and unsure; all</Dropdown.Item>
-                            <Dropdown.Item as="button" eventKey="All users; all">All users; all</Dropdown.Item>
-                            <Dropdown.Item as="button" eventKey="Non-gov; heavy">Non-gov; heavy</Dropdown.Item>
-                            <Dropdown.Item as="button" eventKey = "Non-gov and unsure; heavy">Non-gov and unsure; heavy</Dropdown.Item>
-                            <Dropdown.Item as="button" eventKey = "All users; heavy">All users; heavy</Dropdown.Item>
-
-                        </DropdownButton>
+                        <b>User Type: </b>
+                        <Filter options = {userTypeDict} selected = {selectedUser} selectFunction = { (selectedUser) => {setUser(selectedUser)}} dropdownText = {dropdownUser} getDropdownText = {(dropdownUser) => setDropdownUserText(dropdownUser)}></Filter>
                     </div>
                     <div class = "col-sm">
-                        <DropdownButton id="dropdown-item-button" 
-                                    title= {dropdownSubjectText}
-                                    onSelect = {selectSubject}>
-                    
-                            <Dropdown.Item as="button" eventKey="Animal" > Animal</Dropdown.Item>
-                            <Dropdown.Item as="button" eventKey = "Parking">Parking</Dropdown.Item>
-                            <Dropdown.Item as="button" eventKey="All subjects">All subjects</Dropdown.Item>
-
-                        </DropdownButton>
+                        <b>Frequency: </b>
+                        <Filter options = {freqDict} selected = {selectedFrequency} selectFunction = { (selectedFrequency) => {setFrequency(selectedFrequency)}} dropdownText = {dropdownFreq} getDropdownText = {(dropdownFreq) => setDropdownFreqText(dropdownFreq)}></Filter>
                     </div>
                     <div class = "col-sm">
-                        <DropdownButton id="dropdown-item-button" 
-                                    title= {dropdownDVtext}
-                                    onSelect={selectRegDV}>
-                
-                            <Dropdown.Item as="button" eventKey="total number of reports" > total number of reports</Dropdown.Item>
-                            <Dropdown.Item as="button" eventKey = "total number of users">total number of users</Dropdown.Item>
-                            <Dropdown.Item as="button" eventKey="radius of gyration">radius of gyration</Dropdown.Item>
-                            <Dropdown.Item as="button" eventKey="max home distance">max home distance</Dropdown.Item>
-                        </DropdownButton>
+                        <b>Subject: </b>
+                        <Filter options = {SubjectDict} selected = {selectedSubject} selectFunction = { (selectedSubject) => {setSubject(selectedSubject)}} dropdownText = {dropdownSubjectText} getDropdownText = {(dropdownSubjectText) => setDropdowSubjectText(dropdownSubjectText)}></Filter>
                     </div>
                     <div class = "col-sm">
-                        <DropdownButton id="dropdown-item-button" 
-                                    title= {dropdownIVtext}
-                                    onSelect = {selectRegIV}>
-                    
-                            <Dropdown.Item as="button" eventKey="Poverty Index" > Poverty Index</Dropdown.Item>
-                            <Dropdown.Item as="button" eventKey = "Response Time">Response Time</Dropdown.Item>
-                            <Dropdown.Item as="button" eventKey="Quality of Service">Quality of Service</Dropdown.Item>
-                        </DropdownButton>
+                        <b>Dependent Variable: </b>
+                        <Filter options = {DVDict} selected = {selectedDV} selectFunction = { (selectedDV) => {setDV(selectedDV)}} dropdownText = {dropdownDVtext} getDropdownText = {(dropdownDVtext) => setDropdownDVText(dropdownDVtext)}></Filter>
                     </div>
                     <div class = "col-sm">
-                        <button onClick={()=> RegDataByUserTypeFreq (selectedUser, selectedFrequency)}>
+                        <b>Independent Variable: </b>
+                        <Filter options = {IVDict} selected = {selectedIV} selectFunction = { (selectedIV) => {setIV(selectedIV)}} dropdownText = {dropdownIVtext} getDropdownText = {(dropdownIVtext) => setDropdownIVText(dropdownIVtext)}></Filter>
+                    </div>
+                    <div class = "col-sm">
+                        <button onClick={graphBtnOnclick}>
                                     Show Regression Graph
                         </button>
                     </div>
+                    
+                    {/* <Filters selectedUser = {selectedUser} selectedFrequency = {selectedFrequency} selectUserType ={ (selectedUser, selectedFrequency) =>{setUser(selectedUser); setFrequency(selectedFrequency)}} dropdownUser = {dropdownUser} getDropdownUserText = {(dropdownUser) => setDropdownUserText(dropdownUser)} ></Filters> */}
+                    
                 </div>
+            } 
             </div>
-            {/* <Filters dropdownUser = {dropdownUser} selectUserType ={} dropdownSubjectText = {dropdownSubjectText} dropdownDVtext = {dropdownDVtext} dropdownIVtext = {dropdownIVtext}></Filters> */}
+            
             <div>
                 <div>
                 <Offcanvas class = "offcanvas-xxl offcanvas-start" show={showRegOffcanvas} onHide={handleRegOffcanvasClose}>
                     <OffcanvasHeader closeButton>
                         <OffcanvasTitle>Regression Graph</OffcanvasTitle>
-                        <div class = "container">
-                            <div class = "row">
-                                <div class = "col-sm">
-                                    <DropdownButton id="dropdown-item-button" 
-                                                    title= {dropdownUser}
-                                                    onSelect={selectUserType}>
-                                    
-                                        <Dropdown.Item as="button" eventKey="Non-gov; all" > Non-gov; all</Dropdown.Item>
-                                        <Dropdown.Item as="button" eventKey = "Non-gov and unsure; all">Non-gov and unsure; all</Dropdown.Item>
-                                        <Dropdown.Item as="button" eventKey="All users; all">All users; all</Dropdown.Item>
-                                        <Dropdown.Item as="button" eventKey="Non-gov; heavy">Non-gov; heavy</Dropdown.Item>
-                                        <Dropdown.Item as="button" eventKey = "Non-gov and unsure; heavy">Non-gov and unsure; heavy</Dropdown.Item>
-                                        <Dropdown.Item as="button" eventKey = "All users; heavy">All users; heavy</Dropdown.Item>
-
-                                    </DropdownButton>
-                                </div>
-                                <div class = "col-sm">
-                                    <DropdownButton id="dropdown-item-button" 
-                                                title= {dropdownSubjectText}
-                                                onSelect = {selectSubject}>
-                                
-                                        <Dropdown.Item as="button" eventKey="Animal" > Animal</Dropdown.Item>
-                                        <Dropdown.Item as="button" eventKey = "Parking">Parking</Dropdown.Item>
-                                        <Dropdown.Item as="button" eventKey="All subjects">All subjects</Dropdown.Item>
-
-                                    </DropdownButton>
-                                </div>
-                                <div class = "col-sm">
-                                    <DropdownButton id="dropdown-item-button" 
-                                                title= {dropdownDVtext}
-                                                onSelect={selectRegDV}>
-                            
-                                        <Dropdown.Item as="button" eventKey="total number of reports" > total number of reports</Dropdown.Item>
-                                        <Dropdown.Item as="button" eventKey = "total number of users">total number of users</Dropdown.Item>
-                                        <Dropdown.Item as="button" eventKey="radius of gyration">radius of gyration</Dropdown.Item>
-                                        <Dropdown.Item as="button" eventKey="max home distance">max home distance</Dropdown.Item>
-                                    </DropdownButton>
-                                </div>
-                                <div class = "col-sm">
-                                    <DropdownButton id="dropdown-item-button" 
-                                                title= {dropdownIVtext}
-                                                onSelect = {selectRegIV}>
-                                
-                                        <Dropdown.Item as="button" eventKey="Poverty Index" > Poverty Index</Dropdown.Item>
-                                        <Dropdown.Item as="button" eventKey = "Response Time">Response Time</Dropdown.Item>
-                                        <Dropdown.Item as="button" eventKey="Quality of Service">Quality of Service</Dropdown.Item>
-                                    </DropdownButton>
-                                </div>
-                                <div class = "col-sm">
+                        
+                    </OffcanvasHeader>
+                    <OffcanvasBody>
+                    <div class = "container">
+                        <div class = "col-sm">
+                            <b>User Type: </b>
+                            <Filter options = {userTypeDict} selected = {selectedUser} selectFunction = { (selectedUser) => {setUser(selectedUser)}} dropdownText = {dropdownUser} getDropdownText = {(dropdownUser) => setDropdownUserText(dropdownUser)}></Filter>
+                        </div>
+                        <div class = "col-sm">
+                            <b>Frequency: </b>
+                            <Filter options = {freqDict} selected = {selectedFrequency} selectFunction = { (selectedFrequency) => {setFrequency(selectedFrequency)}} dropdownText = {dropdownFreq} getDropdownText = {(dropdownFreq) => setDropdownFreqText(dropdownFreq)}></Filter>
+                        </div>
+                        <div class = "col-sm">
+                            <b>Subject: </b>
+                            <Filter options = {SubjectDict} selected = {selectedSubject} selectFunction = { (selectedSubject) => {setSubject(selectedSubject)}} dropdownText = {dropdownSubjectText} getDropdownText = {(dropdownSubjectText) => setDropdowSubjectText(dropdownSubjectText)}></Filter>
+                        </div>
+                        <div class = "col-sm">
+                            <b>Dependent Variable: </b>
+                            <Filter options = {DVDict} selected = {selectedDV} selectFunction = { (selectedDV) => {setDV(selectedDV)}} dropdownText = {dropdownDVtext} getDropdownText = {(dropdownDVtext) => setDropdownDVText(dropdownDVtext)}></Filter>
+                        </div>
+                        <div class = "col-sm">
+                            <b>Independent Variable: </b>
+                            <Filter options = {IVDict} selected = {selectedIV} selectFunction = { (selectedIV) => {setIV(selectedIV)}} dropdownText = {dropdownIVtext} getDropdownText = {(dropdownIVtext) => setDropdownIVText(dropdownIVtext)}></Filter>
+                        </div>
+                                {/* <div class = "col-sm">
                                     <button onClick={()=> RegDataByUserTypeFreq (selectedUser, selectedFrequency)}>
                                                 Show Regression Graph
                                     </button>
-                                </div>
-                            </div>
+                                </div> */}
+                                
+                                {/* <Filters selectedUser = {selectedUser} selectedFrequency = {selectedFrequency} selectUserType ={ (selectedUser, selectedFrequency) =>{setUser(selectedUser); setFrequency(selectedFrequency)}} dropdownUser = {dropdownUser} getDropdownUserText = {(dropdownUser) => setDropdownUserText(dropdownUser)} ></Filters> */}
                         </div>
-                    </OffcanvasHeader>
-                    <OffcanvasBody>
-                    {regressionGraph === true && <RegressionPlt RegDataSelectedUser = {RegData} RegDataDV = {regDV}/>}
+                    {regressionGraph === true && <RegressionPlt RegDataSelectedUser = {RegData} RegDataDV = {selectedDV} DVName = {dropdownDVtext}/>}
                     </OffcanvasBody>
                 </Offcanvas>
                     
@@ -316,10 +274,21 @@ const BosMap =()=>{
                 <Offcanvas show={showHexOffcanvas} onHide={handleHexOffcanvasClose} placement='end'>
                     <OffcanvasHeader closeButton>
                         <OffcanvasTitle>Hexagon Variables</OffcanvasTitle>
+
                     </OffcanvasHeader>
                     <OffcanvasBody>
-                        <HexRegression selectedHex = {selectedHex}
-                        hexRegVars = {hexRegVars} selectedUser = {selectedUser} selectedFrequency = {selectedFrequency}/>  
+                        <div class = "container">
+                            <div class = "col-sm">
+                                <b>User Type: </b>
+                                <Filter options = {userTypeDict} selected = {selectedUser} selectFunction = { (selectedUser) => {setUser(selectedUser)}} dropdownText = {dropdownUser} getDropdownText = {(dropdownUser) => setDropdownUserText(dropdownUser)}></Filter>
+                            </div>
+                            <div class = "col-sm">
+                                <b>Frequency: </b>
+                                <Filter options = {freqDict} selected = {selectedFrequency} selectFunction = { (selectedFrequency) => {setFrequency(selectedFrequency)}} dropdownText = {dropdownFreq} getDropdownText = {(dropdownFreq) => setDropdownFreqText(dropdownFreq)}></Filter>
+                            </div>
+                            {/* <Filters selectedUser = {selectedUser} selectedFrequency = {selectedFrequency} selectUserType ={ (selectedUser, selectedFrequency) =>{setUser(selectedUser); setFrequency(selectedFrequency)}} dropdownUser = {dropdownUser} getDropdownUserText = {(dropdownUser) => setDropdownUserText(dropdownUser)} ></Filters> */}
+                        </div>
+                        <HexRegression selectedHex = {selectedHex} hexRegVars = {hexRegVars}/>  
                     </OffcanvasBody>
                 </Offcanvas>
 

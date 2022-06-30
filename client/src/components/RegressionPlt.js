@@ -6,7 +6,7 @@ import { scaleLinear, max, min, axisLeft, axisBottom, select } from "d3";
 import RenderCircles from './graph/RenderCircles';
 import Axis from './graph/Axis';
 
-const RegressionPlt = ({RegDataSelectedUser, RegDataDV}) => {
+const RegressionPlt = ({RegDataSelectedUser, RegDataDV, DVName}) => {
    
 
     function getPovertyIndex(hexagon){
@@ -41,9 +41,6 @@ const RegressionPlt = ({RegDataSelectedUser, RegDataDV}) => {
     // const total_reporting_data = variables_data.map(getHexTotalReporting);
 
     const hexDV = variables_data.map(getHexDV);
-
-    
-
     const margin = { top: 20, right: 30, bottom: 60, left: 60 }
     const width = 400 - margin.left - margin.right
     const height = 300 - margin.top - margin.bottom
@@ -79,11 +76,13 @@ const RegressionPlt = ({RegDataSelectedUser, RegDataDV}) => {
             {/* {console.log(allHeavyUsers)} */}
 
         <h3> Scatter Plot </h3>
+
         <svg
           width={width + margin.right + margin.left}
           height={height + margin.top + margin.bottom}
           className="chart"
         >
+  
           <g
             transform={"translate(" + margin.left + "," + margin.top + ")"}
             width={width}
@@ -96,11 +95,18 @@ const RegressionPlt = ({RegDataSelectedUser, RegDataDV}) => {
               transform={"translate(0," + height + ")"}
               scale={axisBottom().scale(x_axis)}
             />
+            <text text-anchor = "end" x = {width} y = {height + margin.top+10} >
+              {"Poverty Index"}
+            </text>
+
             <Axis
               axis="y"
               transform={"translate(0,0)"}
               scale={axisLeft().scale(y_axis)}
             />
+            <text text-anchor = "end" x = {-30} y = {-50 } transform = "rotate(-90)" >
+              {DVName}
+            </text>
           </g>
         </svg>
       </div>
