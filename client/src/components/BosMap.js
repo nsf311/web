@@ -43,7 +43,7 @@ const BosMap =()=>{
     const handleHexOffcanvasClose = () => setShowHexOffcanvas(false);
     const handleHexOffcanvasShow = () => setShowHexOffcanvas(true);
 
-    const [showRegOffcanvas, setShowRegOffcanvas] = useState(false);
+    const [showRegOffcanvas, setShowRegOffcanvas] = useState(true);
     const handleRegOffcanvasClose = () => setShowRegOffcanvas(false);
     const handleRegOffcanvasShow = () => setShowRegOffcanvas(true);
  
@@ -146,6 +146,7 @@ const BosMap =()=>{
 
     const RegDataByUserTypeFreq = ()=>{
         console.log("load reg data by user type and frequency")
+        
   
         bos311Service.findByUserTypeFreq(selectedUser, selectedFrequency)
             .then(response=>{
@@ -259,7 +260,7 @@ const BosMap =()=>{
                     {regressionGraph === true && <RegressionPlt RegDataSelectedUser = {RegData} RegDataDV = {selectedDV} DVName = {dropdownDVtext}/>}
                     </OffcanvasBody>
                 </Offcanvas>
-                    
+                {console.log(RegData)}
                 </div>
 
                    

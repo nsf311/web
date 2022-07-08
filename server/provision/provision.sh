@@ -18,3 +18,7 @@ sudo systemctl enable mongod
 
 # import data to db
 mongorestore --drop -d boston311  -c bos311Hex /vagrant/src/db/hexagon.bson
+# pushd /vagrant/src/ && npm start; popd
+
+
+

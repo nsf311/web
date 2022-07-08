@@ -47,6 +47,45 @@ exports.findAll = (req, res) =>{
     });
 } 
 
+exports.findHexByUserTypeFreq = (req, res) =>{
+    const hex_600 = req.params.HEX_600;
+    const userType = req.params.user_type;
+    const frequency = req.params.frequency;
+    bos311Hex.aggregate( [
+        {
+            "$match":{
+                "HEX_600": parseInt(hex_600)
+            }
+        },
+        {
+            "$project": {
+                "HEX_600":1,
+                "results":{
+                    "$filter":{
+                        "input":"$results",
+                        "as":"results",
+                        "cond":{
+                            "$and":[
+                                {"$eq":["$$results.user_type", userType ]},
+                                {"$eq":["$$results.frequency", frequency] }
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    ])
+    .then(data =>{
+        if(!data)
+            res.status(404).send({message:"Cannot find any data"});
+        else
+            res.send(data);
+    })
+    .catch(err=>{
+        res.status(500).send({message: "Error retrieving hexagon data with number= "+ hex_600});
+    });
+} 
+
 exports.findByUserTypeFreq = (req, res) =>{
     const userType = req.params.user_type;
     const frequency = req.params.frequency;

@@ -23,3 +23,7 @@ yarn-debug.log*
 yarn-error.log*
 
 .vagrant
+/provision/notes
+
+# pwd
+/src/config/db_pwd.js
