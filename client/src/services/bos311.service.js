@@ -8,12 +8,12 @@ class boston311Service{
         return http.get(`/hex_data/hex_num/${hexNum}`);
     }
 
-    findHexByUserTypeFreq(hexNum, user_type, frequency){
-        return http.get(`/hex_data/hex_reg_vars_filtered/${hexNum}/${user_type}/${frequency}`);
+    findHexVarByFilter(hexNum, user_type, frequency, subject){
+        return http.get(`/hex_data/hex_vars_filtered/${hexNum}/${user_type}/${frequency}/${subject}`);
     }
 
-    findByUserTypeFreq(user_type, frequency){
-        return http.get(`/hex_data/reg_res_user_freq/${user_type}/${frequency}`);
+    findRegVarByFilter(user_type, frequency,subject){
+        return http.get(`/hex_data/reg_res_filtered/${user_type}/${frequency}/${subject}`);
     }
 
     findAll(){

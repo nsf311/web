@@ -90,20 +90,31 @@ const BosMap =()=>{
 
     const SubjectDict = [
         {Name: "All subjects", Value: "all" },
-        {Name: "Animals", Value: "Animals" },
-        {Name: "Parking", Value: "Parking" },
+        {Name: "Mayors 24 Hour Hotline", Value: "Mayors_24_Hour_Hotline"},
+        {Name: "Consumer Affair and Licensing", Value:"Consumer_Affairs_and_Licensing"},
+        {Name: "Boston Water and Sewer Commission", Value:"Boston_Water_and_Sewer_Commission"},
+        {Name: "Public Works Department", Value:"Public_Works_Department"},
+        {Name: "Inspectional Services", Value:"Inspectional_Services"},
+        {Name: "Neighborhood Services", Value:"Neighborhood_Services"},
+        {Name: "Property Management", Value:"Property_Management"},
+        {Name: "Boston Public School", Value:"Boston_Public_School"},
+        {Name: "Transportation Traffic Division", Value:"Transportation_Traffic_Division"},
+        {Name: "Animal Control", Value: "Animal_Control" },
+        {Name: "Boston Police Department", Value: "Boston_Police_Department" },
+        {Name: "Parks and Recreation Department", Value: "Parks_and_Recreation_Department" },
+        {Name: "Civil Rights", Value: "Civil_Rights" }
     ]
     
 
     useEffect(() => {
         const newKey = makeKey(10)
         setGeoJsonKey(newKey)
-      }, [selectedUser, selectedFrequency])
+      }, [selectedUser, selectedFrequency, selectedSubject])
 
     useEffect(() => {
-        RegDataByUserTypeFreq();
+        RegDataByFilter();
         getHexRegVarsByFilter(hexNum);
-    }, [selectedUser, selectedFrequency])
+    }, [selectedUser, selectedFrequency, selectedSubject])
 
     
     const hexRegData = async (hex)=>{
@@ -120,7 +131,7 @@ const BosMap =()=>{
     };
 
     const getHexRegVarsByFilter = (hexNum)=>{
-        bos311Service.findHexByUserTypeFreq(hexNum, selectedUser, selectedFrequency)
+        bos311Service.findHexVarByFilter(hexNum, selectedUser, selectedFrequency, selectedSubject)
         .then(response=>{
             setHexRegVars(response.data);
         })
@@ -144,11 +155,11 @@ const BosMap =()=>{
               
       };
 
-    const RegDataByUserTypeFreq = ()=>{
+    const RegDataByFilter = ()=>{
         console.log("load reg data by user type and frequency")
         
   
-        bos311Service.findByUserTypeFreq(selectedUser, selectedFrequency)
+        bos311Service.findRegVarByFilter(selectedUser, selectedFrequency, selectedSubject)
             .then(response=>{
                   setRegData(response.data);
                   setRegressionGraph(true);
@@ -174,7 +185,7 @@ const BosMap =()=>{
     }
 
     const graphBtnOnclick = ()=>{
-        RegDataByUserTypeFreq();
+        RegDataByFilter();
         handleRegOffcanvasShow();
     }
   
@@ -250,7 +261,7 @@ const BosMap =()=>{
                             <Filter options = {IVDict} selected = {selectedIV} selectFunction = { (selectedIV) => {setIV(selectedIV)}} dropdownText = {dropdownIVtext} getDropdownText = {(dropdownIVtext) => setDropdownIVText(dropdownIVtext)}></Filter>
                         </div>
                                 {/* <div class = "col-sm">
-                                    <button onClick={()=> RegDataByUserTypeFreq (selectedUser, selectedFrequency)}>
+                                    <button onClick={()=> RegDataByFilter (selectedUser, selectedFrequency)}>
                                                 Show Regression Graph
                                     </button>
                                 </div> */}
@@ -286,6 +297,10 @@ const BosMap =()=>{
                             <div class = "col-sm">
                                 <b>Frequency: </b>
                                 <Filter options = {freqDict} selected = {selectedFrequency} selectFunction = { (selectedFrequency) => {setFrequency(selectedFrequency)}} dropdownText = {dropdownFreq} getDropdownText = {(dropdownFreq) => setDropdownFreqText(dropdownFreq)}></Filter>
+                            </div>
+                            <div class = "col-sm">
+                                <b>Subject: </b>
+                                <Filter options = {SubjectDict} selected = {selectedSubject} selectFunction = { (selectedSubject) => {setSubject(selectedSubject)}} dropdownText = {dropdownSubjectText} getDropdownText = {(dropdownSubjectText) => setDropdowSubjectText(dropdownSubjectText)}></Filter>
                             </div>
                             {/* <Filters selectedUser = {selectedUser} selectedFrequency = {selectedFrequency} selectUserType ={ (selectedUser, selectedFrequency) =>{setUser(selectedUser); setFrequency(selectedFrequency)}} dropdownUser = {dropdownUser} getDropdownUserText = {(dropdownUser) => setDropdownUserText(dropdownUser)} ></Filters> */}
                         </div>

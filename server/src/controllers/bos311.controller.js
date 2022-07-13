@@ -47,10 +47,11 @@ exports.findAll = (req, res) =>{
     });
 } 
 
-exports.findHexByUserTypeFreq = (req, res) =>{
+exports.findHexVarByFilter = (req, res) =>{
     const hex_600 = req.params.HEX_600;
     const userType = req.params.user_type;
     const frequency = req.params.frequency;
+    const subject = req.params.subject;
     bos311Hex.aggregate( [
         {
             "$match":{
@@ -67,7 +68,8 @@ exports.findHexByUserTypeFreq = (req, res) =>{
                         "cond":{
                             "$and":[
                                 {"$eq":["$$results.user_type", userType ]},
-                                {"$eq":["$$results.frequency", frequency] }
+                                {"$eq":["$$results.frequency", frequency] },
+                                {"$eq":["$$results.subject", subject] }
                             ]
                         }
                     }
@@ -86,9 +88,10 @@ exports.findHexByUserTypeFreq = (req, res) =>{
     });
 } 
 
-exports.findByUserTypeFreq = (req, res) =>{
+exports.findRegVarByFilter = (req, res) =>{
     const userType = req.params.user_type;
     const frequency = req.params.frequency;
+    const subject = req.params.subject;
     bos311Hex.aggregate( [
         {
             "$project": {
@@ -100,7 +103,8 @@ exports.findByUserTypeFreq = (req, res) =>{
                         "cond":{
                             "$and":[
                                 {"$eq":["$$results.user_type", userType ]},
-                                {"$eq":["$$results.frequency", frequency] }
+                                {"$eq":["$$results.frequency", frequency] },
+                                {"$eq":["$$results.subject", subject] }
                             ]
                         }
                     }
