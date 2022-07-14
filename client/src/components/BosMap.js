@@ -109,6 +109,17 @@ const BosMap =()=>{
     };
 
 
+    // const setHexStyle = (hex) =>{
+    //     return {
+    //         fillColor: getColor(feature.properties.COUNT),
+    //         weight: 1,
+    //         opacity: 1,
+    //         color: "white",
+    //         dashArray: "3",
+    //         fillOpacity: 0.8
+    //       };
+    // }
+    
     const getHexRegVarsByFilter = (hexNum)=>{
         bos311Service.findHexVarByFilter(hexNum, selectedUser, selectedFrequency, selectedSubject)
         .then(response=>{
