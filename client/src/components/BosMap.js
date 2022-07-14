@@ -23,49 +23,8 @@ import Button from 'react-bootstrap/Button'
 import { Offcanvas, OffcanvasBody, OffcanvasHeader, OffcanvasTitle } from 'react-bootstrap';
 import { makeKey } from "../lib/makeKey"
 
-const BosMap =()=>{
-      // GeoJson Key to handle updating geojson inside react-leaflet
-    const [geoJsonKey, setGeoJsonKey] = useState("initialKey123abc")
-    const [selectedHex, setSelectedHex] = useState([]);
-    const [hexNum, setHexNum] = useState(-1);
-    const [hexRegVars, setHexRegVars] = useState([]);
-    const [RegData, setRegData] = useState({});
-    const [regressionGraph, setRegressionGraph] = useState(false);
-
-    const [selectedUser, setUser] = useState('non_gov');
-    const [selectedFrequency, setFrequency] = useState('all');
-    const [selectedDV, setDV] = useState('HEX_total_reporting');
-    const [selectedIV, setIV] = useState('poverty_index');
-    const [selectedSubject, setSubject] = useState('all');
-
-
-    const [showHexOffcanvas, setShowHexOffcanvas] = useState(false);
-    const handleHexOffcanvasClose = () => setShowHexOffcanvas(false);
-    const handleHexOffcanvasShow = () => setShowHexOffcanvas(true);
-
-    const [showRegOffcanvas, setShowRegOffcanvas] = useState(true);
-    const handleRegOffcanvasClose = () => setShowRegOffcanvas(false);
-    const handleRegOffcanvasShow = () => setShowRegOffcanvas(true);
- 
-    const [dropdownUser, setDropdownUserText] = useState('Non-gov');
-    const [dropdownFreq, setDropdownFreqText] = useState('All');
-    const [dropdownDVtext, setDropdownDVText] = useState('total number of reports');
-    const [dropdownIVtext, setDropdownIVText] = useState('Poverty Index');
-    const [dropdownSubjectText, setDropdowSubjectText] = useState('All subjects');
-
-
-   
-    const bosCenter = [42.360081, -71.058884];
-    const hexStyle = {
-        fillColor:"yellow",
-    };
-
-    const regDVDict = {
-        'total number of reports':'HEX_total_reporting',
-        'total number of users': 'HEX_total_user',
-        'radius of gyration': 'HEX_weighted_radius_of_gyration',
-        'max home distance': 'HEX_weighted_max_home_distance'
-    }
+const bosCenter = [42.360081, -71.058884];
+    
 
     const userTypeDict = [
         {Name : "Non-gov", Value: "non_gov"},
@@ -104,7 +63,36 @@ const BosMap =()=>{
         {Name: "Parks and Recreation Department", Value: "Parks_and_Recreation_Department" },
         {Name: "Civil Rights", Value: "Civil_Rights" }
     ]
-    
+
+const BosMap =()=>{
+      // GeoJson Key to handle updating geojson inside react-leaflet
+    const [geoJsonKey, setGeoJsonKey] = useState("initialKey123abc")
+    const [selectedHex, setSelectedHex] = useState([]);
+    const [hexNum, setHexNum] = useState(-1);
+    const [hexRegVars, setHexRegVars] = useState([]);
+    const [RegData, setRegData] = useState({});
+    const [regressionGraph, setRegressionGraph] = useState(false);
+
+    const [selectedUser, setUser] = useState('non_gov');
+    const [selectedFrequency, setFrequency] = useState('all');
+    const [selectedDV, setDV] = useState('HEX_total_reporting');
+    const [selectedIV, setIV] = useState('poverty_index');
+    const [selectedSubject, setSubject] = useState('all');
+
+
+    const [showHexOffcanvas, setShowHexOffcanvas] = useState(false);
+    const handleHexOffcanvasClose = () => setShowHexOffcanvas(false);
+    const handleHexOffcanvasShow = () => setShowHexOffcanvas(true);
+
+    const [showRegOffcanvas, setShowRegOffcanvas] = useState(true);
+    const handleRegOffcanvasClose = () => setShowRegOffcanvas(false);
+    const handleRegOffcanvasShow = () => setShowRegOffcanvas(true);
+ 
+    const [dropdownUser, setDropdownUserText] = useState('Non-gov');
+    const [dropdownFreq, setDropdownFreqText] = useState('All');
+    const [dropdownDVtext, setDropdownDVText] = useState('total number of reports');
+    const [dropdownIVtext, setDropdownIVText] = useState('Poverty Index');
+    const [dropdownSubjectText, setDropdowSubjectText] = useState('All subjects');
 
     useEffect(() => {
         const newKey = makeKey(10)
@@ -116,19 +104,10 @@ const BosMap =()=>{
         getHexRegVarsByFilter(hexNum);
     }, [selectedUser, selectedFrequency, selectedSubject])
 
-    
-    const hexRegData = async (hex)=>{
-    
-        console.log("load data")
-        var hex_vars = await bos311Service.findByHexNum(hex.properties.HEX_600)
-            .then(response=>{
-                return response.data
-            })
-            .catch(e=>{
-                console.log(e)
-            });
-            setHexRegVars(hex_vars);
+    const hexStyle = {
+        fillColor:"yellow",
     };
+
 
     const getHexRegVarsByFilter = (hexNum)=>{
         bos311Service.findHexVarByFilter(hexNum, selectedUser, selectedFrequency, selectedSubject)
@@ -139,21 +118,8 @@ const BosMap =()=>{
             console.log(e)
         });    
     };
+   
 
-
-    const GetAllRegData = ()=>{
-        console.log("load all reg data")
-          bos311Service.findAll()
-              .then(response=>{
-                  setRegData(response.data);
-                  setRegressionGraph(true);
-                
-              })
-              .catch(e=>{
-                  console.log(e)
-              });
-              
-      };
 
     const RegDataByFilter = ()=>{
         console.log("load reg data by user type and frequency")
@@ -177,7 +143,7 @@ const BosMap =()=>{
             setSelectedHex(hex);
             setHexNum(hex.properties.HEX_600);
             // console.log("hexagon is clicked");
-            // console.log(hex.properties.HEX_600)
+            console.log(hex.properties.HEX_600)
             getHexRegVarsByFilter(hex.properties.HEX_600);
             handleHexOffcanvasShow();
             
@@ -189,6 +155,32 @@ const BosMap =()=>{
         handleRegOffcanvasShow();
     }
   
+    const hexRegData = (hex)=>{
+    
+        console.log("load data")
+        var hex_vars = bos311Service.findByHexNum(hex.properties.HEX_600)
+            .then(response=>{
+                return response.data
+            })
+            .catch(e=>{
+                console.log(e)
+            });
+            setHexRegVars(hex_vars);
+    };
+
+    const GetAllRegData = ()=>{
+        console.log("load all reg data")
+          bos311Service.findAll()
+              .then(response=>{
+                  setRegData(response.data);
+                  setRegressionGraph(true);
+                
+              })
+              .catch(e=>{
+                  console.log(e)
+              });
+              
+      };
     
 
     // console.log(selectedHex);
