@@ -28,15 +28,15 @@ const HexRegression = ({ selectedHex, hexRegVars }) => {
                 && hexRegVars[0]['results'][0]['user_type']}
                 </b>
             </p>
-
+        {/* just need the following 3 rows for debugging, will remove them ultimately */}
             <p>
-                <b> Frequency </b>   
+                <b> Frequency: </b>   
                 {hexRegVars[0] && hexRegVars[0]['results'][0] && hexRegVars[0]['HEX_600'] === selectedHex.properties.HEX_600 
                 && hexRegVars[0]['results'][0]['frequency']}
             </p>
 
             <p>
-                <b> Frequency </b>   
+                <b> Subject: </b>   
                 {hexRegVars[0] && hexRegVars[0]['results'][0] && hexRegVars[0]['HEX_600'] === selectedHex.properties.HEX_600 
                 && hexRegVars[0]['results'][0]['subject']}
             </p>
