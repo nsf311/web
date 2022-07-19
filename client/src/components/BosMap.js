@@ -84,10 +84,6 @@ const hexStyle = {
     fillColor:"yellow",
 };
 
-var MIN_DV_VAL = 0;
-var MAX_DV_VAL = 0;
-var STEP = 0;
-
 
 const BosMap =()=>{
       // GeoJson Key to handle updating geojson inside react-leaflet
@@ -137,9 +133,6 @@ const BosMap =()=>{
         
       }, [RegData, selectedDV])
 
-    // useEffect(()=>{
-
-    // },[minDV, maxDV, step])
 
     
     function getHexDV(hexagon){
@@ -302,8 +295,6 @@ const BosMap =()=>{
               
       };
     
-
-    // console.log(selectedHex);
 
     return (
        
