@@ -1,1 +1,1 @@
-{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"6f6e6b064cf54bec9fbc91626b00cd07","collectionName":"hexagon","type":"collection"}
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"3d45fc63b7c84875a41afc4e008b3606","collectionName":"hexagon","type":"collection"}

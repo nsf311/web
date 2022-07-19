@@ -1,6 +1,7 @@
 import React, { Component,useState, useEffect } from 'react';
 import "leaflet/dist/leaflet.css";
 import {MapContainer, GeoJSON, TileLayer} from 'react-leaflet';
+import '../App.css';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 
 import bosHexes from '../data/hexagon_600m_311_pop_20200707.json';
@@ -9,13 +10,15 @@ import ReactDOMServer from 'react-dom/server';
 import HexRegression from './HexRegression';
 import bos311Service from '../services/bos311.service';
 import RegressionPlt from './RegressionPlt';
-import Filters from './filters';
 import Filter from './filter';
+import Legend from '../components/graph/Legend';
 
 import DropdownToggle from '@restart/ui/esm/DropdownToggle';
 import DropdownItem from '@restart/ui/esm/DropdownItem';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { max, min} from "d3";
+
 import Dropdown from 'react-bootstrap/Dropdown'
 import SplitButton from 'react-bootstrap/SplitButton'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
@@ -24,56 +27,67 @@ import { Offcanvas, OffcanvasBody, OffcanvasHeader, OffcanvasTitle } from 'react
 import { makeKey } from "../lib/makeKey"
 
 const bosCenter = [42.360081, -71.058884];
-    
 
-    const userTypeDict = [
-        {Name : "Non-gov", Value: "non_gov"},
-        {Name: "Non-gov and unsure", Value: "non_gov_unsure"},
-        {Name: "All users", Value: "all"}
-    ]
-    const freqDict = [
-        {Name: "all", Value: "all"},
-        {Name: "heavy", Value: "heavy"}
-    ]
+const userTypeDict = [
+    {Name : "Non-gov", Value: "non_gov"},
+    {Name: "Non-gov and unsure", Value: "non_gov_unsure"},
+    {Name: "All users", Value: "all"}
+]
+const freqDict = [
+    {Name: "all", Value: "all"},
+    {Name: "heavy", Value: "heavy"}
+]
 
-    const DVDict = [
-        {Name: "total number of reports", Value: "HEX_total_number_of_reports" },
-        {Name: "total number of users", Value: "HEX_total_user"},
-        {Name: 'radius of gyration', Value: 'HEX_weighted_radius_of_gyration'},
-        {Name: 'max home distance', Value: 'HEX_weighted_max_home_distance'}
-    ]
+const DVDict = [
+    {Name: "total number of reports", Value: "HEX_total_reporting" },
+    {Name: "total number of users", Value: "HEX_total_user"},
+    {Name: 'radius of gyration', Value: 'HEX_weighted_radius_of_gyration'},
+    {Name: 'max home distance', Value: 'HEX_weighted_max_home_distance'}
+]
 
-    const IVDict = [
-        {Name: "Poverty Index", Value: "povertyIndex" }
-    ]
+const IVDict = [
+    {Name: "Poverty Index", Value: "povertyIndex" }
+]
 
-    const SubjectDict = [
-        {Name: "All subjects", Value: "all" },
-        {Name: "Mayors 24 Hour Hotline", Value: "Mayors_24_Hour_Hotline"},
-        {Name: "Consumer Affair and Licensing", Value:"Consumer_Affairs_and_Licensing"},
-        {Name: "Boston Water and Sewer Commission", Value:"Boston_Water_and_Sewer_Commission"},
-        {Name: "Public Works Department", Value:"Public_Works_Department"},
-        {Name: "Inspectional Services", Value:"Inspectional_Services"},
-        {Name: "Neighborhood Services", Value:"Neighborhood_Services"},
-        {Name: "Property Management", Value:"Property_Management"},
-        {Name: "Boston Public School", Value:"Boston_Public_School"},
-        {Name: "Transportation Traffic Division", Value:"Transportation_Traffic_Division"},
-        {Name: "Animal Control", Value: "Animal_Control" },
-        {Name: "Boston Police Department", Value: "Boston_Police_Department" },
-        {Name: "Parks and Recreation Department", Value: "Parks_and_Recreation_Department" },
-        {Name: "Civil Rights", Value: "Civil_Rights" }
-    ]
+const SubjectDict = [
+    {Name: "All subjects", Value: "all" },
+    {Name: "Mayors 24 Hour Hotline", Value: "Mayors_24_Hour_Hotline"},
+    {Name: "Consumer Affair and Licensing", Value:"Consumer_Affairs_and_Licensing"},
+    {Name: "Boston Water and Sewer Commission", Value:"Boston_Water_and_Sewer_Commission"},
+    {Name: "Public Works Department", Value:"Public_Works_Department"},
+    {Name: "Inspectional Services", Value:"Inspectional_Services"},
+    {Name: "Neighborhood Services", Value:"Neighborhood_Services"},
+    {Name: "Property Management", Value:"Property_Management"},
+    {Name: "Boston Public School", Value:"Boston_Public_School"},
+    {Name: "Transportation Traffic Division", Value:"Transportation_Traffic_Division"},
+    {Name: "Animal Control", Value: "Animal_Control" },
+    {Name: "Boston Police Department", Value: "Boston_Police_Department" },
+    {Name: "Parks and Recreation Department", Value: "Parks_and_Recreation_Department" },
+    {Name: "Civil Rights", Value: "Civil_Rights" }
+]
 
-    const COLOR_0 = "#F06E45";
-    const COLOR_1 = "#C9A83E";
-    const COLOR_24 = "#A1A436";
-    const COLOR_75 = "#789E2D";
-    const COLOR_140 = "#509923";
-    const COLOR_222 = "#3eb80e";
+const COLOR_1 = "#ffe6e6";
+const COLOR_2 = "#ffb6b6";
+const COLOR_3 = "#ff8686";
+const COLOR_4 = "#ff5656";
+const COLOR_5 = "#ff2626";
+const COLOR_6 = "#ff0000";
+const COLOR_7 = "#f00000";
+const COLOR_8 = "#d00000";
+const COLOR_9 = "#b00000";
+const COLOR_10 = "#900000";
+const COLOR_11 = "#700000";
+const COLOR_NULL = "#ffffff";
 
-    const hexStyle = {
-        fillColor:"yellow",
-    };
+const NUM_OF_HEX_COLORS = 11;
+const hexStyle = {
+    fillColor:"yellow",
+};
+
+var MIN_DV_VAL = 0;
+var MAX_DV_VAL = 0;
+var STEP = 0;
+
 
 const BosMap =()=>{
       // GeoJson Key to handle updating geojson inside react-leaflet
@@ -104,130 +118,99 @@ const BosMap =()=>{
     const [dropdownDVtext, setDropdownDVText] = useState('total number of reports');
     const [dropdownIVtext, setDropdownIVText] = useState('Poverty Index');
     const [dropdownSubjectText, setDropdowSubjectText] = useState('All subjects');
-    const [hexagonColors, setHexagonColors] = useState({fillColor:"yellow"});
     const [geojsonDV, setGeojsonDV] = useState(bosHexes);
+   
+    const [minDV, setMinDV] = useState(0);
+    const [maxDV, setMaxDV] = useState(0);
+    const [step, setStep] = useState(0);
+
 
     useEffect(() => {
-
         RegDataByFilter();
-      
         getHexRegVarsByFilter(hexNum);
-        // setHexFillColor();
-        // const newKey = makeKey(10);
-        // setGeoJsonKey(newKey);
     }, [selectedUser, selectedFrequency, selectedSubject])
 
     useEffect(() => {
-        setHexFillColor();
+        appendHexDVToGeojson();
         const newKey = makeKey(10);
         setGeoJsonKey(newKey);
         
       }, [RegData, selectedDV])
 
+    // useEffect(()=>{
 
-
-
-    // setHexStyle(hex){
-    
-    //     return{
-    //         fillColor: getColor(hex.properties.HEX_600),
-    //         weight: 1,
-    //         opacity: 1,
-    //         color: "white",
-    //         dashArray: "3",
-    //         fillOpacity: 0.8
-    //     }
-    // };
+    // },[minDV, maxDV, step])
 
     
-    
-
-
-
-
     function getHexDV(hexagon){
         if(hexagon[0]!==undefined){
-          return hexagon[0][selectedDV];
+            return hexagon[0][selectedDV];
         }
-     }
-    
+    }
+  
 
-    function setHexFillColor(){
-        console.log("setHexcolor");
-        var count = 0;
+    function appendHexDVToGeojson(){
         console.log(bosHexes.features.length);
+        var variables_data = RegData.map((d) => d.results);
+        var hexDVvals = variables_data.map(getHexDV);
+        setMinDV(min(hexDVvals));
+        setMaxDV(max(hexDVvals));    
+        setStep(( max(hexDVvals) - min(hexDVvals) ) /(NUM_OF_HEX_COLORS));
+   
         for (var hex_idx = 0; hex_idx<bosHexes.features.length; hex_idx++){
             var hexNum = bosHexes.features[hex_idx].properties.HEX_600
             // console.log(hexNum)
             var reg_idx = RegData.map(object => object.HEX_600).indexOf(hexNum);
             if (reg_idx!==-1){
                 try {
-                    bosHexes.features[hex_idx].properties.dvValues = RegData[reg_idx]['results'][0][selectedDV];
+                    bosHexes.features[hex_idx].properties.dvValue = RegData[reg_idx]['results'][0][selectedDV];
                 }
                 catch{
-                    bosHexes.features[hex_idx].properties.dvValues = null;
+                    bosHexes.features[hex_idx].properties.dvValue = null;
                 }
             }
             else{
-                bosHexes.features[hex_idx].properties.dvValues = null;
+                bosHexes.features[hex_idx].properties.dvValue = null;
                 
             }
             
         }
         setGeojsonDV(bosHexes);
-        // console.log(count)
 
     }
-    const getColor=(d)=>{
+    const getfillColor=(d)=>{
         
         if (RegData!==[]){
-            console.log("getColor")
-            // RegData.forEach( (hexagon, index, RegData) =>{
-            //     if (hexagon['HEX_600'] == hexNum){
-            //         var val = RegData[index]['results'][0][selectedDV]
-            //         console.log("value")
-            //         console.log(val)
-            //         return val > 222
-            //         ? COLOR_222
-            //         : val > 140
-            //         ? COLOR_140
-            //         : val > 75
-            //         ? COLOR_75
-            //         : val > 300
-            //         ? COLOR_24
-            //         : val > 0
-            //         ? COLOR_1
-            //         : COLOR_0;
-
-            //         // ? {fillColor: COLOR_222}
-            //         // : val > 140
-            //         // ? {fillColor: COLOR_140}
-            //         // : val > 75
-            //         // ? {fillColor: COLOR_75}
-            //         // : val > 300
-            //         // ? {fillColor: COLOR_24}
-            //         // : val > 0
-            //         // ? {fillColor: COLOR_1}
-            //         // : {fillColor: COLOR_0};
-            //     }
-            // })
-
-            return d > 222
-            ? COLOR_222
-            : d > 140
-            ? COLOR_140
-            : d > 75
-            ? COLOR_75
-            : d > 300
-            ? COLOR_24
-            : d > 0
-            ? COLOR_1
-            : COLOR_0;
+            console.log("getfillColor")
+            // console.log(step)
+            // console.log(minDV)
             
-            // const listHex = RegData.map( (d) => d.HEX_600);
-            // const variables_data = RegData.map((d) => d.results);
-            // const var_values = variables_data.map(getHexDV);
-            // console.log(variables_data)
+            // console.log(maxDV - 11 * step)
+            // console.log(maxDV - 2 * step)
+            // console.log(maxDV)
+            return d > maxDV - 2 * step
+            ? COLOR_11
+            : d > maxDV - 3 * step
+            ? COLOR_10
+            : d > maxDV - 4 * step
+            ? COLOR_9
+            : d > maxDV - 5 * step
+            ? COLOR_8
+            : d > maxDV - 6 * step
+            ? COLOR_7
+            : d > maxDV - 7 * step
+            ? COLOR_6
+            : d > maxDV - 8 * step
+            ? COLOR_5
+            : d > maxDV - 9 * step
+            ? COLOR_4
+            : d > maxDV - 10 * step
+            ? COLOR_3
+            : d > maxDV - 11 * step
+            ? COLOR_2
+            : d > maxDV - 12 * step
+            ? COLOR_1
+            : COLOR_NULL;
             
         }
            
@@ -236,8 +219,9 @@ const BosMap =()=>{
       }
     
     const setHexStyle = (hex)=>{
+        console.log("setHexcolor");
         return{
-            fillColor: getColor(hex.properties.dvValues),
+            fillColor: getfillColor(hex.properties.dvValue),
             weight: 1,
             opacity: 1,
             color: "white",
@@ -245,19 +229,7 @@ const BosMap =()=>{
             fillOpacity: 0.8
         };
     }
-    // useEffect(()=>{
-    //     function setHexStyle(hex){
-    //         setHexagonColors ({
-    //             fillColor: getColor(hex.properties.HEX_600),
-    //             weight: 1,
-    //             opacity: 1,
-    //             color: "white",
-    //             dashArray: "3",
-    //             fillOpacity: 0.8
-    //           });
-    //     }
-    // }, [selectedUser, selectedFrequency, selectedSubject]);
-    
+
     
     const getHexRegVarsByFilter = (hexNum)=>{
         bos311Service.findHexVarByFilter(hexNum, selectedUser, selectedFrequency, selectedSubject)
@@ -269,8 +241,6 @@ const BosMap =()=>{
         });    
     };
    
-
-
     const RegDataByFilter = ()=>{
         console.log("load reg data by user type and frequency")
   
@@ -425,6 +395,7 @@ const BosMap =()=>{
 
                    
                 <MapContainer style = {{height:"80vh"}} zoom ={10} center ={bosCenter}>
+                    <Legend maxDV  = {maxDV} minDV = {minDV} step = {step}></Legend>
                     <TileLayer
                         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -457,7 +428,9 @@ const BosMap =()=>{
                     </OffcanvasBody>
                 </Offcanvas>
 
-            </div>           
+            </div>      
+            <p>min DV = {minDV}</p>     
+            <p>max DV = {maxDV}</p> 
         </div>
     )
 
