@@ -6,7 +6,7 @@ import { scaleLinear, max, min, axisLeft, axisBottom, select } from "d3";
 import RenderCircles from './graph/RenderCircles';
 import Axis from './graph/Axis';
 
-const RegressionPlt = ({RegDataSelectedUser, RegDataDV, DVName}) => {
+const RegressionPlt = ({RegDataSelectedUser, RegDataDV, DVName, RegDataIV, IVName}) => {
    
 
     function getPovertyIndex(hexagon){
@@ -25,6 +25,12 @@ const RegressionPlt = ({RegDataSelectedUser, RegDataDV, DVName}) => {
         return hexagon[0][RegDataDV];
       }
     }
+
+    function getHexIV(hexagon){
+      if(hexagon[0]!==undefined){
+        return hexagon[0][RegDataIV];
+      }
+    }
     function getXYData(x_data, y_data){
         const xy_data = [];
 
@@ -38,17 +44,19 @@ const RegressionPlt = ({RegDataSelectedUser, RegDataDV, DVName}) => {
     const variables_data = RegDataSelectedUser.map((d) => d.results)
 
     const poverty_index_data = variables_data.map(getPovertyIndex);
+    
     // const total_reporting_data = variables_data.map(getHexTotalReporting);
 
     const hexDV = variables_data.map(getHexDV);
+    const hexIV = variables_data.map(getHexIV);
     const margin = { top: 20, right: 30, bottom: 60, left: 60 }
     const width = 400 - margin.left - margin.right
     const height = 300 - margin.top - margin.bottom
     
     let x_axis = scaleLinear()
     .domain([
-      min(poverty_index_data),
-      max(poverty_index_data)
+      min(hexIV),
+      max(hexIV)
     ])
     .range([0, width])
 
@@ -61,7 +69,7 @@ const RegressionPlt = ({RegDataSelectedUser, RegDataDV, DVName}) => {
       
   
 
-    let xy_data = getXYData(poverty_index_data, hexDV )
+    let xy_data = getXYData(hexIV, hexDV )
 
     return (
         <div>
@@ -75,7 +83,7 @@ const RegressionPlt = ({RegDataSelectedUser, RegDataDV, DVName}) => {
 
             {/* {console.log(allHeavyUsers)} */}
 
-        <h3> Scatter Plot </h3>
+        {/* <h3> Scatter Plot </h3> */}
 
         <svg
           width={width + margin.right + margin.left}
@@ -96,7 +104,7 @@ const RegressionPlt = ({RegDataSelectedUser, RegDataDV, DVName}) => {
               scale={axisBottom().scale(x_axis)}
             />
             <text text-anchor = "end" x = {width} y = {height + margin.top+10} >
-              {"Poverty Index"}
+              {IVName}
             </text>
 
             <Axis

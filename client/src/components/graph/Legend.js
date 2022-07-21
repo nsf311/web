@@ -14,20 +14,19 @@ const COLOR_10 = "#900000";
 const COLOR_11 = "#700000";
 const COLOR_NULL = "#ffffff";
 const Legend = ({maxDV, minDV, step}) => {
-
     return(
         <div className="legend">
-            <div style={{ "--color": COLOR_11 }}>{maxDV - 1 * step} - {maxDV}</div>
-            <div style={{ "--color": COLOR_10 }}>{maxDV - 2 * step} - {maxDV - 1 * step}</div>
-            <div style={{ "--color": COLOR_9 }}>{maxDV - 3 * step} - {maxDV - 2 * step}</div>
-            <div style={{ "--color": COLOR_8 }}>{maxDV - 5 * step} - {maxDV - 4 * step}</div>
-            <div style={{ "--color": COLOR_7 }}>{maxDV - 6 * step} - {maxDV - 5 * step}</div>
-            <div style={{ "--color": COLOR_6 }}>{maxDV - 7 * step} - {maxDV - 6 * step}</div>
-            <div style={{ "--color": COLOR_5 }}>{maxDV - 8 * step} - {maxDV - 7 * step}</div>
-            <div style={{ "--color": COLOR_4 }}>{maxDV - 9 * step} - {maxDV - 8 * step}</div>
-            <div style={{ "--color": COLOR_3 }}>{maxDV - 10 * step} - {maxDV - 9 * step}</div>
-            <div style={{ "--color": COLOR_2 }}>{maxDV - 11 * step} - {maxDV - 10 * step}</div>
-            <div style={{ "--color": COLOR_1 }}> {minDV}</div>
+            <div style={{ "--color": COLOR_11 }}>{Math.round((maxDV - 1 * step + Number.EPSILON) * 100) / 100} - {Math.round((maxDV + Number.EPSILON) * 100) / 100}</div>
+            <div style={{ "--color": COLOR_10 }}>{Math.round(maxDV - 2 * step + Number.EPSILON * 100)/100} - {Math.round((maxDV - 1 * step + Number.EPSILON) * 100) / 100}</div>
+            <div style={{ "--color": COLOR_9 }}>{Math.round(maxDV - 3 * step + Number.EPSILON * 100)/100} - {Math.round(maxDV - 2 * step + Number.EPSILON * 100)/100}</div>
+            <div style={{ "--color": COLOR_8 }}>{Math.round(maxDV - 4 * step + Number.EPSILON * 100)/100} - {Math.round(maxDV - 3 * step + Number.EPSILON * 100)/100}</div>
+            <div style={{ "--color": COLOR_7 }}>{Math.round(maxDV - 5 * step + Number.EPSILON * 100)/100} - {Math.round(maxDV - 4 * step + Number.EPSILON * 100)/100}</div>
+            <div style={{ "--color": COLOR_6 }}>{Math.round(maxDV - 6 * step + Number.EPSILON * 100)/100} - {Math.round(maxDV - 5 * step + Number.EPSILON * 100)/100}</div>
+            <div style={{ "--color": COLOR_5 }}>{Math.round(maxDV - 7 * step + Number.EPSILON * 100)/100} - {Math.round(maxDV - 6 * step + Number.EPSILON * 100)/100}</div>
+            <div style={{ "--color": COLOR_4 }}>{Math.round(maxDV - 8 * step + Number.EPSILON * 100)/100} - {Math.round(maxDV - 7 * step + Number.EPSILON * 100)/100}</div>
+            <div style={{ "--color": COLOR_3 }}>{Math.round(maxDV - 9 * step + Number.EPSILON * 100)/100} - {Math.round(maxDV - 8 * step + Number.EPSILON * 100)/100}</div>
+            <div style={{ "--color": COLOR_2 }}>{Math.round(maxDV - 10 * step + Number.EPSILON * 100)/100} - {Math.round(maxDV - 9 * step + Number.EPSILON * 100)/100}</div>
+            <div style={{ "--color": COLOR_1 }}> {0.00} - {Math.round(maxDV - 10 * step + Number.EPSILON * 100)/100}</div>
             <div style={{ "--color": COLOR_NULL }}>NULL</div>
         </div>
        

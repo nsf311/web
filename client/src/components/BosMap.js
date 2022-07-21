@@ -39,14 +39,47 @@ const freqDict = [
 ]
 
 const DVDict = [
-    {Name: "total number of reports", Value: "HEX_total_reporting" },
-    {Name: "total number of users", Value: "HEX_total_user"},
-    {Name: 'radius of gyration', Value: 'HEX_weighted_radius_of_gyration'},
-    {Name: 'max home distance', Value: 'HEX_weighted_max_home_distance'}
+    {Name: "Total number of reports", Value: "HEX_total_reporting" },
+    {Name: "Total number of 311 users", Value: "HEX_total_user"},
+    // Mobility
+    {Name: "Weighted radius of gyration", Value: "HEX_weighted_radius_of_gyration"},
+    {Name: "Weighted average distance between reported locations", Value: "HEX_weighted_average_distance"},
+
+    // Territoriality
+    {Name: "Weighted number of hexagons covered", Value: "HEX_weighted_HEX_coverage"},
+    {Name: "Weighted max home distance", Value: "HEX_weighted_max_home_distance"},
+    {Name: "Weighted mean home distance", Value: "HEX_weighted_mean_home_distance"},
+    {Name: "Weighted median home distance", Value: "HEX_weighted_median_home_distance"},
+
+    // Variety
+    {Name: "Weighted number of subjects reported", Value: "HEX_weighted_subject_coverage"},
+    {Name: "Weighted subject reversed HHI", Value: "HEX_weighted_subject_hhi"},
+
+    {Name: "Weighted number of reporting in 2015", Value: "HEX_weighted_num_reporting_2015"},
+    {Name: "Number of 311 reports per 100 population", Value: "HEX_normalized_total_311_per_100"},
+   
 ]
 
 const IVDict = [
-    {Name: "Poverty Index", Value: "povertyIndex" }
+    {Name: "Poverty Index", Value: "povertyIndex" },
+    {Name: "Total number of reports", Value: "HEX_total_reporting" },
+    {Name: "Total number of 311 users", Value: "HEX_total_user"},
+    // Mobility
+    {Name: "Weighted radius of gyration", Value: "HEX_weighted_radius_of_gyration"},
+    {Name: "Weighted average distance between reported locations", Value: "HEX_weighted_average_distance"},
+
+    // Territoriality
+    {Name: "Weighted number of hexagons covered", Value: "HEX_weighted_HEX_coverage"},
+    {Name: "Weighted max home distance", Value: "HEX_weighted_max_home_distance"},
+    {Name: "Weighted mean home distance", Value: "HEX_weighted_mean_home_distance"},
+    {Name: "Weighted median home distance", Value: "HEX_weighted_median_home_distance"},
+
+    // Variety
+    {Name: "Weighted number of subjects reported", Value: "HEX_weighted_subject_coverage"},
+    {Name: "Weighted subject reversed HHI", Value: "HEX_weighted_subject_hhi"},
+
+    {Name: "Weighted number of reporting in 2015", Value: "HEX_weighted_num_reporting_2015"},
+    {Name: "Number of 311 reports per 100 population", Value: "HEX_normalized_total_311_per_100"},
 ]
 
 const SubjectDict = [
@@ -174,34 +207,35 @@ const BosMap =()=>{
     const getfillColor=(d)=>{
         
         if (RegData!==[]){
-            console.log("getfillColor")
+            // console.log("getfillColor")
             // console.log(step)
             // console.log(minDV)
             
             // console.log(maxDV - 11 * step)
             // console.log(maxDV - 2 * step)
             // console.log(maxDV)
-            return d > maxDV - 2 * step
+            
+            return d > Math.round((maxDV - 2 * step + Number.EPSILON) * 100) / 100
             ? COLOR_11
-            : d > maxDV - 3 * step
+            : d > Math.round((maxDV - 3 * step + Number.EPSILON) * 100) / 100
             ? COLOR_10
-            : d > maxDV - 4 * step
+            : d > Math.round((maxDV - 4 * step + Number.EPSILON) * 100) / 100
             ? COLOR_9
-            : d > maxDV - 5 * step
+            : d > Math.round((maxDV - 5 * step + Number.EPSILON) * 100) / 100
             ? COLOR_8
-            : d > maxDV - 6 * step
+            : d > Math.round((maxDV - 6 * step + Number.EPSILON) * 100) / 100
             ? COLOR_7
-            : d > maxDV - 7 * step
+            : d > Math.round((maxDV - 7 * step + Number.EPSILON) * 100) / 100
             ? COLOR_6
-            : d > maxDV - 8 * step
+            : d > Math.round((maxDV - 8 * step + Number.EPSILON) * 100) / 100
             ? COLOR_5
-            : d > maxDV - 9 * step
+            : d >  Math.round((maxDV - 9 * step + Number.EPSILON) * 100) / 100
             ? COLOR_4
-            : d > maxDV - 10 * step
+            : d > Math.round((maxDV - 10 * step + Number.EPSILON) * 100) / 100
             ? COLOR_3
-            : d > maxDV - 11 * step
+            : d > Math.round((maxDV - 11 * step + Number.EPSILON) * 100) / 100
             ? COLOR_2
-            : d > maxDV - 12 * step
+            : d > Math.round((maxDV - 12 * step + Number.EPSILON) * 100) / 100
             ? COLOR_1
             : COLOR_NULL;
             
@@ -212,7 +246,6 @@ const BosMap =()=>{
       }
     
     const setHexStyle = (hex)=>{
-        console.log("setHexcolor");
         return{
             fillColor: getfillColor(hex.properties.dvValue),
             weight: 1,
@@ -254,7 +287,7 @@ const BosMap =()=>{
             setSelectedHex(hex);
             setHexNum(hex.properties.HEX_600);
             // console.log("hexagon is clicked");
-            console.log(hex.properties.HEX_600)
+            // console.log(hex.properties.HEX_600)
             getHexRegVarsByFilter(hex.properties.HEX_600);
             handleHexOffcanvasShow();
             
@@ -299,7 +332,7 @@ const BosMap =()=>{
     return (
        
         <div>
-            <h1 style ={{ textAlign: "center"}}>Bos 311 Viz</h1>
+            <h1 style ={{ textAlign: "center"}}>Boston 311 Visualization System</h1>
             <div class = "container">
             {showRegOffcanvas === false && showHexOffcanvas === false &&
                 <div class = "row"> 
@@ -316,13 +349,13 @@ const BosMap =()=>{
                         <Filter options = {SubjectDict} selected = {selectedSubject} selectFunction = { (selectedSubject) => {setSubject(selectedSubject)}} dropdownText = {dropdownSubjectText} getDropdownText = {(dropdownSubjectText) => setDropdowSubjectText(dropdownSubjectText)}></Filter>
                     </div>
                     <div class = "col-sm">
-                        <b>Dependent Variable: </b>
+                        <b>Color coded by: </b>
                         <Filter options = {DVDict} selected = {selectedDV} selectFunction = { (selectedDV) => {setDV(selectedDV)}} dropdownText = {dropdownDVtext} getDropdownText = {(dropdownDVtext) => setDropdownDVText(dropdownDVtext)}></Filter>
                     </div>
-                    <div class = "col-sm">
+                    {/* <div class = "col-sm">
                         <b>Independent Variable: </b>
                         <Filter options = {IVDict} selected = {selectedIV} selectFunction = { (selectedIV) => {setIV(selectedIV)}} dropdownText = {dropdownIVtext} getDropdownText = {(dropdownIVtext) => setDropdownIVText(dropdownIVtext)}></Filter>
-                    </div>
+                    </div> */}
                     <div class = "col-sm">
                         <button onClick={graphBtnOnclick}>
                                     Show Regression Graph
@@ -378,7 +411,7 @@ const BosMap =()=>{
                                 
                                 {/* <Filters selectedUser = {selectedUser} selectedFrequency = {selectedFrequency} selectUserType ={ (selectedUser, selectedFrequency) =>{setUser(selectedUser); setFrequency(selectedFrequency)}} dropdownUser = {dropdownUser} getDropdownUserText = {(dropdownUser) => setDropdownUserText(dropdownUser)} ></Filters> */}
                         </div>
-                    {regressionGraph === true && <RegressionPlt RegDataSelectedUser = {RegData} RegDataDV = {selectedDV} DVName = {dropdownDVtext}/>}
+                    {regressionGraph === true && <RegressionPlt RegDataSelectedUser = {RegData} RegDataDV = {selectedDV} DVName = {dropdownDVtext} RegDataIV = {selectedIV} IVName = {dropdownIVtext}/>}
                     </OffcanvasBody>
                 </Offcanvas>
                 {console.log(RegData)}
@@ -420,8 +453,8 @@ const BosMap =()=>{
                 </Offcanvas>
 
             </div>      
-            <p>min DV = {minDV}</p>     
-            <p>max DV = {maxDV}</p> 
+            {/* <p>min DV = {minDV}</p>     
+            <p>max DV = {maxDV}</p>  */}
         </div>
     )
 
