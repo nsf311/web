@@ -15,11 +15,7 @@ const RegressionPlt = ({RegDataSelectedUser, RegDataDV, DVName, RegDataIV, IVNam
        }
        
     }
-    function getHexTotalReporting(hexagon){
-        if (hexagon[0] !==undefined){
-            return hexagon[0]["HEX_total_reporting"];
-        }
-    }
+
     function getHexDV(hexagon){
       if(hexagon[0]!==undefined){
         return hexagon[0][RegDataDV];
@@ -33,9 +29,10 @@ const RegressionPlt = ({RegDataSelectedUser, RegDataDV, DVName, RegDataIV, IVNam
     }
     function getXYData(x_data, y_data){
         const xy_data = [];
-
         for (let i = 0; i < x_data.length; i++) {
+          if ( (typeof x_data[i] == "number") && (typeof y_data[i] == "number") ){
             xy_data.push([x_data[i],y_data[i]] );
+          }
         }
         return xy_data;
     }
@@ -43,7 +40,7 @@ const RegressionPlt = ({RegDataSelectedUser, RegDataDV, DVName, RegDataIV, IVNam
     // const hexResults = RegDataSelectedUser.map( (d) => d.results);
     const variables_data = RegDataSelectedUser.map((d) => d.results)
 
-    const poverty_index_data = variables_data.map(getPovertyIndex);
+    // const poverty_index_data = variables_data.map(getPovertyIndex);
     
     // const total_reporting_data = variables_data.map(getHexTotalReporting);
 

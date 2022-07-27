@@ -176,7 +176,7 @@ const BosMap =()=>{
   
 
     function appendHexDVToGeojson(){
-        console.log(bosHexes.features.length);
+        // console.log(bosHexes.features.length);
         var variables_data = RegData.map((d) => d.results);
         var hexDVvals = variables_data.map(getHexDV);
         setMinDV(min(hexDVvals));
@@ -268,7 +268,6 @@ const BosMap =()=>{
     };
    
     const RegDataByFilter = ()=>{
-        console.log("load reg data by user type and frequency")
   
         bos311Service.findRegVarByFilter(selectedUser, selectedFrequency, selectedSubject)
             .then(response=>{
@@ -414,7 +413,6 @@ const BosMap =()=>{
                     {regressionGraph === true && <RegressionPlt RegDataSelectedUser = {RegData} RegDataDV = {selectedDV} DVName = {dropdownDVtext} RegDataIV = {selectedIV} IVName = {dropdownIVtext}/>}
                     </OffcanvasBody>
                 </Offcanvas>
-                {console.log(RegData)}
                 </div>
 
                    

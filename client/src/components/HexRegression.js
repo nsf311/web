@@ -118,6 +118,13 @@ const HexRegression = ({ selectedHex, hexRegVars }) => {
                     hexRegVars[0]['results'][0]['HEX_total_user']}
             </p>
 
+            <p>
+                <b> HEX poverty index: </b>
+                {hexRegVars[0] && hexRegVars[0]['results'][0] &&
+                    hexRegVars[0]['HEX_600'] === selectedHex.properties.HEX_600 && 
+                    hexRegVars[0]['results'][0]['poverty_index']}
+            </p>
+
         </div>
       );
 };

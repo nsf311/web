@@ -7,6 +7,7 @@ const cors = require("cors");
 
 var corsOptions = {
   origin: "http://localhost:3000"
+  // origin:"http://34.134.26.155"
 };
 app.use(cors(corsOptions));
 
@@ -30,6 +31,7 @@ app.get('/', (req, res) => {
   res.send(data);
 });
 require("./routers/bos311.routes")(app)
-app.listen('3000', () => {
-  console.log('Listening on port 3000');
+const port = process.env.NODE_ENV === 'production' ? (process.env.PORT || 80) : 3000;
+app.listen(port, () => {
+  console.log('Listening on port' + port);
 });
