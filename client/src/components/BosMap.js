@@ -61,7 +61,7 @@ const DVDict = [
 ]
 
 const IVDict = [
-    {Name: "Poverty Index", Value: "povertyIndex" },
+    {Name: "Poverty Index", Value: "poverty_index" },
     {Name: "Total number of reports", Value: "HEX_total_reporting" },
     {Name: "Total number of 311 users", Value: "HEX_total_user"},
     // Mobility
