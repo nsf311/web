@@ -1,7 +1,8 @@
 import React, { Component, useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import "leaflet/dist/leaflet.css";
-// import * as d3 from "d3";
+import * as d3 from "d3";
+import * as d3r from "d3-regression"
 import { scaleLinear, max, min, axisLeft, axisBottom, select } from "d3";
 import RenderCircles from './graph/RenderCircles';
 import Axis from './graph/Axis';
@@ -67,7 +68,14 @@ const RegressionPlt = ({RegDataSelectedUser, RegDataDV, DVName, RegDataIV, IVNam
   
 
     let xy_data = getXYData(hexIV, hexDV )
-
+    const loessRegression = d3r.regressionLoess()
+      .x(xy_data => xy_data[0])
+      .y(xy_data => xy_data[1])
+      .bandwidth(0.25);
+    const lineGenerator = d3.line()
+      .x(xy_data =>x_axis(xy_data[0]))
+      .y(xy_data => y_axis(xy_data[1]));
+      
     return (
         <div>
             {/* {console.log(listHex)} */}
@@ -94,7 +102,8 @@ const RegressionPlt = ({RegDataSelectedUser, RegDataDV, DVName, RegDataIV, IVNam
             height={height}
             className="main"
           >
-            <RenderCircles data={xy_data} scale={{ x_axis, y_axis }} />
+            <RenderCircles data={xy_data} scale={{ x_axis, y_axis }} regressionGenerator = {loessRegression} line = {lineGenerator} />
+
             <Axis
               axis="x"
               transform={"translate(0," + height + ")"}

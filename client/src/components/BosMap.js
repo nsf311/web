@@ -1,33 +1,34 @@
 import React, {useState, useEffect } from 'react';
 import {MapContainer, GeoJSON, TileLayer} from 'react-leaflet';
 import { Offcanvas, OffcanvasBody, OffcanvasHeader, OffcanvasTitle } from 'react-bootstrap';
-import { max, min} from "d3";
-// css
-import '../App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 import "leaflet/dist/leaflet.css";
-// hexagon data
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../App.css';
+
+
 import bosHexes from '../data/hexagon_600m_311_pop_20200707.json';
-// customized components
+
 import HexRegression from './HexRegression';
 import bos311Service from '../services/bos311.service';
 import RegressionPlt from './RegressionPlt';
 import Filter from './filter';
-import Legend from '../components/graph/Legend';
-// customized javascript
+import Legend from './graph/Legend';
+
+import { max, min} from "d3";
+
 import { makeKey } from "../lib/makeKey"
 
-// constant variables for map, styles, variable dictionaries
 const bosCenter = [42.360081, -71.058884];
 // component style - SASS variables
 // https://coreui.io/react/docs/components/offcanvas/#coffcanvas
 const offcanvasStyle = { 
     '--bs-offcanvas-width': "50vh"
-}
+};
+
 const hexStyle = {
     fillColor:"yellow",
 };
-
 const userTypeDict = [
     {Name : "Non-gov", Value: "non_gov"},
     {Name: "Non-gov and unsure", Value: "non_gov_unsure"},
@@ -115,8 +116,9 @@ const COLOR_NULL = "#ffffff";
 const NUM_OF_HEX_COLORS = 11;
 
 
+
 const BosMap =()=>{
-    // GeoJson Key to handle updating geojson inside react-leaflet
+      // GeoJson Key to handle updating geojson inside react-leaflet
     const [geoJsonKey, setGeoJsonKey] = useState("initialKey123abc")
     const [selectedHex, setSelectedHex] = useState([]);
     const [hexNum, setHexNum] = useState(-1);
@@ -141,7 +143,7 @@ const BosMap =()=>{
  
     const [dropdownUser, setDropdownUserText] = useState('Non-gov');
     const [dropdownFreq, setDropdownFreqText] = useState('All');
-    const [dropdownDVtext, setDropdownDVText] = useState('Total number of reports');
+    const [dropdownDVtext, setDropdownDVText] = useState('total number of reports');
     const [dropdownIVtext, setDropdownIVText] = useState('Poverty Index');
     const [dropdownSubjectText, setDropdowSubjectText] = useState('All subjects');
     const [geojsonDV, setGeojsonDV] = useState(bosHexes);
@@ -236,7 +238,10 @@ const BosMap =()=>{
             ? COLOR_1
             : COLOR_NULL;
             
-        }  
+        }
+           
+
+       
       }
     
     const setHexStyle = (hex)=>{
@@ -353,14 +358,23 @@ const BosMap =()=>{
                         <button onClick={graphBtnOnclick}>
                                     Show Regression Graph
                         </button>
-                    </div>                    
+                    </div>
+
+                    {/* <div class = "col-sm">
+                        <button onClick ={setHexFillColor}>
+                            Color Code Map
+                        </button>
+                    </div> */}
+                    
+                    {/* <Filters selectedUser = {selectedUser} selectedFrequency = {selectedFrequency} selectUserType ={ (selectedUser, selectedFrequency) =>{setUser(selectedUser); setFrequency(selectedFrequency)}} dropdownUser = {dropdownUser} getDropdownUserText = {(dropdownUser) => setDropdownUserText(dropdownUser)} ></Filters> */}
+                    
                 </div>
             } 
             </div>
             
             <div>
                 <div>
-                <Offcanvas class = "offcanvas-xxl offcanvas-start " show={showRegOffcanvas} onHide={handleRegOffcanvasClose} style = {offcanvasStyle}>
+                <Offcanvas class = "offcanvas-xxl offcanvas-start" show={showRegOffcanvas} onHide={handleRegOffcanvasClose} style = {offcanvasStyle} >
                     <OffcanvasHeader closeButton>
                         <OffcanvasTitle>Regression Graph</OffcanvasTitle>
                         
@@ -387,14 +401,21 @@ const BosMap =()=>{
                             <b>Independent Variable: </b>
                             <Filter options = {IVDict} selected = {selectedIV} selectFunction = { (selectedIV) => {setIV(selectedIV)}} dropdownText = {dropdownIVtext} getDropdownText = {(dropdownIVtext) => setDropdownIVText(dropdownIVtext)}></Filter>
                         </div>
-                    </div>
+                                {/* <div class = "col-sm">
+                                    <button onClick={()=> RegDataByFilter (selectedUser, selectedFrequency)}>
+                                                Show Regression Graph
+                                    </button>
+                                </div> */}
+                                
+                                {/* <Filters selectedUser = {selectedUser} selectedFrequency = {selectedFrequency} selectUserType ={ (selectedUser, selectedFrequency) =>{setUser(selectedUser); setFrequency(selectedFrequency)}} dropdownUser = {dropdownUser} getDropdownUserText = {(dropdownUser) => setDropdownUserText(dropdownUser)} ></Filters> */}
+                        </div>
                     {regressionGraph === true && <RegressionPlt RegDataSelectedUser = {RegData} RegDataDV = {selectedDV} DVName = {dropdownDVtext} RegDataIV = {selectedIV} IVName = {dropdownIVtext}/>}
                     </OffcanvasBody>
                 </Offcanvas>
                 </div>
 
                    
-                <MapContainer style = {{height:"80vh"}} zoom ={10.5} center ={bosCenter} >
+                <MapContainer style = {{height:"80vh"}} zoom ={11} center ={bosCenter}>
                     <Legend maxDV  = {maxDV} minDV = {minDV} step = {step}></Legend>
                     <TileLayer
                         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
