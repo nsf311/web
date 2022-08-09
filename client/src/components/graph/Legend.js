@@ -1,6 +1,5 @@
-import React, { Component, useState } from 'react';
-import "leaflet/dist/leaflet.css";
-// import * as d3 from "d3";
+import React from 'react';
+
 const COLOR_1 = "#ffe6e6";
 const COLOR_2 = "#ffb6b6";
 const COLOR_3 = "#ff8686";

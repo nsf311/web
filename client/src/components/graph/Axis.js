@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect,useLayoutEffect, useRef, useCallback } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {select } from "d3";
 const Axis = ({axis, transform, scale}) =>{
     
@@ -10,9 +10,6 @@ const Axis = ({axis, transform, scale}) =>{
         select(ref.current).call(scale);
       }, [scale])
       
-
-    
-    
 
     return(
         <g

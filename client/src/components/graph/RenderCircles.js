@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React from 'react';
 import "leaflet/dist/leaflet.css";
 import * as d3 from "d3";
 import * as d3r from "d3-regression"

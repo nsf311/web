@@ -1,15 +1,7 @@
-import React, { Component, useState } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-import "leaflet/dist/leaflet.css";
-
+import React from 'react';
 const HexRegression = ({ selectedHex, hexRegVars }) => {
-    // console.log(hexRegVars)
-    // function getVarsByFilter(hexRegVarsAll){
-    //     for (let i = hexRegVarsAll)
-    // } 
     const hexRegVarsAll = hexRegVars.map((d) => d.results)
    
-
     return (
         <div>
 

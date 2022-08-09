@@ -1,8 +1,6 @@
-import React, { Component, useState } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-import "leaflet/dist/leaflet.css";
+import React from 'react';
 
-import { scaleLinear, max, min, axisLeft, axisBottom, select, line } from "d3";
+import { scaleLinear, max, min, axisLeft, axisBottom} from "d3";
 
 import RenderCircles from './graph/RenderCircles';
 import Axis from './graph/Axis';
@@ -10,25 +8,18 @@ import Axis from './graph/Axis';
 const RegressionPlt = ({RegDataSelectedUser, RegDataDV, DVName, RegDataIV, IVName}) => {
    
 
-    function getPovertyIndex(hexagon){
-       if (hexagon[0]!==undefined){
-           return hexagon[0].poverty_index;
-       }
-       
-    }
-
-    function getHexDV(hexagon){
+    const getHexDV=(hexagon)=>{
       if(hexagon[0]!==undefined){
         return hexagon[0][RegDataDV];
       }
     }
 
-    function getHexIV(hexagon){
+    const getHexIV =(hexagon)=>{
       if(hexagon[0]!==undefined){
         return hexagon[0][RegDataIV];
       }
     }
-    function getXYData(x_data, y_data){
+    const getXYData = (x_data, y_data)=>{
         const xy_data = [];
         for (let i = 0; i < x_data.length; i++) {
           if ( (typeof x_data[i] == "number") && (typeof y_data[i] == "number") ){

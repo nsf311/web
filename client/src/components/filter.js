@@ -1,10 +1,6 @@
-import React, { Component, useState } from 'react';
+import React from 'react';
 import Dropdown from 'react-bootstrap/Dropdown'
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import BosMap from './BosMap';
-// import {selectUserType, selectSubject, selectRegDV } from './BosMap';
-
-
 const Filter = ({ options, selected, selectFunction, dropdownText, getDropdownText, onSelectFunction}) =>{
     // console.log(options)
     const setSelection = (e)=>{
