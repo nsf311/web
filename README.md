@@ -48,7 +48,17 @@ The back-end server uses Node.js + Express for REST APIs, and front-end side is 
 - Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads) and [Vagrant](https://www.vagrantup.com/downloads)
 - Open up a terminal
 - Clone this repository
-#### Start the server on the virtual machine:
+
+#### Start the front-end application
+- Open up another teminal window and change the directory to the client folder 
+- Run `npm install` to install the node modules
+- Run `npm start`
+
+Go to the web browser and type: http://localhost:8081/
+
+#### Archive
+Everything is set up on the google cloud server, please ignore following steps
+##### Start the server on the virtual machine:
 - Run `cd server`
 - Run `vagrant up` in the server folder 
 - Run `cd src`
@@ -60,12 +70,6 @@ The back-end server uses Node.js + Express for REST APIs, and front-end side is 
 * The app is now running on the virtual machine. The virtual machine's port **3000** is mapped to the host machine's port **3001**. 
 * The `/vagrant` folder in the virtual machine is synchronized with the server folder in your machine. Any changes you make in the `/vagrant` folder will be visible on your machine and vice-versa.
 
-#### Start the front-end application
-- Open up another teminal window and change the directory to the client folder 
-- Run `npm install` to install the node modules
-- Run `npm start`
-
-Go to the web browser and type: http://localhost:3000/
 
 
 
