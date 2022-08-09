@@ -187,3 +187,9 @@ body {
 .info span {
   text-align: right;
 }
+
+.regression {
+  fill: none;
+  stroke: #000;
+  stroke-width: 1.5px;
+}

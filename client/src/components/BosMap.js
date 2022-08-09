@@ -23,19 +23,16 @@ const bosCenter = [42.360081, -71.058884];
 // component style - SASS variables
 // https://coreui.io/react/docs/components/offcanvas/#coffcanvas
 const offcanvasStyle = { 
-    '--bs-offcanvas-width': "50vh"
+    '--bs-offcanvas-width': "60wh"
 };
 
-const hexStyle = {
-    fillColor:"yellow",
-};
 const userTypeDict = [
     {Name : "Non-gov", Value: "non_gov"},
     {Name: "Non-gov and unsure", Value: "non_gov_unsure"},
     {Name: "All users", Value: "all"}
 ]
 const freqDict = [
-    {Name: "all", Value: "all"},
+    {Name: "All", Value: "all"},
     {Name: "heavy", Value: "heavy"}
 ]
 
@@ -126,69 +123,87 @@ const BosMap =()=>{
     const [RegData, setRegData] = useState([]);
     const [regressionGraph, setRegressionGraph] = useState(false);
 
+    // variables' states
     const [selectedUser, setUser] = useState('non_gov');
     const [selectedFrequency, setFrequency] = useState('all');
     const [selectedDV, setDV] = useState('HEX_total_reporting');
     const [selectedIV, setIV] = useState('poverty_index');
     const [selectedSubject, setSubject] = useState('all');
 
-
+    // sidebar for each individual hexagon
     const [showHexOffcanvas, setShowHexOffcanvas] = useState(false);
     const handleHexOffcanvasClose = () => setShowHexOffcanvas(false);
     const handleHexOffcanvasShow = () => setShowHexOffcanvas(true);
 
+    // sidebar for regresson graph
     const [showRegOffcanvas, setShowRegOffcanvas] = useState(true);
     const handleRegOffcanvasClose = () => setShowRegOffcanvas(false);
     const handleRegOffcanvasShow = () => setShowRegOffcanvas(true);
- 
+    
+    // dropdown text states 
     const [dropdownUser, setDropdownUserText] = useState('Non-gov');
     const [dropdownFreq, setDropdownFreqText] = useState('All');
     const [dropdownDVtext, setDropdownDVText] = useState('total number of reports');
     const [dropdownIVtext, setDropdownIVText] = useState('Poverty Index');
     const [dropdownSubjectText, setDropdowSubjectText] = useState('All subjects');
+
+    // for color-coded map
     const [geojsonDV, setGeojsonDV] = useState(bosHexes);
-   
     const [minDV, setMinDV] = useState(0);
     const [maxDV, setMaxDV] = useState(0);
     const [step, setStep] = useState(0);
 
-
+    // when one of the following filter is changed, 
+    // load the data again
     useEffect(() => {
         RegDataByFilter();
         getHexRegVarsByFilter(hexNum);
     }, [selectedUser, selectedFrequency, selectedSubject])
 
+
+    /*
+    - update the DV to geojson data when DV or regression data is changed
+    (regression data is changed when frequency or user type is changed)
+    - makeKey is used for refreshing/ updating the <GEOJSON> component when the DV is changed or 
+    the regression data is changed 
+    */
     useEffect(() => {
         appendHexDVToGeojson();
         const newKey = makeKey(10);
         setGeoJsonKey(newKey);
         
       }, [RegData, selectedDV])
-
-
     
-    function getHexDV(hexagon){
+   
+
+
+    // helper function to get values of selected DV of each hexagon
+    const getHexDV = (hexagon)=>{
         if(hexagon[0]!==undefined){
             return hexagon[0][selectedDV];
         }
     }
   
-
-    function appendHexDVToGeojson(){
+    /*
+    Color-coded map
+    Append one feature (dvValue) to the boxHexex data to change the color of hexagons
+    */
+    const appendHexDVToGeojson = ()=>{
         // console.log(bosHexes.features.length);
-        var variables_data = RegData.map((d) => d.results);
-        var hexDVvals = variables_data.map(getHexDV);
+        let variables_data = RegData.map((d) => d.results);
+        let hexDVvals = variables_data.map(getHexDV);
         setMinDV(min(hexDVvals));
         setMaxDV(max(hexDVvals));    
         setStep(( max(hexDVvals) - min(hexDVvals) ) /(NUM_OF_HEX_COLORS));
    
-        for (var hex_idx = 0; hex_idx<bosHexes.features.length; hex_idx++){
-            var hexNum = bosHexes.features[hex_idx].properties.HEX_600
-            // console.log(hexNum)
-            var reg_idx = RegData.map(object => object.HEX_600).indexOf(hexNum);
+        for (let hex_idx = 0; hex_idx<bosHexes.features.length; hex_idx++){
+            let hexNum = bosHexes.features[hex_idx].properties.HEX_600
+            let reg_idx = RegData.map(object => object.HEX_600).indexOf(hexNum);
             if (reg_idx!==-1){
                 try {
                     bosHexes.features[hex_idx].properties.dvValue = RegData[reg_idx]['results'][0][selectedDV];
+                    console.log(bosHexes.features[hex_idx].properties.dvValue)
+                    console.log(hex_idx)
                 }
                 catch{
                     bosHexes.features[hex_idx].properties.dvValue = null;
@@ -200,11 +215,14 @@ const BosMap =()=>{
             }
             
         }
+        // update geojson data with appended DV
         setGeojsonDV(bosHexes);
+        
 
     }
+
+
     const getfillColor=(d)=>{
-        
         if (RegData!==[]){
             // console.log("getfillColor")
             // console.log(step)
@@ -213,7 +231,6 @@ const BosMap =()=>{
             // console.log(maxDV - 11 * step)
             // console.log(maxDV - 2 * step)
             // console.log(maxDV)
-            
             return d > Math.round((maxDV - 2 * step + Number.EPSILON) * 100) / 100
             ? COLOR_11
             : d > Math.round((maxDV - 3 * step + Number.EPSILON) * 100) / 100
@@ -234,14 +251,11 @@ const BosMap =()=>{
             ? COLOR_3
             : d > Math.round((maxDV - 11 * step + Number.EPSILON) * 100) / 100
             ? COLOR_2
-            : d > Math.round((maxDV - 12 * step + Number.EPSILON) * 100) / 100
+            : d >= Math.round((maxDV - 12 * step + Number.EPSILON) * 100) / 100
             ? COLOR_1
             : COLOR_NULL;
             
-        }
-           
-
-       
+        }    
       }
     
     const setHexStyle = (hex)=>{
@@ -452,6 +466,8 @@ const BosMap =()=>{
             </div>      
             {/* <p>min DV = {minDV}</p>     
             <p>max DV = {maxDV}</p>  */}
+          
+
         </div>
     )
 
