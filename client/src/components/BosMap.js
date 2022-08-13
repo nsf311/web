@@ -268,7 +268,8 @@ const BosMap = () => {
   };
 
   return (
-    <div>
+    // somthing is making change to the root background color so I added bg-white. I will fix this later. (Issue is from the App.css)
+    <div className="bg-white">
       <h1 className="text-center">Boston 311 Visualization System</h1>
       <div class="container">
         {/* {showRegOffcanvas === false && showHexOffcanvas === false && (
