@@ -8,7 +8,6 @@ import {
 } from "react-bootstrap";
 
 import "leaflet/dist/leaflet.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.css";
 
 import bosHexes from "../data/hexagon_600m_311_pop_20200707.json";
