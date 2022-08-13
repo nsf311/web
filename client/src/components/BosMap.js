@@ -272,7 +272,7 @@ const BosMap = () => {
     <div>
       <h1 className="text-center">Boston 311 Visualization System</h1>
       <div class="container">
-        {showRegOffcanvas === false && showHexOffcanvas === false && (
+        {/* {showRegOffcanvas === false && showHexOffcanvas === false && (
           <div class="row">
             <div class="col-sm">
               <b>User Type: </b>
@@ -330,25 +330,23 @@ const BosMap = () => {
                 }
               ></Filter>
             </div>
-            {/* <div class = "col-sm">
-                        <b>Independent Variable: </b>
-                        <Filter options = {IVDict} selected = {selectedIV} selectFunction = { (selectedIV) => {setIV(selectedIV)}} dropdownText = {dropdownIVtext} getDropdownText = {(dropdownIVtext) => setDropdownIVText(dropdownIVtext)}></Filter>
-                    </div> */}
             <div class="col-sm">
-              <Button variant="outline-primary" onClick={graphBtnOnclick}>
-                Show Regression Graph
-              </Button>
+              
             </div>
-
-            {/* <div class = "col-sm">
-                        <button onClick ={setHexFillColor}>
-                            Color Code Map
-                        </button>
-                    </div> */}
-
-            {/* <Filters selectedUser = {selectedUser} selectedFrequency = {selectedFrequency} selectUserType ={ (selectedUser, selectedFrequency) =>{setUser(selectedUser); setFrequency(selectedFrequency)}} dropdownUser = {dropdownUser} getDropdownUserText = {(dropdownUser) => setDropdownUserText(dropdownUser)} ></Filters> */}
           </div>
-        )}
+        )} */}
+
+        {/* <div class = "col-sm">
+                                <b>Independent Variable: </b>
+                                <Filter options = {IVDict} selected = {selectedIV} selectFunction = { (selectedIV) => {setIV(selectedIV)}} dropdownText = {dropdownIVtext} getDropdownText = {(dropdownIVtext) => setDropdownIVText(dropdownIVtext)}></Filter>
+                            </div> */}
+        {/* <div class = "col-sm">
+                                <button onClick ={setHexFillColor}>
+                                    Color Code Map
+                                </button>
+                            </div> */}
+
+        {/* <Filters selectedUser = {selectedUser} selectedFrequency = {selectedFrequency} selectUserType ={ (selectedUser, selectedFrequency) =>{setUser(selectedUser); setFrequency(selectedFrequency)}} dropdownUser = {dropdownUser} getDropdownUserText = {(dropdownUser) => setDropdownUserText(dropdownUser)} ></Filters> */}
       </div>
       <div className="col-10 mx-auto py-3">
         <div className="row">
@@ -379,6 +377,14 @@ const BosMap = () => {
               label="Color coded by"
               onChange={setDV}
             ></SelectForms>
+          </div>
+          <div className="col pt-4">
+            <Button
+              variant="outline-primary rounded-pill"
+              onClick={graphBtnOnclick}
+            >
+              Show Regression Graph
+            </Button>
           </div>
         </div>
       </div>
