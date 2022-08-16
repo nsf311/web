@@ -74,7 +74,7 @@ const BosMap = () => {
   const handleHexOffcanvasShow = () => setShowHexOffcanvas(true);
 
   // sidebar for regresson graph
-  const [showRegOffcanvas, setShowRegOffcanvas] = useState(false);
+  const [showRegOffcanvas, setShowRegOffcanvas] = useState(true);
   const handleRegOffcanvasClose = () => setShowRegOffcanvas(false);
   const handleRegOffcanvasShow = () => setShowRegOffcanvas(true);
 
