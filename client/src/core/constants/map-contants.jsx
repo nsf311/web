@@ -1,5 +1,3 @@
-// export const DDDD = {};
-
 const offcanvasStyle = {
   "--bs-offcanvas-width": "60wh",
 };
@@ -15,7 +13,6 @@ const userTypeDictObj = {
   non_gov_unsure: "Non-gov and unsure",
   all: "All users",
 };
-
 
 const freqDict = [
   { Name: "All", Value: "all" },
@@ -79,7 +76,8 @@ const DVDictObj = {
   HEX_total_reporting: "Total number of reports",
   HEX_total_user: "Total number of 311 users",
   HEX_weighted_radius_of_gyration: "Weighted radius of gyration",
-  HEX_weighted_average_distance: "Weighted average distance between reported locations",
+  HEX_weighted_average_distance:
+    "Weighted average distance between reported locations",
   HEX_weighted_HEX_coverage: "Weighted number of hexagons covered",
   HEX_weighted_max_home_distance: "Weighted max home distance",
   HEX_weighted_mean_home_distance: "Weighted mean home distance",
@@ -144,7 +142,8 @@ const IVDictObj = {
   HEX_total_reporting: "Total number of reports",
   HEX_total_user: "Total number of 311 users",
   HEX_weighted_radius_of_gyration: "Weighted radius of gyration",
-  HEX_weighted_average_distance: "Weighted average distance between reported locations",
+  HEX_weighted_average_distance:
+    "Weighted average distance between reported locations",
   HEX_weighted_HEX_coverage: "Weighted number of hexagons covered",
   HEX_weighted_max_home_distance: "Weighted max home distance",
   HEX_weighted_mean_home_distance: "Weighted mean home distance",
@@ -153,8 +152,7 @@ const IVDictObj = {
   HEX_weighted_subject_hhi: "Weighted subject reversed HHI",
   HEX_weighted_num_reporting_2015: "Weighted number of reporting in 2015",
   HEX_normalized_total_311_per_100: "Number of 311 reports per 100 population",
-};  // end of IVDictObj
-
+}; // end of IVDictObj
 
 const SubjectDict = [
   { Name: "All subjects", Value: "all" },
@@ -201,7 +199,6 @@ const SubjectDictObj = {
   Parks_and_Recreation_Department: "Parks and Recreation Department",
   Civil_Rights: "Civil Rights",
 }; // end of SubjectDictObj
-
 
 const COLOR_1 = "#ffe6e6";
 const COLOR_2 = "#ffb6b6";

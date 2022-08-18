@@ -13,7 +13,9 @@ function App() {
       <HeaderNav className="App-header" />
       <BrowserRouter>
         <Switch>
-          <Route path="/about"><AboutUs /></Route>
+          <Route path="/about">
+            <AboutUs />
+          </Route>
           <Route default>
             <BosMap />
           </Route>
