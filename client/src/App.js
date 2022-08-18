@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.scss";
-import BosMap from "./components/BosMap";
+import BosMap from "./pages/BosMap";
 import HeaderNav from "./layout/header";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 

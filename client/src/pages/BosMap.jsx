@@ -10,11 +10,11 @@ import {
 // import "leaflet/dist/leaflet.css";
 import bosHexes from "../core/data/hexagon_600m_311_pop_20200707.json";
 
-import HexRegression from "./HexRegression";
+import HexRegression from "../components/HexRegression";
 import bos311Service from "../core/services/bos311.service";
-import RegressionPlt from "./RegressionPlt";
-import Filter from "./filter";
-import Legend from "./graph/Legend";
+import RegressionPlt from "../components/RegressionPlt";
+import Filter from "../components/filter";
+import Legend from "../components/graph/Legend";
 
 import { max, min } from "d3";
 
