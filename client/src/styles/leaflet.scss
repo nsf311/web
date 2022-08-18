@@ -1,0 +1,8 @@
+
+@import "~bootstrap/dist/css/bootstrap.css";
+.leaflet-interactive:hover {
+  cursor: pointer;
+   color: black !important;
+  //  opacity: 0.1 !important;
+  @extend .text-primary;
+}
