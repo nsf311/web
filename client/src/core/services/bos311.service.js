@@ -1,4 +1,4 @@
-import http from "../http-commom";
+import http from "../../http-commom";
 class boston311Service{
     get(id){
         return http.get(`/hex_data/${id}`);

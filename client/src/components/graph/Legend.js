@@ -14,7 +14,7 @@ import {
   COLOR_2,
   COLOR_1,
   COLOR_NULL,
-} from "../../core/map-contants";
+} from "../../core/constants/map-contants";
 
 const COLORS = [
   COLOR_11,

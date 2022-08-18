@@ -9,10 +9,23 @@ const userTypeDict = [
   { Name: "Non-gov and unsure", Value: "non_gov_unsure" },
   { Name: "All users", Value: "all" },
 ];
+
+const userTypeDictObj = {
+  non_gov: "Non-gov",
+  non_gov_unsure: "Non-gov and unsure",
+  all: "All users",
+};
+
+
 const freqDict = [
   { Name: "All", Value: "all" },
   { Name: "heavy", Value: "heavy" },
 ];
+
+const freqDictObj = {
+  all: "All",
+  heavy: "Heavy",
+};
 
 const DVDict = [
   { Name: "Total number of reports", Value: "HEX_total_reporting" },
@@ -61,6 +74,21 @@ const DVDict = [
     Value: "HEX_normalized_total_311_per_100",
   },
 ];
+
+const DVDictObj = {
+  HEX_total_reporting: "Total number of reports",
+  HEX_total_user: "Total number of 311 users",
+  HEX_weighted_radius_of_gyration: "Weighted radius of gyration",
+  HEX_weighted_average_distance: "Weighted average distance between reported locations",
+  HEX_weighted_HEX_coverage: "Weighted number of hexagons covered",
+  HEX_weighted_max_home_distance: "Weighted max home distance",
+  HEX_weighted_mean_home_distance: "Weighted mean home distance",
+  HEX_weighted_median_home_distance: "Weighted median home distance",
+  HEX_weighted_subject_coverage: "Weighted number of subjects reported",
+  HEX_weighted_subject_hhi: "Weighted subject reversed HHI",
+  HEX_weighted_num_reporting_2015: "Weighted number of reporting in 2015",
+  HEX_normalized_total_311_per_100: "Number of 311 reports per 100 population",
+};
 
 const IVDict = [
   { Name: "Poverty Index", Value: "poverty_index" },
@@ -111,6 +139,23 @@ const IVDict = [
   },
 ];
 
+const IVDictObj = {
+  poverty_index: "Poverty Index",
+  HEX_total_reporting: "Total number of reports",
+  HEX_total_user: "Total number of 311 users",
+  HEX_weighted_radius_of_gyration: "Weighted radius of gyration",
+  HEX_weighted_average_distance: "Weighted average distance between reported locations",
+  HEX_weighted_HEX_coverage: "Weighted number of hexagons covered",
+  HEX_weighted_max_home_distance: "Weighted max home distance",
+  HEX_weighted_mean_home_distance: "Weighted mean home distance",
+  HEX_weighted_median_home_distance: "Weighted median home distance",
+  HEX_weighted_subject_coverage: "Weighted number of subjects reported",
+  HEX_weighted_subject_hhi: "Weighted subject reversed HHI",
+  HEX_weighted_num_reporting_2015: "Weighted number of reporting in 2015",
+  HEX_normalized_total_311_per_100: "Number of 311 reports per 100 population",
+};  // end of IVDictObj
+
+
 const SubjectDict = [
   { Name: "All subjects", Value: "all" },
   { Name: "Mayors 24 Hour Hotline", Value: "Mayors_24_Hour_Hotline" },
@@ -140,6 +185,24 @@ const SubjectDict = [
   { Name: "Civil Rights", Value: "Civil_Rights" },
 ];
 
+const SubjectDictObj = {
+  all: "All subjects",
+  Mayors_24_Hour_Hotline: "Mayors 24 Hour Hotline",
+  Consumer_Affairs_and_Licensing: "Consumer Affair and Licensing",
+  Boston_Water_and_Sewer_Commission: "Boston Water and Sewer Commission",
+  Public_Works_Department: "Public Works Department",
+  Inspectional_Services: "Inspectional Services",
+  Neighborhood_Services: "Neighborhood Services",
+  Property_Management: "Property Management",
+  Boston_Public_School: "Boston Public School",
+  Transportation_Traffic_Division: "Transportation Traffic Division",
+  Animal_Control: "Animal Control",
+  Boston_Police_Department: "Boston Police Department",
+  Parks_and_Recreation_Department: "Parks and Recreation Department",
+  Civil_Rights: "Civil Rights",
+}; // end of SubjectDictObj
+
+
 const COLOR_1 = "#ffe6e6";
 const COLOR_2 = "#ffb6b6";
 const COLOR_3 = "#ff8686";
@@ -156,13 +219,9 @@ const COLOR_NULL = "#ffffff";
 const NUM_OF_HEX_COLORS = 11;
 
 export {
-  offcanvasStyle,
-  userTypeDict,
-  freqDict,
-  DVDict,
-  IVDict,
-  SubjectDict,
   COLOR_1,
+  COLOR_10,
+  COLOR_11,
   COLOR_2,
   COLOR_3,
   COLOR_4,
@@ -171,8 +230,17 @@ export {
   COLOR_7,
   COLOR_8,
   COLOR_9,
-  COLOR_10,
-  COLOR_11,
   COLOR_NULL,
+  DVDict,
+  DVDictObj,
+  freqDict,
+  freqDictObj,
+  IVDict,
+  IVDictObj,
   NUM_OF_HEX_COLORS,
+  offcanvasStyle,
+  SubjectDict,
+  SubjectDictObj,
+  userTypeDict,
+  userTypeDictObj,
 };

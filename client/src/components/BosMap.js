@@ -11,7 +11,7 @@ import {
 import bosHexes from "../core/data/hexagon_600m_311_pop_20200707.json";
 
 import HexRegression from "./HexRegression";
-import bos311Service from "../services/bos311.service";
+import bos311Service from "../core/services/bos311.service";
 import RegressionPlt from "./RegressionPlt";
 import Filter from "./filter";
 import Legend from "./graph/Legend";
@@ -44,7 +44,7 @@ import {
   COLOR_11,
   COLOR_NULL,
   NUM_OF_HEX_COLORS,
-} from "../core/map-contants";
+} from "../core/constants/map-contants";
 
 const bosCenter = [42.360081, -71.058884];
 // component style - SASS variables
