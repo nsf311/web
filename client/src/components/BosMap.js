@@ -8,7 +8,7 @@ import {
 } from "react-bootstrap";
 
 import "leaflet/dist/leaflet.css";
-import "../App.css";
+import "../App.scss";
 
 import bosHexes from "../data/hexagon_600m_311_pop_20200707.json";
 
@@ -268,8 +268,7 @@ const BosMap = () => {
   };
 
   return (
-    // somthing is making change to the root background color so I added bg-white. I will fix this later. (Issue is from the App.css)
-    <div className="bg-white">
+    <div>
       <h1 className="text-center">Boston 311 Visualization System</h1>
       <div class="container">
         {/* {showRegOffcanvas === false && showHexOffcanvas === false && (

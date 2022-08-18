@@ -1,5 +1,5 @@
 @import "~bootstrap/dist/css/bootstrap.css";
-@import "~styles/leaflet.scss";
+@import "./styles/leaflet.scss";
 
 /* https://codepen.io/hazmi/pen/JjoyONo */
 .legend {
@@ -20,7 +20,7 @@
   align-items: center;
   height: 20px;
   padding: 0 5px;
-  color: #fff;
+  @extend .text-white;
 }
 .legend > div::before {
   content: "";
