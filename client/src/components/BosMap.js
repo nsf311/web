@@ -7,10 +7,8 @@ import {
   OffcanvasTitle,
 } from "react-bootstrap";
 
-import "leaflet/dist/leaflet.css";
-import "../App.scss";
-
-import bosHexes from "../data/hexagon_600m_311_pop_20200707.json";
+// import "leaflet/dist/leaflet.css";
+import bosHexes from "../core/data/hexagon_600m_311_pop_20200707.json";
 
 import HexRegression from "./HexRegression";
 import bos311Service from "../services/bos311.service";
@@ -20,7 +18,7 @@ import Legend from "./graph/Legend";
 
 import { max, min } from "d3";
 
-import { makeKey } from "../lib/makeKey";
+import { makeKey } from "../core/lib/makeKey";
 
 import { Button } from "react-bootstrap";
 
@@ -269,84 +267,6 @@ const BosMap = () => {
 
   return (
     <div>
-      <h1 className="text-center">Boston 311 Visualization System</h1>
-      <div class="container">
-        {/* {showRegOffcanvas === false && showHexOffcanvas === false && (
-          <div class="row">
-            <div class="col-sm">
-              <b>User Type: </b>
-              <Filter
-                options={userTypeDict}
-                selected={selectedUser}
-                selectFunction={(selectedUser) => {
-                  setUser(selectedUser);
-                }}
-                dropdownText={dropdownUser}
-                getDropdownText={(dropdownUser) =>
-                  setDropdownUserText(dropdownUser)
-                }
-              ></Filter>
-            </div>
-            <div class="col-sm">
-              <b>Frequency: </b>
-              <Filter
-                options={freqDict}
-                selected={selectedFrequency}
-                selectFunction={(selectedFrequency) => {
-                  setFrequency(selectedFrequency);
-                }}
-                dropdownText={dropdownFreq}
-                getDropdownText={(dropdownFreq) =>
-                  setDropdownFreqText(dropdownFreq)
-                }
-              ></Filter>
-            </div>
-            <div class="col-sm">
-              <b>Subject: </b>
-              <Filter
-                options={SubjectDict}
-                selected={selectedSubject}
-                selectFunction={(selectedSubject) => {
-                  setSubject(selectedSubject);
-                }}
-                dropdownText={dropdownSubjectText}
-                getDropdownText={(dropdownSubjectText) =>
-                  setDropdowSubjectText(dropdownSubjectText)
-                }
-              ></Filter>
-            </div>
-            <div class="col-sm">
-              <b>Color coded by: </b>
-              <Filter
-                options={DVDict}
-                selected={selectedDV}
-                selectFunction={(selectedDV) => {
-                  setDV(selectedDV);
-                }}
-                dropdownText={dropdownDVtext}
-                getDropdownText={(dropdownDVtext) =>
-                  setDropdownDVText(dropdownDVtext)
-                }
-              ></Filter>
-            </div>
-            <div class="col-sm">
-              
-            </div>
-          </div>
-        )} */}
-
-        {/* <div class = "col-sm">
-                                <b>Independent Variable: </b>
-                                <Filter options = {IVDict} selected = {selectedIV} selectFunction = { (selectedIV) => {setIV(selectedIV)}} dropdownText = {dropdownIVtext} getDropdownText = {(dropdownIVtext) => setDropdownIVText(dropdownIVtext)}></Filter>
-                            </div> */}
-        {/* <div class = "col-sm">
-                                <button onClick ={setHexFillColor}>
-                                    Color Code Map
-                                </button>
-                            </div> */}
-
-        {/* <Filters selectedUser = {selectedUser} selectedFrequency = {selectedFrequency} selectUserType ={ (selectedUser, selectedFrequency) =>{setUser(selectedUser); setFrequency(selectedFrequency)}} dropdownUser = {dropdownUser} getDropdownUserText = {(dropdownUser) => setDropdownUserText(dropdownUser)} ></Filters> */}
-      </div>
       <div className="col-10 mx-auto py-3">
         <div className="row">
           <div className="col">

@@ -1,5 +1,11 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "./styles/leaflet.scss";
+@import "./styles/animation.scss";
+@import "./styles/button.scss";
+
+.text-shadow {
+  text-shadow: 10px 9px 4px #444444;
+}
 
 /* https://codepen.io/hazmi/pen/JjoyONo */
 .legend {
@@ -10,7 +16,7 @@
   padding: 10px 5px;
   border-radius: 5px;
   box-shadow: 0 0 5px 0 rgba(255, 255, 255, 0.3);
-  font: 13px/1 sans-serif;
+  font: calc(13px/1) sans-serif;
   background: rgba(0, 0, 0, 0.8);
   cursor: default !important;
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import "leaflet/dist/leaflet.css";
+// import "leaflet/dist/leaflet.css";
 import * as d3 from "d3";
 import * as d3r from "d3-regression"
 const RenderCircles = ({data, scale}) => {

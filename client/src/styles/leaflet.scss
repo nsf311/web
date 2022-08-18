@@ -2,9 +2,10 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~leaflet/dist/leaflet.css";
 @import "bootstrap";
+@import "./animation.scss";
 
 .leaflet-interactive:hover {
-  stroke-width: 3;
-  stroke: #bd0202;
+  stroke: #021ebd;
+  // animation: pulse-motion 2s ease 0s;
 }
  
