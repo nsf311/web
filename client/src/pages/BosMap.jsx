@@ -10,6 +10,8 @@ import {
 // import "leaflet/dist/leaflet.css";
 import bosHexes from "../core/data/hexagon_600m_311_pop_20200707.json";
 
+import Collapse from 'react-bootstrap/Collapse';
+
 import HexRegression from "../components/HexRegression";
 import bos311Service from "../core/services/bos311.service";
 import RegressionPlt from "../components/RegressionPlt";
@@ -31,6 +33,8 @@ import {
   DVDict,
   IVDict,
   SubjectDict,
+  IVDictObj,
+  DVDictObj,
   COLOR_1,
   COLOR_2,
   COLOR_3,
@@ -72,9 +76,9 @@ const BosMap = () => {
   const handleHexOffcanvasShow = () => setShowHexOffcanvas(true);
 
   // sidebar for regresson graph
-  const [showRegOffcanvas, setShowRegOffcanvas] = useState(true);
+  const [showRegOffcanvas, setShowRegOffcanvas] = useState(false);
   const handleRegOffcanvasClose = () => setShowRegOffcanvas(false);
-  const handleRegOffcanvasShow = () => setShowRegOffcanvas(true);
+  const handleRegOffcanvasShow = () => setShowRegOffcanvas(true); // setShowRegOffcanvas(true);
 
   // dropdown text states
   const [dropdownUser, setDropdownUserText] = useState("Non-gov");
@@ -266,14 +270,16 @@ const BosMap = () => {
   };
 
   return (
-    <div>
-      <div className="col-10 mx-auto py-3">
+    <div className="container-fluid mt-5">
+      {/* <div className="col-10 mx-auto py-3">
         <div className="row">
           <div className="col">
+            <pre>{selectedUser}</pre>
             <SelectForms
               options={userTypeDict}
               label="User Type"
               onChange={setUser}
+              value={selectedUser}
             ></SelectForms>
           </div>
           <div className="col">
@@ -281,6 +287,7 @@ const BosMap = () => {
               options={freqDict}
               label="Frequency"
               onChange={setFrequency}
+              value={selectedFrequency}
             ></SelectForms>
           </div>
           <div className="col">
@@ -288,6 +295,7 @@ const BosMap = () => {
               options={SubjectDict}
               label="Subject"
               onChange={setSubject}
+              value={selectedSubject}
             ></SelectForms>
           </div>
           <div className="col">
@@ -295,6 +303,7 @@ const BosMap = () => {
               options={DVDict}
               label="Color coded by"
               onChange={setDV}
+              value={selectedDV}
             ></SelectForms>
           </div>
           <div className="col pt-4">
@@ -306,10 +315,10 @@ const BosMap = () => {
             </Button>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div>
-        <div>
+        {/* <div>
           <Offcanvas
             class="offcanvas-xxl offcanvas-start"
             show={showRegOffcanvas}
@@ -391,13 +400,6 @@ const BosMap = () => {
                     }
                   ></Filter>
                 </div>
-                {/* <div class = "col-sm">
-                                    <button onClick={()=> RegDataByFilter (selectedUser, selectedFrequency)}>
-                                                Show Regression Graph
-                                    </button>
-                                </div> */}
-
-                {/* <Filters selectedUser = {selectedUser} selectedFrequency = {selectedFrequency} selectUserType ={ (selectedUser, selectedFrequency) =>{setUser(selectedUser); setFrequency(selectedFrequency)}} dropdownUser = {dropdownUser} getDropdownUserText = {(dropdownUser) => setDropdownUserText(dropdownUser)} ></Filters> */}
               </div>
               {regressionGraph === true && (
                 <RegressionPlt
@@ -410,22 +412,92 @@ const BosMap = () => {
               )}
             </OffcanvasBody>
           </Offcanvas>
-        </div>
+        </div> */}
 
-        <div className="col-10 mx-auto shadow-lg rounded-lg">
-          <MapContainer style={{ height: "80vh" }} zoom={11} center={bosCenter}>
-            <Legend maxDV={maxDV} minDV={minDV} step={step}></Legend>
-            <TileLayer
-              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            <GeoJSON
-              key={geoJsonKey}
-              style={setHexStyle}
-              data={geojsonDV.features}
-              onEachFeature={onEachHex}
-            ></GeoJSON>
-          </MapContainer>
+        <div className="col-11 mx-auto shadow rounded-end border border-primary border-start-0">
+          <div className="col-12  border-bottom  bg-primary bg-opacity-10">
+            <h2 className="text-center text-primary"> Boston Map Data</h2>
+          </div>
+          <div className="row">
+            <div className="col-12 col-lg-3">
+            <Collapse in={true}>
+              <div id="regression-dialog">
+                <h3 className="col-11 mx-auto text-center text-primary">Regression Graph</h3>
+                <div className="col-11 mx-auto my-3">
+                  <SelectForms
+                    options={userTypeDict}
+                    label="User Type"
+                    onChange={setUser}
+                    value={selectedUser}
+                  ></SelectForms>
+                </div>
+                <div className="col-11 mx-auto my-3">
+                  <SelectForms
+                    options={freqDict}
+                    label="Frequency"
+                    onChange={setFrequency}
+                    value={selectedFrequency}
+                  ></SelectForms>
+                </div>
+                <div className="col-11 mx-auto my-3">
+                  <SelectForms
+                    options={SubjectDict}
+                    label="Subject"
+                    onChange={setSubject}
+                    value={selectedSubject}
+                  ></SelectForms>
+                </div>
+                <div className="col-11 mx-auto my-3 mb-auto">
+                  <SelectForms
+                    options={DVDict}
+                    label="Dependent Variable (Color coded by)"
+                    onChange={setDV}
+                    value={selectedDV}
+                  ></SelectForms>
+                </div>
+                <div className="col-11 mx-auto my-3 mb-auto">
+                  <SelectForms
+                    options={IVDict}
+                    label="Independent Variable"
+                    onChange={setIV}
+                    value={selectedIV}
+                  ></SelectForms>
+                </div>
+
+                <div className="col-12">
+                  {regressionGraph === true && (
+                    <RegressionPlt
+                      RegDataSelectedUser={RegData}
+                      RegDataDV={selectedDV}
+                      DVName={DVDictObj[selectedDV]}
+                      RegDataIV={selectedIV}
+                      IVName={IVDictObj[selectedIV]}
+                    />
+                  )}
+                </div>
+              </div>
+            </Collapse>
+            </div>
+            <div className="col-12 col-lg-9">
+              <MapContainer
+                style={{ minHeight: "80vh", maxHeight: "100%" }}
+                zoom={11}
+                center={bosCenter}
+              >
+                <Legend maxDV={maxDV} minDV={minDV} step={step}></Legend>
+                <TileLayer
+                  attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                <GeoJSON
+                  key={geoJsonKey}
+                  style={setHexStyle}
+                  data={geojsonDV.features}
+                  onEachFeature={onEachHex}
+                ></GeoJSON>
+              </MapContainer>
+            </div>
+          </div>
         </div>
 
         <Offcanvas
