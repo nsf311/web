@@ -12,12 +12,12 @@ export default class FooterNav extends React.Component {
           </li>
           <li className="nav-item">
             <a href="/" className="nav-link px-2 text-muted">
-              Features
+              About
             </a>
           </li>
           <li className="nav-item">
             <a href="/" className="nav-link px-2 text-muted">
-              Pricing
+              Terms and Conditions
             </a>
           </li>
           <li className="nav-item">
@@ -31,7 +31,7 @@ export default class FooterNav extends React.Component {
             </a>
           </li>
         </ul>
-        <p className="text-center text-muted">© 2021 Company, Inc</p>
+        <p className="text-center text-muted">© 2021 GMU, Inc</p>
       </footer>
     );
   }

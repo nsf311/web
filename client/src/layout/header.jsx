@@ -3,7 +3,7 @@ import React from "react";
 export const HeaderNav = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light px-4 shadow">
-      <a className="navbar-brand text-shadow" href="/">
+      <a className="navbar-brand text-shadow fw-bold" href="/">
         Boston 311 Visualization System
       </a>
       <button

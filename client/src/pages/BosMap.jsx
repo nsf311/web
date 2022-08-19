@@ -10,7 +10,7 @@ import {
 // import "leaflet/dist/leaflet.css";
 import bosHexes from "../core/data/hexagon_600m_311_pop_20200707.json";
 
-import Collapse from 'react-bootstrap/Collapse';
+import Collapse from "react-bootstrap/Collapse";
 
 import HexRegression from "../components/HexRegression";
 import bos311Service from "../core/services/bos311.service";
@@ -420,67 +420,70 @@ const BosMap = () => {
           </div>
           <div className="row">
             <div className="col-12 col-lg-3">
-            <Collapse in={true}>
-              <div id="regression-dialog">
-                <h3 className="col-11 mx-auto text-center text-primary">Regression Graph</h3>
-                <div className="col-11 mx-auto my-3">
-                  <SelectForms
-                    options={userTypeDict}
-                    label="User Type"
-                    onChange={setUser}
-                    value={selectedUser}
-                  ></SelectForms>
-                </div>
-                <div className="col-11 mx-auto my-3">
-                  <SelectForms
-                    options={freqDict}
-                    label="Frequency"
-                    onChange={setFrequency}
-                    value={selectedFrequency}
-                  ></SelectForms>
-                </div>
-                <div className="col-11 mx-auto my-3">
-                  <SelectForms
-                    options={SubjectDict}
-                    label="Subject"
-                    onChange={setSubject}
-                    value={selectedSubject}
-                  ></SelectForms>
-                </div>
-                <div className="col-11 mx-auto my-3 mb-auto">
-                  <SelectForms
-                    options={DVDict}
-                    label="Dependent Variable (Color coded by)"
-                    onChange={setDV}
-                    value={selectedDV}
-                  ></SelectForms>
-                </div>
-                <div className="col-11 mx-auto my-3 mb-auto">
-                  <SelectForms
-                    options={IVDict}
-                    label="Independent Variable"
-                    onChange={setIV}
-                    value={selectedIV}
-                  ></SelectForms>
-                </div>
+              <Collapse in={true}>
+                <div id="regression-dialog">
+                  <h3 className="col-11 mx-auto text-center text-primary">
+                    Regression Graph
+                  </h3>
+                  <div className="col-11 mx-auto my-3">
+                    <SelectForms
+                      options={userTypeDict}
+                      label="User Type"
+                      onChange={setUser}
+                      value={selectedUser}
+                    ></SelectForms>
+                  </div>
+                  <div className="col-11 mx-auto my-3">
+                    <SelectForms
+                      options={freqDict}
+                      label="Frequency"
+                      onChange={setFrequency}
+                      value={selectedFrequency}
+                    ></SelectForms>
+                  </div>
+                  <div className="col-11 mx-auto my-3">
+                    <SelectForms
+                      options={SubjectDict}
+                      label="Subject"
+                      onChange={setSubject}
+                      value={selectedSubject}
+                    ></SelectForms>
+                  </div>
+                  <div className="col-11 mx-auto my-3 mb-auto">
+                    <SelectForms
+                      options={DVDict}
+                      label="Dependent Variable (Color coded by)"
+                      onChange={setDV}
+                      value={selectedDV}
+                    ></SelectForms>
+                  </div>
+                  <div className="col-11 mx-auto my-3 mb-auto">
+                    <SelectForms
+                      options={IVDict}
+                      label="Independent Variable"
+                      onChange={setIV}
+                      value={selectedIV}
+                    ></SelectForms>
+                  </div>
 
-                <div className="col-12">
-                  {regressionGraph === true && (
-                    <RegressionPlt
-                      RegDataSelectedUser={RegData}
-                      RegDataDV={selectedDV}
-                      DVName={DVDictObj[selectedDV]}
-                      RegDataIV={selectedIV}
-                      IVName={IVDictObj[selectedIV]}
-                    />
-                  )}
+                  <div className="col-12">
+                    {regressionGraph === true && (
+                      <RegressionPlt
+                        RegDataSelectedUser={RegData}
+                        RegDataDV={selectedDV}
+                        DVName={DVDictObj[selectedDV]}
+                        RegDataIV={selectedIV}
+                        IVName={IVDictObj[selectedIV]}
+                      />
+                    )}
+                  </div>
                 </div>
-              </div>
-            </Collapse>
+              </Collapse>
             </div>
             <div className="col-12 col-lg-9">
               <MapContainer
-                style={{ minHeight: "80vh", maxHeight: "100%" }}
+                // style={{ minHeight: "80vh", maxHeight: "100%" }}
+                className="min-vh-100"
                 zoom={11}
                 center={bosCenter}
               >
