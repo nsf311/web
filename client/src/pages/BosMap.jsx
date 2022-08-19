@@ -525,7 +525,6 @@ const BosMap = () => {
                   <Button
                     variant="outline-primary rounded-start rounded-pill btn-sm"
                     onClick={graphBtnOnclick}
-                    style={{ zIndex: 1000, position: "absolute !important" }}
                     transform="rotate(-90)"
                   >
                     {showRegOffcanvas ? "Hide" : "Show"} Regression Graph
