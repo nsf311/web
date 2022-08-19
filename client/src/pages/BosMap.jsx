@@ -482,8 +482,8 @@ const BosMap = () => {
             </div>
             <div className="col-12 col-lg-9">
               <MapContainer
-                // style={{ minHeight: "80vh", maxHeight: "100%" }}
-                className="min-vh-100"
+                style={{ minHeight: "83vh", maxHeight: "100%" }}
+                // className="min-vh-100"
                 zoom={11}
                 center={bosCenter}
               >
