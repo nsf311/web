@@ -95,7 +95,7 @@ const RegressionPlt = ({
             transform={"translate(0," + height + ")"}
             scale={axisBottom().scale(x_axis)}
           />
-          <text text-anchor="end" x={width} y={height + margin.top + 10}>
+          <text textAnchor="end" x={width} y={height + margin.top + 10}>
             {IVName}
           </text>
 
@@ -104,7 +104,7 @@ const RegressionPlt = ({
             transform={"translate(0,0)"}
             scale={axisLeft().scale(y_axis)}
           />
-          <text text-anchor="end" x={-40} y={-47} transform="rotate(-90)">
+          <text textAnchor="end" x={-40} y={-47} transform="rotate(-90)">
             {DVName}
           </text>
         </g>

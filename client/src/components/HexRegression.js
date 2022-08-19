@@ -8,7 +8,7 @@ const HexRegression = ({ selectedHex, hexRegVars }) => {
 
             <p>
                 <b>Hexagon number: </b>
-                {selectedHex.properties.HEX_600}
+                {selectedHex?.properties?.HEX_600}
             </p>
             <p>
                 <b># of 311: </b>

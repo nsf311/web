@@ -7,6 +7,11 @@
   text-shadow: 10px 9px 4px #444444;
 }
 
+.show-on-mapcontainer {
+  position: absolute;
+  z-index: 999;
+}
+
 /* https://codepen.io/hazmi/pen/JjoyONo */
 .legend {
   position: absolute;
