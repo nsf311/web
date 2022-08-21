@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { MapContainer, GeoJSON, TileLayer } from "react-leaflet";
-// import {
-//   Offcanvas,
-//   OffcanvasBody,
-//   OffcanvasHeader,
-//   OffcanvasTitle,
-// } from "react-bootstrap";
-
-// import "leaflet/dist/leaflet.css";
 import bosHexes from "../core/data/hexagon_600m_311_pop_20200707.json";
 
 import closeArrow from "../assets/icons8-double-left.gif";
@@ -18,7 +10,6 @@ import Collapse from "react-bootstrap/Collapse";
 import HexRegression from "../components/HexRegression";
 import bos311Service from "../core/services/bos311.service";
 import RegressionPlt from "../components/RegressionPlt";
-// import Filter from "../components/filter";
 import Legend from "../components/graph/Legend";
 
 import { max, min } from "d3";
@@ -75,17 +66,13 @@ const BosMap = () => {
 
   // sidebar for each individual hexagon
   const [showHexOffcanvas, setShowHexOffcanvas] = useState(false);
-  // const handleHexOffcanvasClose = () => setShowHexOffcanvas(false);
   const handleHexOffcanvasShow = () => setShowHexOffcanvas(true);
 
   // sidebar for regression graph
 
-  // const [showHexDetails, setShowHexDetails] = useState(false);
-
   // sidebar for regresson graph
   const [showRegOffcanvas, setShowRegOffcanvas] = useState(false);
-  // const handleRegOffcanvasClose = () => setShowRegOffcanvas(false);
-  const handleRegOffcanvasShow = () => setShowRegOffcanvas(true); // setShowRegOffcanvas(true);
+  const handleRegOffcanvasShow = () => setShowRegOffcanvas(true);
 
   // sidebar for Hexagon Graph expand close the Regression Graph.
   useEffect(() => {
@@ -101,13 +88,6 @@ const BosMap = () => {
   }, [showRegOffcanvas]);
 
   // dropdown text states
-  // const [dropdownUser, setDropdownUserText] = useState("Non-gov");
-  // const [dropdownFreq, setDropdownFreqText] = useState("All");
-  // const [dropdownDVtext, setDropdownDVText] = useState(
-  //   "total number of reports"
-  // );
-  // const [dropdownIVtext, setDropdownIVText] = useState("Poverty Index");
-  // const [dropdownSubjectText, setDropdowSubjectText] = useState("All subjects");
 
   // for color-coded map
   const [geojsonDV, setGeojsonDV] = useState(bosHexes);
@@ -295,149 +275,7 @@ const BosMap = () => {
 
   return (
     <div className="container-fluid mt-5">
-      {/* <div className="col-10 mx-auto py-3">
-        <div className="row">
-          <div className="col">
-            <pre>{selectedUser}</pre>
-            <SelectForms
-              options={userTypeDict}
-              label="User Type"
-              onChange={setUser}
-              value={selectedUser}
-            ></SelectForms>
-          </div>
-          <div className="col">
-            <SelectForms
-              options={freqDict}
-              label="Frequency"
-              onChange={setFrequency}
-              value={selectedFrequency}
-            ></SelectForms>
-          </div>
-          <div className="col">
-            <SelectForms
-              options={SubjectDict}
-              label="Subject"
-              onChange={setSubject}
-              value={selectedSubject}
-            ></SelectForms>
-          </div>
-          <div className="col">
-            <SelectForms
-              options={DVDict}
-              label="Color coded by"
-              onChange={setDV}
-              value={selectedDV}
-            ></SelectForms>
-          </div>
-          <div className="col pt-4">
-            <Button
-              variant="outline-primary rounded-pill"
-              onClick={graphBtnOnclick}
-            >
-              Show Regression Graph
-            </Button>
-          </div>
-        </div>
-      </div> */}
-
       <div>
-        {/* <div>
-          <Offcanvas
-            className="offcanvas-xxl offcanvas-start"
-            show={showRegOffcanvas}
-            onHide={handleRegOffcanvasClose}
-            style={offcanvasStyle}
-          >
-            <OffcanvasHeader closeButton>
-              <OffcanvasTitle>Regression Graph</OffcanvasTitle>
-            </OffcanvasHeader>
-            <OffcanvasBody>
-              <div className="container">
-                <div className="col-sm">
-                  <b>User Type: </b>
-                  <Filter
-                    options={userTypeDict}
-                    selected={selectedUser}
-                    selectFunction={(selectedUser) => {
-                      setUser(selectedUser);
-                    }}
-                    dropdownText={dropdownUser}
-                    getDropdownText={(dropdownUser) =>
-                      setDropdownUserText(dropdownUser)
-                    }
-                  ></Filter>
-                </div>
-                <div className="col-sm">
-                  <b>Frequency: </b>
-                  <Filter
-                    options={freqDict}
-                    selected={selectedFrequency}
-                    selectFunction={(selectedFrequency) => {
-                      setFrequency(selectedFrequency);
-                    }}
-                    dropdownText={dropdownFreq}
-                    getDropdownText={(dropdownFreq) =>
-                      setDropdownFreqText(dropdownFreq)
-                    }
-                  ></Filter>
-                </div>
-                <div className="col-sm">
-                  <b>Subject: </b>
-                  <Filter
-                    options={SubjectDict}
-                    selected={selectedSubject}
-                    selectFunction={(selectedSubject) => {
-                      setSubject(selectedSubject);
-                    }}
-                    dropdownText={dropdownSubjectText}
-                    getDropdownText={(dropdownSubjectText) =>
-                      setDropdowSubjectText(dropdownSubjectText)
-                    }
-                  ></Filter>
-                </div>
-                <div className="col-sm">
-                  <b>Dependent Variable: </b>
-                  <Filter
-                    options={DVDict}
-                    selected={selectedDV}
-                    selectFunction={(selectedDV) => {
-                      setDV(selectedDV);
-                    }}
-                    dropdownText={dropdownDVtext}
-                    getDropdownText={(dropdownDVtext) =>
-                      setDropdownDVText(dropdownDVtext)
-                    }
-                  ></Filter>
-                </div>
-                <div className="col-sm">
-                  <b>Independent Variable: </b>
-                  <Filter
-                    options={IVDict}
-                    selected={selectedIV}
-                    selectFunction={(selectedIV) => {
-                      setIV(selectedIV);
-                    }}
-                    dropdownText={dropdownIVtext}
-                    getDropdownText={(dropdownIVtext) =>
-                      setDropdownIVText(dropdownIVtext)
-                    }
-                  ></Filter>
-                </div>
-              </div>
-              {regressionGraph === true && (
-                <RegressionPlt
-                  RegDataSelectedUser={RegData}
-                  RegDataDV={selectedDV}
-                  DVName={dropdownDVtext}
-                  RegDataIV={selectedIV}
-                  IVName={dropdownIVtext}
-                />
-              )}
-            </OffcanvasBody>
-          </Offcanvas>
-        </div> */}
-
         <div className="col-11 mx-auto map-container">
           <div className="col-12  border-bottom  bg-primary bg-opacity-10">
             <h2 className="text-center text-primary"> Boston Map Data</h2>
@@ -606,49 +444,7 @@ const BosMap = () => {
             </Collapse>
           </div>
         </div>
-
-        {/* <Offcanvas
-          show={showHexOffcanvas}
-          onHide={handleHexOffcanvasClose}
-          placement="end"
-          style={offcanvasStyle}
-        >
-          <OffcanvasHeader closeButton>
-            <OffcanvasTitle>Hexagon Variables</OffcanvasTitle>
-          </OffcanvasHeader>
-          <OffcanvasBody>
-            <div className="container">
-              <div className="col-11 mx-auto my-3">
-                <SelectForms
-                  options={userTypeDict}
-                  label="User Type"
-                  onChange={setUser}
-                  value={selectedUser}
-                ></SelectForms>
-              </div>
-              <div className="col-11 mx-auto my-3">
-                <SelectForms
-                  options={freqDict}
-                  label="Frequency"
-                  onChange={setFrequency}
-                  value={selectedFrequency}
-                ></SelectForms>
-              </div>
-              <div className="col-11 mx-auto my-3">
-                <SelectForms
-                  options={SubjectDict}
-                  label="Subject"
-                  onChange={setSubject}
-                  value={selectedSubject}
-                ></SelectForms>
-              </div>
-            </div>
-            <HexRegression selectedHex={selectedHex} hexRegVars={hexRegVars} />
-          </OffcanvasBody>
-        </Offcanvas> */}
       </div>
-      {/* <p>min DV = {minDV}</p>     
-            <p>max DV = {maxDV}</p>  */}
     </div>
   );
 };
