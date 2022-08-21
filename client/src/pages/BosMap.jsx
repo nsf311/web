@@ -562,7 +562,7 @@ const BosMap = () => {
                 <div className="overflow-auto" style={{ height: "83vh" }}>
                   <div className="col-11 mx-auto d-flex mt-2">
                     <h3 className="text-center text-primary col-10">
-                      Hexagon Graph
+                      Hexagon Subject
                     </h3>
                     <Button
                       className="btn btn-primary bg-opacity-10 btn-close ml-auto col py-2 rounded-pill"
