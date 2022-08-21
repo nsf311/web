@@ -21,7 +21,7 @@
   padding: 10px 5px;
   border-radius: 5px;
   box-shadow: 0 0 5px 0 rgba(255, 255, 255, 0.3);
-  font: calc(13px/1) sans-serif;
+  font: calc(13px / 1) sans-serif;
   background: rgba(0, 0, 0, 0.8);
   cursor: default !important;
 }
@@ -47,4 +47,22 @@
   fill: none;
   stroke: #000;
   stroke-width: 1.5px;
+}
+
+.direction-left {
+  direction: ltr;
+}
+.direction-right {
+  direction: rtl;
+}
+
+.map-container {
+
+  @extend .rounded, .border, .border-primary;;
+  box-shadow: 20px 20px 19px 8px #60a0ff;
+  &:hover {
+    @extend .rounded, .border-0;
+    box-shadow: 20px 9px 17px 1px #7cb1ff;
+  }
+
 }

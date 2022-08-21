@@ -435,20 +435,21 @@ const BosMap = () => {
           </Offcanvas>
         </div> */}
 
-        <div className="col-11 mx-auto shadow rounded-end border border-primary border-start-0">
+        <div className="col-11 mx-auto map-container">
           <div className="col-12  border-bottom  bg-primary bg-opacity-10">
             <h2 className="text-center text-primary"> Boston Map Data</h2>
           </div>
           <div className="row">
             <Collapse in={showRegOffcanvas} className="col-12 col-lg-3">
               <div id="regression-dialog">
-                <div className="overflow-auto" style={{ height: "83vh" }}>
-                  <div className="col-11 mx-auto d-flex">
+                <div className="direction-right overflow-auto" style={{ height: "83vh" }}>
+                <div className="direction-left overflow-auto">
+                  <div className="col-11 mx-auto d-flex mt-2">
                     <h3 className="text-center text-primary col-10">
                       Regression Graph
                     </h3>
                     <Button
-                      className="btn btn-light btn-close ml-auto col py-2 rounded-pill"
+                      className="btn btn-primary bg-opacity-10 btn-close ml-auto col py-2 rounded-pill"
                       onClick={() => setShowRegOffcanvas(false)}
                     >
                       <span className="visually-hidden">Close</span>
@@ -508,6 +509,7 @@ const BosMap = () => {
                     )}
                   </div>
                 </div>
+                </div>
               </div>
             </Collapse>
             <div
@@ -524,12 +526,15 @@ const BosMap = () => {
                 center={bosCenter}
               >
                 <div className="position-absolute top-50 start-0 translate-middle-y show-on-mapcontainer">
+                <img src="./icons8-double-right-32.png" alt="regression icon" />
                   <Button
                     variant="outline-primary rounded-start rounded-pill btn-sm"
                     onClick={graphBtnOnclick}
                     transform="rotate(-90)"
                   >
                     {showRegOffcanvas ? "Hide" : "Show"} Regression Graph
+                    
+                   
                   </Button>
                 </div>
                 <Legend maxDV={maxDV} minDV={minDV} step={step}></Legend>
@@ -548,12 +553,12 @@ const BosMap = () => {
             <Collapse in={showHexOffcanvas} className="col-12 col-lg-3">
               <div id="hexagon-dialog">
                 <div className="overflow-auto" style={{ height: "83vh" }}>
-                  <div className="col-11 mx-auto d-flex">
+                  <div className="col-11 mx-auto d-flex mt-2">
                     <h3 className="text-center text-primary col-10">
                       Hexagon Graph
                     </h3>
                     <Button
-                      className="btn btn-light btn-close ml-auto col py-2 rounded-pill"
+                      className="btn btn-primary bg-opacity-10 btn-close ml-auto col py-2 rounded-pill"
                       onClick={() => setShowHexOffcanvas(false)}
                     >
                       <span className="visually-hidden">Close</span>
