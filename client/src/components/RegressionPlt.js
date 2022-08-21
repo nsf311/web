@@ -51,16 +51,32 @@ const RegressionPlt = ({
     .range([height, 0]);
 
   const xy_data = getXYData(hexIV, hexDV);
+  {
+    /* {console.log(listHex)} */
+  }
+  {
+    /* {JSON.stringify(allRegData)} */
+  }
+  {
+    /* {JSON.stringify(hexResults)} */
+  }
+  {
+    /* {allRegData.forEach(element => console.log(element))} */
+  }
+  {
+    /* {console.log(variables_data)} */
+  }
+  {
+    /* {console.log(x_axis)}
+            {console.log(y_axis)} */
+  }
   return (
-    <div className="container-fluid my-2 rounded shadow" >
-      {/* {console.log(listHex)} */}
-      {/* {JSON.stringify(allRegData)} */}
-      {/* {JSON.stringify(hexResults)} */}
-      {/* {allRegData.forEach(element => console.log(element))} */}
-      {/* {console.log(variables_data)} */}
-      {/* {console.log(x_axis)}
-            {console.log(y_axis)} */}
-
+    <div className="px-2">
+      <h5 className="text-center border-bottom pb-2">
+        {" "}
+        <small className="text-primary">{DVName}</small> <strong>vs</strong>{" "}
+        <small className="text-danger">{IVName}</small>
+      </h5>
       <svg
         width={width + margin.right + margin.left}
         height={height + margin.top + margin.bottom}
@@ -79,7 +95,7 @@ const RegressionPlt = ({
             transform={"translate(0," + height + ")"}
             scale={axisBottom().scale(x_axis)}
           />
-          <text text-anchor="end" x={width} y={height + margin.top + 10}>
+          <text textAnchor="end" x={width} y={height + margin.top + 10}>
             {IVName}
           </text>
 
@@ -88,7 +104,7 @@ const RegressionPlt = ({
             transform={"translate(0,0)"}
             scale={axisLeft().scale(y_axis)}
           />
-          <text text-anchor="end" x={-40} y={-47} transform="rotate(-90)">
+          <text textAnchor="end" x={-40} y={-47} transform="rotate(-90)">
             {DVName}
           </text>
         </g>

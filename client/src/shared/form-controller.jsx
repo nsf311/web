@@ -1,11 +1,18 @@
 import React from "react";
+import { useEffect } from "react";
 import Form from "react-bootstrap/Form";
 
 export const SelectForms = ({ id, options, label, value, onChange }) => {
+  const [selected, setSelected] = React.useState(value);
   const onChangeFunc = ({ target }) => {
-    value = target.value;
+    setSelected(target.value);
     onChange(target.value);
   };
+  useEffect(() => {
+    if (value !== selected) {
+      setSelected(value);
+    }
+  }, [selected, value]);
   return (
     <div className="text-dark">
       <div className="form-group">
@@ -16,7 +23,7 @@ export const SelectForms = ({ id, options, label, value, onChange }) => {
           className="form-control"
           id={id}
           onChange={onChangeFunc}
-          value={value}
+          value={selected}
         >
           {options?.map((option, idx) => (
             <option key={idx} value={option.Value}>

@@ -14,7 +14,7 @@ import {
   COLOR_2,
   COLOR_1,
   COLOR_NULL,
-} from "../../core/map-contants";
+} from "../../core/constants/map-contants";
 
 const COLORS = [
   COLOR_11,
@@ -50,6 +50,8 @@ const Legend = ({ maxDV, minDV, step }) => {
         {0.0} - {Math.round((maxDV - 10 * step + Number.EPSILON) * 100) / 100}
       </div>
       <div style={{ "--color": COLOR_NULL }}>NULL</div>
+      <div className="col-10 mx-auto py-4">
+
       <Button
         variant="danger rounded-pill"
         className="my-3"
@@ -57,6 +59,7 @@ const Legend = ({ maxDV, minDV, step }) => {
       >
         Refresh
       </Button>
+      </div>
       {/* Future development */}
       {/* <div className="container"></div> */}
     </div>

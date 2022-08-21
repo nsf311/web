@@ -1,0 +1,5 @@
+
+.btn:hover {
+  animation: pulse-motion 2s ease 0s;
+  @extend .shadow;
+}

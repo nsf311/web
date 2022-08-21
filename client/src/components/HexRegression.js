@@ -1,4 +1,5 @@
 import React from 'react';
+import { userTypeDictObj, freqDictObj, SubjectDictObj } from '../core/constants/map-contants';
 const HexRegression = ({ selectedHex, hexRegVars }) => {
     const hexRegVarsAll = hexRegVars.map((d) => d.results)
    
@@ -7,7 +8,7 @@ const HexRegression = ({ selectedHex, hexRegVars }) => {
 
             <p>
                 <b>Hexagon number: </b>
-                {selectedHex.properties.HEX_600}
+                {selectedHex?.properties?.HEX_600}
             </p>
             <p>
                 <b># of 311: </b>
@@ -16,21 +17,21 @@ const HexRegression = ({ selectedHex, hexRegVars }) => {
             </p>
 
             <p>
-                <b>User type:   {hexRegVars[0]  && hexRegVars[0]['results'][0] && hexRegVars[0]['HEX_600'] === selectedHex.properties.HEX_600
-                && hexRegVars[0]['results'][0]['user_type']}
+                <b>User type:   {userTypeDictObj[hexRegVars[0]  && hexRegVars[0]['results'][0] && hexRegVars[0]['HEX_600'] === selectedHex.properties.HEX_600
+                && hexRegVars[0]['results'][0]['user_type']]}
                 </b>
             </p>
         {/* just need the following 3 rows for debugging, will remove them ultimately */}
             <p>
                 <b> Frequency: </b>   
-                {hexRegVars[0] && hexRegVars[0]['results'][0] && hexRegVars[0]['HEX_600'] === selectedHex.properties.HEX_600 
-                && hexRegVars[0]['results'][0]['frequency']}
+                {freqDictObj[hexRegVars[0] && hexRegVars[0]['results'][0] && hexRegVars[0]['HEX_600'] === selectedHex.properties.HEX_600 
+                && hexRegVars[0]['results'][0]['frequency']]}
             </p>
 
             <p>
                 <b> Subject: </b>   
-                {hexRegVars[0] && hexRegVars[0]['results'][0] && hexRegVars[0]['HEX_600'] === selectedHex.properties.HEX_600 
-                && hexRegVars[0]['results'][0]['subject']}
+                {SubjectDictObj[hexRegVars[0] && hexRegVars[0]['results'][0] && hexRegVars[0]['HEX_600'] === selectedHex.properties.HEX_600 
+                && hexRegVars[0]['results'][0]['subject']]}
             </p>
             
             <p>
