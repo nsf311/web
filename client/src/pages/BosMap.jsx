@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { MapContainer, GeoJSON, TileLayer } from "react-leaflet";
-import {
-  Offcanvas,
-  OffcanvasBody,
-  OffcanvasHeader,
-  OffcanvasTitle,
-} from "react-bootstrap";
+// import {
+//   Offcanvas,
+//   OffcanvasBody,
+//   OffcanvasHeader,
+//   OffcanvasTitle,
+// } from "react-bootstrap";
 
 // import "leaflet/dist/leaflet.css";
 import bosHexes from "../core/data/hexagon_600m_311_pop_20200707.json";
@@ -15,7 +15,7 @@ import Collapse from "react-bootstrap/Collapse";
 import HexRegression from "../components/HexRegression";
 import bos311Service from "../core/services/bos311.service";
 import RegressionPlt from "../components/RegressionPlt";
-import Filter from "../components/filter";
+// import Filter from "../components/filter";
 import Legend from "../components/graph/Legend";
 
 import { max, min } from "d3";
@@ -27,7 +27,7 @@ import { Button } from "react-bootstrap";
 import { SelectForms } from "../shared/form-controller";
 
 import {
-  offcanvasStyle,
+  // offcanvasStyle,
   userTypeDict,
   freqDict,
   DVDict,
@@ -72,16 +72,16 @@ const BosMap = () => {
 
   // sidebar for each individual hexagon
   const [showHexOffcanvas, setShowHexOffcanvas] = useState(false);
-  const handleHexOffcanvasClose = () => setShowHexOffcanvas(false);
+  // const handleHexOffcanvasClose = () => setShowHexOffcanvas(false);
   const handleHexOffcanvasShow = () => setShowHexOffcanvas(true);
 
   // sidebar for regression graph
 
-  const [showHexDetails, setShowHexDetails] = useState(false);
+  // const [showHexDetails, setShowHexDetails] = useState(false);
 
   // sidebar for regresson graph
   const [showRegOffcanvas, setShowRegOffcanvas] = useState(false);
-  const handleRegOffcanvasClose = () => setShowRegOffcanvas(false);
+  // const handleRegOffcanvasClose = () => setShowRegOffcanvas(false);
   const handleRegOffcanvasShow = () => setShowRegOffcanvas(true); // setShowRegOffcanvas(true);
 
   // sidebar for Hexagon Graph expand close the Regression Graph.
@@ -98,13 +98,13 @@ const BosMap = () => {
   }, [showRegOffcanvas]);
 
   // dropdown text states
-  const [dropdownUser, setDropdownUserText] = useState("Non-gov");
-  const [dropdownFreq, setDropdownFreqText] = useState("All");
-  const [dropdownDVtext, setDropdownDVText] = useState(
-    "total number of reports"
-  );
-  const [dropdownIVtext, setDropdownIVText] = useState("Poverty Index");
-  const [dropdownSubjectText, setDropdowSubjectText] = useState("All subjects");
+  // const [dropdownUser, setDropdownUserText] = useState("Non-gov");
+  // const [dropdownFreq, setDropdownFreqText] = useState("All");
+  // const [dropdownDVtext, setDropdownDVText] = useState(
+  //   "total number of reports"
+  // );
+  // const [dropdownIVtext, setDropdownIVText] = useState("Poverty Index");
+  // const [dropdownSubjectText, setDropdowSubjectText] = useState("All subjects");
 
   // for color-coded map
   const [geojsonDV, setGeojsonDV] = useState(bosHexes);
@@ -442,69 +442,71 @@ const BosMap = () => {
           <div className="row">
             <Collapse in={showRegOffcanvas} className="col-12 col-lg-3">
               <div id="regression-dialog">
-                <div className="col-11 mx-auto d-flex">
-                  <h3 className="text-center text-primary col-10">
-                    Regression Graph
-                  </h3>
-                  <Button
-                    className="btn btn-light btn-close ml-auto col py-2 rounded-pill"
-                    onClick={() => setShowRegOffcanvas(false)}
-                  >
-                    <span className="visually-hidden">Close</span>
-                  </Button>
-                </div>
+                <div className="overflow-auto" style={{ height: "83vh" }}>
+                  <div className="col-11 mx-auto d-flex">
+                    <h3 className="text-center text-primary col-10">
+                      Regression Graph
+                    </h3>
+                    <Button
+                      className="btn btn-light btn-close ml-auto col py-2 rounded-pill"
+                      onClick={() => setShowRegOffcanvas(false)}
+                    >
+                      <span className="visually-hidden">Close</span>
+                    </Button>
+                  </div>
 
-                <div className="col-11 mx-auto my-3">
-                  <SelectForms
-                    options={userTypeDict}
-                    label="User Type"
-                    onChange={setUser}
-                    value={selectedUser}
-                  ></SelectForms>
-                </div>
-                <div className="col-11 mx-auto my-3">
-                  <SelectForms
-                    options={freqDict}
-                    label="Frequency"
-                    onChange={setFrequency}
-                    value={selectedFrequency}
-                  ></SelectForms>
-                </div>
-                <div className="col-11 mx-auto my-3">
-                  <SelectForms
-                    options={SubjectDict}
-                    label="Subject"
-                    onChange={setSubject}
-                    value={selectedSubject}
-                  ></SelectForms>
-                </div>
-                <div className="col-11 mx-auto my-3 mb-auto">
-                  <SelectForms
-                    options={DVDict}
-                    label="Dependent Variable (Color coded by)"
-                    onChange={setDV}
-                    value={selectedDV}
-                  ></SelectForms>
-                </div>
-                <div className="col-11 mx-auto my-3 mb-auto">
-                  <SelectForms
-                    options={IVDict}
-                    label="Independent Variable"
-                    onChange={setIV}
-                    value={selectedIV}
-                  ></SelectForms>
-                </div>
+                  <div className="col-11 mx-auto my-3">
+                    <SelectForms
+                      options={userTypeDict}
+                      label="User Type"
+                      onChange={setUser}
+                      value={selectedUser}
+                    ></SelectForms>
+                  </div>
+                  <div className="col-11 mx-auto my-3">
+                    <SelectForms
+                      options={freqDict}
+                      label="Frequency"
+                      onChange={setFrequency}
+                      value={selectedFrequency}
+                    ></SelectForms>
+                  </div>
+                  <div className="col-11 mx-auto my-3">
+                    <SelectForms
+                      options={SubjectDict}
+                      label="Subject"
+                      onChange={setSubject}
+                      value={selectedSubject}
+                    ></SelectForms>
+                  </div>
+                  <div className="col-11 mx-auto my-3 mb-auto">
+                    <SelectForms
+                      options={DVDict}
+                      label="Dependent Variable (Color coded by)"
+                      onChange={setDV}
+                      value={selectedDV}
+                    ></SelectForms>
+                  </div>
+                  <div className="col-11 mx-auto my-3 mb-auto">
+                    <SelectForms
+                      options={IVDict}
+                      label="Independent Variable"
+                      onChange={setIV}
+                      value={selectedIV}
+                    ></SelectForms>
+                  </div>
 
-                <div className="col-12">
-                  {regressionGraph === true && (
-                    <RegressionPlt
-                      RegDataSelectedUser={RegData}
-                      RegDataDV={selectedDV}
-                      DVName={DVDictObj[selectedDV]}
-                      RegDataIV={selectedIV}
-                      IVName={IVDictObj[selectedIV]}
-                    />
-                  )}
+                  <div className="col-12">
+                    {regressionGraph === true && (
+                      <RegressionPlt
+                        RegDataSelectedUser={RegData}
+                        RegDataDV={selectedDV}
+                        DVName={DVDictObj[selectedDV]}
+                        RegDataIV={selectedIV}
+                        IVName={IVDictObj[selectedIV]}
+                      />
+                    )}
+                  </div>
                 </div>
               </div>
             </Collapse>
@@ -545,46 +547,48 @@ const BosMap = () => {
             </div>
             <Collapse in={showHexOffcanvas} className="col-12 col-lg-3">
               <div id="hexagon-dialog">
-                <div className="col-11 mx-auto d-flex">
-                  <h3 className="text-center text-primary col-10">
-                    Hexagon Graph
-                  </h3>
-                  <Button
-                    className="btn btn-light btn-close ml-auto col py-2 rounded-pill"
-                    onClick={() => setShowHexOffcanvas(false)}
-                  >
-                    <span className="visually-hidden">Close</span>
-                  </Button>
-                </div>
-                <div className="col-11 mx-auto my-3">
-                  <SelectForms
-                    options={userTypeDict}
-                    label="User Type"
-                    onChange={setUser}
-                    value={selectedUser}
-                  ></SelectForms>
-                </div>
-                <div className="col-11 mx-auto my-3">
-                  <SelectForms
-                    options={freqDict}
-                    label="Frequency"
-                    onChange={setFrequency}
-                    value={selectedFrequency}
-                  ></SelectForms>
-                </div>
-                <div className="col-11 mx-auto my-3">
-                  <SelectForms
-                    options={SubjectDict}
-                    label="Subject"
-                    onChange={setSubject}
-                    value={selectedSubject}
-                  ></SelectForms>
-                </div>
-                <div className="col-11 mx-auto my-3">
-                  <HexRegression
-                    selectedHex={selectedHex}
-                    hexRegVars={hexRegVars}
-                  />
+                <div className="overflow-auto" style={{ height: "83vh" }}>
+                  <div className="col-11 mx-auto d-flex">
+                    <h3 className="text-center text-primary col-10">
+                      Hexagon Graph
+                    </h3>
+                    <Button
+                      className="btn btn-light btn-close ml-auto col py-2 rounded-pill"
+                      onClick={() => setShowHexOffcanvas(false)}
+                    >
+                      <span className="visually-hidden">Close</span>
+                    </Button>
+                  </div>
+                  <div className="col-11 mx-auto my-3">
+                    <SelectForms
+                      options={userTypeDict}
+                      label="User Type"
+                      onChange={setUser}
+                      value={selectedUser}
+                    ></SelectForms>
+                  </div>
+                  <div className="col-11 mx-auto my-3">
+                    <SelectForms
+                      options={freqDict}
+                      label="Frequency"
+                      onChange={setFrequency}
+                      value={selectedFrequency}
+                    ></SelectForms>
+                  </div>
+                  <div className="col-11 mx-auto my-3">
+                    <SelectForms
+                      options={SubjectDict}
+                      label="Subject"
+                      onChange={setSubject}
+                      value={selectedSubject}
+                    ></SelectForms>
+                  </div>
+                  <div className="col-11 mx-auto my-3">
+                    <HexRegression
+                      selectedHex={selectedHex}
+                      hexRegVars={hexRegVars}
+                    />
+                  </div>
                 </div>
               </div>
             </Collapse>
