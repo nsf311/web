@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 
-const db = require("./models/");
+const db = require("./src/models");
 
 const cors = require("cors");
 
@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
   }
   res.send(data);
 });
-require("./routers/bos311.routes")(app)
+require("./src/routers/bos311.routes")(app)
 const port = process.env.NODE_ENV === 'production' ? (process.env.PORT || 80) : 3000;
 app.listen(port, () => {
   console.log('Listening on port' + port);
