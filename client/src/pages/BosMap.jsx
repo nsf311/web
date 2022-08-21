@@ -10,6 +10,9 @@ import { MapContainer, GeoJSON, TileLayer } from "react-leaflet";
 // import "leaflet/dist/leaflet.css";
 import bosHexes from "../core/data/hexagon_600m_311_pop_20200707.json";
 
+import closeArrow from "../assets/icons8-double-left.gif";
+import openArrow from "../assets/icons8-double-right.gif";
+
 import Collapse from "react-bootstrap/Collapse";
 
 import HexRegression from "../components/HexRegression";
@@ -442,73 +445,76 @@ const BosMap = () => {
           <div className="row">
             <Collapse in={showRegOffcanvas} className="col-12 col-lg-3">
               <div id="regression-dialog">
-                <div className="direction-right overflow-auto" style={{ height: "83vh" }}>
-                <div className="direction-left overflow-auto">
-                  <div className="col-11 mx-auto d-flex mt-2">
-                    <h3 className="text-center text-primary col-10">
-                      Regression Graph
-                    </h3>
-                    <Button
-                      className="btn btn-primary bg-opacity-10 btn-close ml-auto col py-2 rounded-pill"
-                      onClick={() => setShowRegOffcanvas(false)}
-                    >
-                      <span className="visually-hidden">Close</span>
-                    </Button>
-                  </div>
+                <div
+                  className="direction-right overflow-auto"
+                  style={{ height: "83vh" }}
+                >
+                  <div className="direction-left overflow-auto">
+                    <div className="col-11 mx-auto d-flex mt-2">
+                      <h3 className="text-center text-primary col-10">
+                        Regression Graph
+                      </h3>
+                      <Button
+                        className="btn btn-primary bg-opacity-10 btn-close ml-auto col py-2 rounded-pill"
+                        onClick={() => setShowRegOffcanvas(false)}
+                      >
+                        <span className="visually-hidden">Close</span>
+                      </Button>
+                    </div>
 
-                  <div className="col-11 mx-auto my-3">
-                    <SelectForms
-                      options={userTypeDict}
-                      label="User Type"
-                      onChange={setUser}
-                      value={selectedUser}
-                    ></SelectForms>
-                  </div>
-                  <div className="col-11 mx-auto my-3">
-                    <SelectForms
-                      options={freqDict}
-                      label="Frequency"
-                      onChange={setFrequency}
-                      value={selectedFrequency}
-                    ></SelectForms>
-                  </div>
-                  <div className="col-11 mx-auto my-3">
-                    <SelectForms
-                      options={SubjectDict}
-                      label="Subject"
-                      onChange={setSubject}
-                      value={selectedSubject}
-                    ></SelectForms>
-                  </div>
-                  <div className="col-11 mx-auto my-3 mb-auto">
-                    <SelectForms
-                      options={DVDict}
-                      label="Dependent Variable (Color coded by)"
-                      onChange={setDV}
-                      value={selectedDV}
-                    ></SelectForms>
-                  </div>
-                  <div className="col-11 mx-auto my-3 mb-auto">
-                    <SelectForms
-                      options={IVDict}
-                      label="Independent Variable"
-                      onChange={setIV}
-                      value={selectedIV}
-                    ></SelectForms>
-                  </div>
+                    <div className="col-11 mx-auto my-3">
+                      <SelectForms
+                        options={userTypeDict}
+                        label="User Type"
+                        onChange={setUser}
+                        value={selectedUser}
+                      ></SelectForms>
+                    </div>
+                    <div className="col-11 mx-auto my-3">
+                      <SelectForms
+                        options={freqDict}
+                        label="Frequency"
+                        onChange={setFrequency}
+                        value={selectedFrequency}
+                      ></SelectForms>
+                    </div>
+                    <div className="col-11 mx-auto my-3">
+                      <SelectForms
+                        options={SubjectDict}
+                        label="Subject"
+                        onChange={setSubject}
+                        value={selectedSubject}
+                      ></SelectForms>
+                    </div>
+                    <div className="col-11 mx-auto my-3 mb-auto">
+                      <SelectForms
+                        options={DVDict}
+                        label="Dependent Variable (Color coded by)"
+                        onChange={setDV}
+                        value={selectedDV}
+                      ></SelectForms>
+                    </div>
+                    <div className="col-11 mx-auto my-3 mb-auto">
+                      <SelectForms
+                        options={IVDict}
+                        label="Independent Variable"
+                        onChange={setIV}
+                        value={selectedIV}
+                      ></SelectForms>
+                    </div>
 
-                  <div className="col-12">
-                    {regressionGraph === true && (
-                      <RegressionPlt
-                        RegDataSelectedUser={RegData}
-                        RegDataDV={selectedDV}
-                        DVName={DVDictObj[selectedDV]}
-                        RegDataIV={selectedIV}
-                        IVName={IVDictObj[selectedIV]}
-                      />
-                    )}
+                    <div className="col-12">
+                      {regressionGraph === true && (
+                        <RegressionPlt
+                          RegDataSelectedUser={RegData}
+                          RegDataDV={selectedDV}
+                          DVName={DVDictObj[selectedDV]}
+                          RegDataIV={selectedIV}
+                          IVName={IVDictObj[selectedIV]}
+                        />
+                      )}
+                    </div>
                   </div>
-                </div>
                 </div>
               </div>
             </Collapse>
@@ -526,15 +532,16 @@ const BosMap = () => {
                 center={bosCenter}
               >
                 <div className="position-absolute top-50 start-0 translate-middle-y show-on-mapcontainer">
-                <img src="./icons8-double-right-32.png" alt="regression icon" />
                   <Button
-                    variant="outline-primary rounded-start rounded-pill btn-sm"
+                    variant="outline-primary rounded-start rounded-pill btn-sm p-0"
                     onClick={graphBtnOnclick}
-                    transform="rotate(-90)"
                   >
-                    {showRegOffcanvas ? "Hide" : "Show"} Regression Graph
-                    
-                   
+                    <img
+                      src={showRegOffcanvas ? closeArrow : openArrow}
+                      alt="regression icon"
+                      width={40}
+                      className="rounded-start rounded-pill"
+                    />
                   </Button>
                 </div>
                 <Legend maxDV={maxDV} minDV={minDV} step={step}></Legend>
