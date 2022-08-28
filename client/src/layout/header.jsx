@@ -21,7 +21,7 @@ export const HeaderNav = () => {
       </button>
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
-          <li className="nav-item active border-start border-warning px-4">
+          <li className="nav-item border-start border-warning px-4">
             <a className="nav-link fs-4" href="/map">
               Map
             </a>
@@ -32,7 +32,7 @@ export const HeaderNav = () => {
             </a>
           </li>
           <li className="nav-item border-start border-warning px-4">
-            <a className="nav-link fs-4" href="/about">
+            <a className="nav-link fs-4" href="/people">
               People
             </a>
           </li>

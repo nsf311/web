@@ -6,9 +6,10 @@ import HeaderNav from "./layout/header";
 import FooterNav from "./layout/footer";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import AboutUs from "./pages/about-us";
+import AboutUs from "./pages/About-us";
 import PageNotFound from "./pages/page-not-found";
 import HomePage from "./pages/Home-page";
+import PeoplePage from "./pages/People";
 
 function App() {
   return (
@@ -23,6 +24,9 @@ function App() {
             </Route>
             <Route path="/map">
               <BosMap />
+            </Route>
+            <Route path="/people">
+              <PeoplePage />
             </Route>
             <Route default>
               <PageNotFound />

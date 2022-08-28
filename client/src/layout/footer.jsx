@@ -11,7 +11,7 @@ export default class FooterNav extends React.Component {
             </a>
           </li>
           <li className="nav-item">
-            <a href="/" className="nav-link px-2 text-muted">
+            <a href="/about" className="nav-link px-2 text-muted">
               About
             </a>
           </li>
@@ -23,11 +23,6 @@ export default class FooterNav extends React.Component {
           <li className="nav-item">
             <a href="/" className="nav-link px-2 text-muted">
               FAQs
-            </a>
-          </li>
-          <li className="nav-item">
-            <a href="/" className="nav-link px-2 text-muted">
-              About
             </a>
           </li>
         </ul>
