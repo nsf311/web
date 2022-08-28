@@ -7,6 +7,8 @@ import FooterNav from "./layout/footer";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import AboutUs from "./pages/about-us";
+import PageNotFound from "./pages/page-not-found";
+import HomePage from "./pages/Home-page";
 
 function App() {
   return (
@@ -15,11 +17,15 @@ function App() {
       <div className="d-flex flex-column min-vh-100">
         <BrowserRouter>
           <Switch>
+            <Route exact path="/" component={HomePage} />
             <Route path="/about">
               <AboutUs />
             </Route>
-            <Route default>
+            <Route path="/map">
               <BosMap />
+            </Route>
+            <Route default>
+              <PageNotFound />
             </Route>
           </Switch>
         </BrowserRouter>

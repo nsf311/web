@@ -3,7 +3,7 @@ import React from "react";
 export function AboutUs() {
   return (
     <div className="container">
-      <h1 className="text-center text-primary">About Us</h1>
+      <h2 className="text-center text-primary">About Us</h2>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
         quidem.
