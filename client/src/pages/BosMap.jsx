@@ -20,6 +20,8 @@ import { Button } from "react-bootstrap";
 
 import { SelectForms } from "../shared/form-controller";
 
+import { Helmet } from 'react-helmet';
+
 import {
   // offcanvasStyle,
   userTypeDict,
@@ -274,6 +276,10 @@ const BosMap = () => {
   };
 
   return (
+    <>
+       <Helmet>
+        <title>Boston 311 | Map</title>
+      </Helmet>
     <div className="container-fluid mt-5">
       <div>
         <div className="col-11 mx-auto shadow">
@@ -446,6 +452,7 @@ const BosMap = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 export default BosMap;

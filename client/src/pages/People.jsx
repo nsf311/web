@@ -1,8 +1,11 @@
 import React from "react";
-
+import { Helmet } from "react-helmet";
 export function PeoplePage() {
   return (
     <>
+      <Helmet>
+        <title>Boston 311 | People</title>
+      </Helmet>
       <div className="col-11 mx-auto shadow p-4">
         <h2 className="mb-5 fw-bold">
           MEET THE <span className="text-warning">PEOPLE</span> BEHIND <br />{" "}
