@@ -1,7 +1,8 @@
 import React from "react";
 // import { Button } from "react-bootstrap";
 import Helmet from "react-helmet";
-
+import binoculars from "../assets/binoculars.png";
+import map_img from "../assets/map-image.png";
 export function HomePage() {
   return (
     <>
@@ -10,17 +11,22 @@ export function HomePage() {
       </Helmet>
       <div className="col-11 mx-auto shadow-lg">
         <div className="row m-4">
-          <div className="col-6">
+          <div className="col-6 my-auto">
             <h2 className="text-start text-dark fs-1 fw-bold">
               MAKING <br /> INFORMATION DESERTS <br /> VISIBLE{" "}
               <span className="text-warning">.</span>
             </h2>
             <h3 className="pt-4">{"(Add short intro here)"}</h3>
           </div>
-          <div className="col-6">Image</div>
-          <div className="col-12 border-top border-bottom border-warning py-5 my-3">
-            <div>
-              <h2 className="text-end text-dark fs-1 fw-bold">
+          <div className="col-6 text-end">
+            <img src={binoculars} alt="binoculars" className="px-5" />
+          </div>
+          <div className="col-12 border-top border-bottom border-warning py-5 my-3 row">
+            <div className="col-6">
+              <img src={map_img} alt="map" className="px-5" />
+            </div>
+            <div className="col-6 text-end my-auto">
+              <h2 className="text-dark fs-1 fw-bold">
                 SOCIAL JUSTICE <br /> {" & "} TECHNICAL EFFICIENCY
                 <span className="text-warning">.</span> <br />{" "}
                 <span className="text-warning">WHAT DOES OUR MAP SHOW?</span>

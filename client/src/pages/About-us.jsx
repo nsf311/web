@@ -6,7 +6,7 @@ export function AboutUs() {
       <Helmet>
         <title>Boston 311 | About</title>
       </Helmet>
-      <div className="col-11 mx-auto shadow p-4">
+      <div className="col-11 mx-auto shadow p-4 about-background-right">
         <h2 className="mb-5 fw-bold">
           {" "}
           <span className="text-warning">ABOUT</span> BOSTON 311 INFORMATION

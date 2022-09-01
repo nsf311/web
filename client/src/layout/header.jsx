@@ -1,12 +1,10 @@
 import React from "react";
-
+import logo from "../assets/logo.png";
 export const HeaderNav = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light px-4 shadow col-11 mx-auto">
       <a className="navbar-brand text-shadow text-warning fw-bold fs-5 px-4" href="/">
-        Boston 311 <br/>
-        Information <br/> 
-        Deserts
+        <img src={logo} alt="logo"/>
       </a>
       <button
         className="navbar-toggler"
