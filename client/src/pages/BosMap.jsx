@@ -20,6 +20,8 @@ import { Button } from "react-bootstrap";
 
 import { SelectForms } from "../shared/form-controller";
 
+import { Helmet } from 'react-helmet';
+
 import {
   // offcanvasStyle,
   userTypeDict,
@@ -274,11 +276,15 @@ const BosMap = () => {
   };
 
   return (
+    <>
+       <Helmet>
+        <title>Boston 311 | Map</title>
+      </Helmet>
     <div className="container-fluid mt-5">
       <div>
-        <div className="col-11 mx-auto map-container">
-          <div className="col-12  border-bottom  bg-primary bg-opacity-10">
-            <h2 className="text-center text-primary"> Boston Map Data</h2>
+        <div className="col-11 mx-auto shadow">
+          <div className="col-12  border-bottom  bg-warning bg-opacity-10">
+            <h2 className="text-center text-warning"> Boston Map Data</h2>
           </div>
           <div className="row">
             <Collapse in={showRegOffcanvas} className="col-12 col-lg-3">
@@ -289,11 +295,11 @@ const BosMap = () => {
                 >
                   <div className="direction-left overflow-auto">
                     <div className="col-11 mx-auto d-flex mt-2">
-                      <h3 className="text-center text-primary col-10">
+                      <h3 className="text-center text-warning col-10">
                         Regression Graph
                       </h3>
                       <Button
-                        className="btn btn-primary bg-opacity-10 btn-close ml-auto col py-2 rounded-pill"
+                        className="btn btn-warning bg-opacity-10 btn-close ml-auto col py-2 rounded-pill"
                         onClick={() => setShowRegOffcanvas(false)}
                       >
                         <span className="visually-hidden">Close</span>
@@ -371,7 +377,7 @@ const BosMap = () => {
               >
                 <div className="position-absolute top-50 start-0 translate-middle-y show-on-mapcontainer">
                   <Button
-                    variant="outline-primary rounded-start rounded-pill btn-sm p-0"
+                    variant="outline-warning rounded-start rounded-pill btn-sm p-0"
                     onClick={graphBtnOnclick}
                   >
                     <img
@@ -399,11 +405,11 @@ const BosMap = () => {
               <div id="hexagon-dialog">
                 <div className="overflow-auto" style={{ height: "83vh" }}>
                   <div className="col-11 mx-auto d-flex mt-2">
-                    <h3 className="text-center text-primary col-10">
+                    <h3 className="text-center text-warning col-10">
                       Hexagon Subject
                     </h3>
                     <Button
-                      className="btn btn-primary bg-opacity-10 btn-close ml-auto col py-2 rounded-pill"
+                      className="btn btn-warning bg-opacity-10 btn-close ml-auto col py-2 rounded-pill"
                       onClick={() => setShowHexOffcanvas(false)}
                     >
                       <span className="visually-hidden">Close</span>
@@ -446,6 +452,7 @@ const BosMap = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 export default BosMap;

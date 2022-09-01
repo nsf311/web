@@ -3,13 +3,40 @@
 @import "./styles/animation.scss";
 @import "./styles/button.scss";
 
+$orange-color: #fa9917;
+
 .text-shadow {
   text-shadow: 10px 9px 4px #444444;
+}
+.text-warning {
+  color: $orange-color !important;
+}
+
+.border-warning {
+  border-color: $orange-color !important;
+}
+
+.btn-warning {
+  background-color: $orange-color !important;
+  border-color: $orange-color !important;
+}
+
+.about-background-right {
+  background-image: url("./assets/logo.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: right;
 }
 
 .show-on-mapcontainer {
   position: absolute;
   z-index: 999;
+}
+
+.rounded-xxl {
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 15px;
+  padding: 5px;
 }
 
 /* https://codepen.io/hazmi/pen/JjoyONo */
