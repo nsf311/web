@@ -73,7 +73,7 @@ const BosMap = () => {
   // sidebar for regression graph
 
   // sidebar for regresson graph
-  const [showRegOffcanvas, setShowRegOffcanvas] = useState(false);
+  const [showRegOffcanvas, setShowRegOffcanvas] = useState(true);
   const handleRegOffcanvasShow = () => setShowRegOffcanvas(true);
 
   // sidebar for Hexagon Graph expand close the Regression Graph.
@@ -280,9 +280,7 @@ const BosMap = () => {
        <Helmet>
         <title>Boston 311 | Map</title>
       </Helmet>
-    <div className="container-fluid mt-5">
-      <div>
-        <div className="col-11 mx-auto shadow">
+        <div className="shadow">
           <div className="col-12  border-bottom  bg-warning bg-opacity-10">
             <h2 className="text-center text-warning"> Boston Map Data</h2>
           </div>
@@ -450,8 +448,6 @@ const BosMap = () => {
             </Collapse>
           </div>
         </div>
-      </div>
-    </div>
     </>
   );
 };
