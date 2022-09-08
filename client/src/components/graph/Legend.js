@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Button } from "react-bootstrap";
 import {
@@ -16,6 +16,10 @@ import {
   COLOR_NULL,
 } from "../../core/constants/map-contants";
 
+import Draggable from "react-draggable";
+
+import dragIcon from "../.././assets/drag-icon.png";
+
 const COLORS = [
   COLOR_11,
   COLOR_10,
@@ -29,39 +33,69 @@ const COLORS = [
   COLOR_2,
 ];
 
-const reloadMap = () => {
-  window.location.reload();
-};
+const Legend = ({ maxDV, minDV, step, map, position }) => {
+  const [pos, setPos] = React.useState(null);
+  useEffect(() => {
+    setPos(position);
+  }, [position]);
 
-const Legend = ({ maxDV, minDV, step }) => {
   return (
-    <div className="legend shadow rounded-lg">
-      {COLORS.map((color, idx) => {
-        return (
-          <div key={idx} style={{ "--color": color }}>
-            {Math.round((maxDV - (idx + 1) * step + Number.EPSILON) * 100) /
-              100}{" "}
-            - {Math.round((maxDV - idx * step + Number.EPSILON) * 100) / 100}
-          </div>
-        );
-      })}
-      <div style={{ "--color": COLOR_1 }}>
-        {" "}
-        {0.0} - {Math.round((maxDV - 10 * step + Number.EPSILON) * 100) / 100}
-      </div>
-      <div style={{ "--color": COLOR_NULL }}>NULL</div>
-      <div className="col-10 mx-auto py-4">
-
-      <Button
-        variant="danger rounded-pill"
-        className="my-3"
-        onClick={reloadMap}
+    <div>
+      <Draggable
+        position={pos}
+        onDrag={(e, trackp) => {
+          console.log("dragging: ", trackp.x, trackp.y, trackp);
+          setPos(null);
+          map.dragging.disable();
+        }}
+        onStop={() => {
+          map.dragging.enable();
+        }}
       >
-        Refresh
-      </Button>
-      </div>
-      {/* Future development */}
-      {/* <div className="container"></div> */}
+        <div className="legend shadow rounded-lg text-end">
+          <img
+            src={dragIcon}
+            alt="drag legend"
+            width={40}
+            onDragStart={(e) => {
+              e.preventDefault();
+            }}
+            className="rounded-start rounded-pill "
+          />
+          {COLORS.map((color, idx) => {
+            return (
+              <div key={idx} style={{ "--color": color }}>
+                {Math.round(
+                  ((maxDV - (idx + 1) * step + Number.EPSILON) * 100) / 100
+                )}{" "}
+                -{" "}
+                {Math.round(
+                  ((maxDV - idx * step + Number.EPSILON) * 100) / 100
+                )}
+              </div>
+            );
+          })}
+          <div style={{ "--color": COLOR_1 }}>
+            {" "}
+            {0.0} -{" "}
+            {Math.round(((maxDV - 10 * step + Number.EPSILON) * 100) / 100)}
+          </div>
+          <div style={{ "--color": COLOR_NULL }}>NULL</div>
+          <div className="col-10 mx-auto py-4">
+            <Button
+              variant="danger rounded-pill"
+              className="my-3"
+              onClick={() => {
+                map?.setView([42.360081, -71.058884], 11);
+              }}
+            >
+              Refresh
+            </Button>
+          </div>
+          {/* Future development */}
+          {/* <div className="container"></div> */}
+        </div>
+      </Draggable>
     </div>
   );
 };
