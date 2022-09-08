@@ -21,7 +21,7 @@ export const PROFILE = [
     description: "",
   },
   {
-    name: "Julia H.P. Hsu",
+    name: "Julia Hsin-Ping Hsu",
     image: defaultprofile,
     intro:
       "Ph.D. Students (George Mason University) and Developer for Boston 311 Information Deserts.",
