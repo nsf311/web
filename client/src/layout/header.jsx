@@ -2,7 +2,7 @@ import React from "react";
 import logo from "../assets/logo.png";
 export const HeaderNav = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light px-4 shadow col-11 mx-auto">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light px-4 shadow">
       <a className="navbar-brand text-shadow text-warning fw-bold fs-5 px-4" href="/">
         <img src={logo} alt="logo"/>
       </a>

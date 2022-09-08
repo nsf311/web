@@ -1,6 +1,9 @@
 import React from "react";
 import { Helmet } from "react-helmet";
+
+import {PROFILE} from "../core/constants/profile-constant";
 export function PeoplePage() {
+  const profiles = PROFILE;
   return (
     <>
       <Helmet>
@@ -11,60 +14,29 @@ export function PeoplePage() {
           MEET THE <span className="text-warning">PEOPLE</span> BEHIND <br />{" "}
           BOSTON 311 INFORMATION DESERTS.
         </h2>
-        <div className="m-4 pt-5">
-          <div className="row">
-            <div className="col-3 mx-auto">
-              <div className="border rounded-xxl shadow p-2">
+        <div className="m-4 pt-5 h-100">
+          <div className="row px-5 mx-5 h-100">
+            {profiles.map((profile) => (
+            <div className="col col-lg-3 mx-auto mb-4">
+              <div className="border rounded-xxl shadow m-3 p-3 h-100 border-warning">
+                <div className="text-center my-4">
+                  <img
+                    src={profile.image}
+                    alt={profile.name + " profile"}
+                    className="rounded-circle"
+                    width={200}
+                    height={200}
+                  />
+                </div>
                 <p className="fs-5 fw-bold mb-4">
-                  What is a information Desert?
+                  {profile.name}
                 </p>
-                <p className="fs-5">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Corrupti facilis autem magni, sit voluptatem rem dignissimos
-                  dolor doloremque beatae reprehenderit repellendus cum,
-                  molestias quidem adipisci. Repudiandae qui odio sit vel.
+                <p className="fs-6">
+                  {profile.intro}
                 </p>
               </div>
             </div>
-            <div className="col-3 mx-auto">
-              <div className="border rounded-xxl shadow p-2">
-                <p className="fs-5 fw-bold mb-4">
-                  What is a information Desert?
-                </p>
-                <p className="fs-5">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Corrupti facilis autem magni, sit voluptatem rem dignissimos
-                  dolor doloremque beatae reprehenderit repellendus cum,
-                  molestias quidem adipisci. Repudiandae qui odio sit vel.
-                </p>
-              </div>
-            </div>
-            <div className="col-3 mx-auto">
-              <div className="border rounded-xxl shadow p-2">
-                <p className="fs-5 fw-bold mb-4">
-                  What is a information Desert?
-                </p>
-                <p className="fs-5">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Corrupti facilis autem magni, sit voluptatem rem dignissimos
-                  dolor doloremque beatae reprehenderit repellendus cum,
-                  molestias quidem adipisci. Repudiandae qui odio sit vel.
-                </p>
-              </div>
-            </div>
-            <div className="col-3 mx-auto ">
-              <div className="border rounded-xxl shadow p-2">
-                <p className="fs-5 fw-bold mb-4">
-                  What is a information Desert?
-                </p>
-                <p className="fs-5">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Corrupti facilis autem magni, sit voluptatem rem dignissimos
-                  dolor doloremque beatae reprehenderit repellendus cum,
-                  molestias quidem adipisci. Repudiandae qui odio sit vel.
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
