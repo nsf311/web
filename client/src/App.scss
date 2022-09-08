@@ -50,7 +50,8 @@ $orange-color: #fa9917;
   box-shadow: 0 0 5px 0 rgba(255, 255, 255, 0.3);
   font: calc(13px / 1) sans-serif;
   background: rgba(0, 0, 0, 0.8);
-  cursor: default !important;
+  cursor: move !important;
+  user-select: none;
 }
 .legend > div {
   position: relative;
