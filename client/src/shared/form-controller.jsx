@@ -17,7 +17,7 @@ export const SelectForms = ({ id, options, label, value, onChange }) => {
     <div className="text-dark">
       <div className="form-group">
         <label htmlFor={id} className="fw-bold">
-          {label}:{" "}
+          {label}{" "}
         </label>
         <Form.Select
           className="form-control"

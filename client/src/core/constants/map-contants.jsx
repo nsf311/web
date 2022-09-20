@@ -3,25 +3,25 @@ const offcanvasStyle = {
 };
 
 const userTypeDict = [
-  { Name: "Non-gov", Value: "non_gov" },
-  { Name: "Non-gov and unsure", Value: "non_gov_unsure" },
-  { Name: "All users", Value: "all" },
+  { Name: "Residents Only", Value: "non_gov" },
+  { Name: "Residents and unsure", Value: "non_gov_unsure" },
+  { Name: "Residents and Government Employees", Value: "all" },
 ];
 
 const userTypeDictObj = {
-  non_gov: "Non-gov",
-  non_gov_unsure: "Non-gov and unsure",
-  all: "All users",
+  non_gov: "Residents Only",
+  non_gov_unsure: "Residents and unsure",
+  all: "Residents and Government Employees",
 };
 
 const freqDict = [
-  { Name: "All", Value: "all" },
-  { Name: "heavy", Value: "heavy" },
+  { Name: "Both one-time and repeat users", Value: "all" },
+  { Name: "Repeat users only", Value: "heavy" },
 ];
 
 const freqDictObj = {
-  all: "All",
-  heavy: "Heavy",
+  all: "Both one-time and repeat users",
+  heavy: "Repeat users only",
 };
 
 const DVDict = [
@@ -29,29 +29,29 @@ const DVDict = [
   { Name: "Total number of 311 users", Value: "HEX_total_user" },
   // Mobility
   {
-    Name: "Weighted radius of gyration",
+    Name: "Mobility",
     Value: "HEX_weighted_radius_of_gyration",
   },
-  {
-    Name: "Weighted average distance between reported locations",
-    Value: "HEX_weighted_average_distance",
-  },
+  // {
+  //   Name: "Weighted average distance between reported locations",
+  //   Value: "HEX_weighted_average_distance",
+  // },
 
   // Territoriality
   {
     Name: "Weighted number of hexagons covered",
     Value: "HEX_weighted_HEX_coverage",
   },
+  // {
+  //   Name: "Weighted max home distance",
+  //   Value: "HEX_weighted_max_home_distance",
+  // },
+  // {
+  //   Name: "Weighted mean home distance",
+  //   Value: "HEX_weighted_mean_home_distance",
+  // },
   {
-    Name: "Weighted max home distance",
-    Value: "HEX_weighted_max_home_distance",
-  },
-  {
-    Name: "Weighted mean home distance",
-    Value: "HEX_weighted_mean_home_distance",
-  },
-  {
-    Name: "Weighted median home distance",
+    Name: "Median distance from home",
     Value: "HEX_weighted_median_home_distance",
   },
 
@@ -75,13 +75,13 @@ const DVDict = [
 const DVDictObj = {
   HEX_total_reporting: "Total number of reports",
   HEX_total_user: "Total number of 311 users",
-  HEX_weighted_radius_of_gyration: "Weighted radius of gyration",
+  HEX_weighted_radius_of_gyration: "Mobility",
   HEX_weighted_average_distance:
     "Weighted average distance between reported locations",
   HEX_weighted_HEX_coverage: "Weighted number of hexagons covered",
   HEX_weighted_max_home_distance: "Weighted max home distance",
   HEX_weighted_mean_home_distance: "Weighted mean home distance",
-  HEX_weighted_median_home_distance: "Weighted median home distance",
+  HEX_weighted_median_home_distance: "Median distance from home",
   HEX_weighted_subject_coverage: "Weighted number of subjects reported",
   HEX_weighted_subject_hhi: "Weighted subject reversed HHI",
   HEX_weighted_num_reporting_2015: "Weighted number of reporting in 2015",
@@ -94,7 +94,7 @@ const IVDict = [
   { Name: "Total number of 311 users", Value: "HEX_total_user" },
   // Mobility
   {
-    Name: "Weighted radius of gyration",
+    Name: "Mobility",
     Value: "HEX_weighted_radius_of_gyration",
   },
   {
@@ -107,16 +107,16 @@ const IVDict = [
     Name: "Weighted number of hexagons covered",
     Value: "HEX_weighted_HEX_coverage",
   },
+  // {
+  //   Name: "Weighted max home distance",
+  //   Value: "HEX_weighted_max_home_distance",
+  // },
+  // {
+  //   Name: "Weighted mean home distance",
+  //   Value: "HEX_weighted_mean_home_distance",
+  // },
   {
-    Name: "Weighted max home distance",
-    Value: "HEX_weighted_max_home_distance",
-  },
-  {
-    Name: "Weighted mean home distance",
-    Value: "HEX_weighted_mean_home_distance",
-  },
-  {
-    Name: "Weighted median home distance",
+    Name: "Median distance from home",
     Value: "HEX_weighted_median_home_distance",
   },
 
@@ -141,13 +141,13 @@ const IVDictObj = {
   poverty_index: "Poverty Index",
   HEX_total_reporting: "Total number of reports",
   HEX_total_user: "Total number of 311 users",
-  HEX_weighted_radius_of_gyration: "Weighted radius of gyration",
+  HEX_weighted_radius_of_gyration: "Mobility",
   HEX_weighted_average_distance:
     "Weighted average distance between reported locations",
   HEX_weighted_HEX_coverage: "Weighted number of hexagons covered",
   HEX_weighted_max_home_distance: "Weighted max home distance",
   HEX_weighted_mean_home_distance: "Weighted mean home distance",
-  HEX_weighted_median_home_distance: "Weighted median home distance",
+  HEX_weighted_median_home_distance: "Median distance from home",
   HEX_weighted_subject_coverage: "Weighted number of subjects reported",
   HEX_weighted_subject_hhi: "Weighted subject reversed HHI",
   HEX_weighted_num_reporting_2015: "Weighted number of reporting in 2015",

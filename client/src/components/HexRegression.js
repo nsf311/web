@@ -17,13 +17,13 @@ const HexRegression = ({ selectedHex, hexRegVars }) => {
             </p>
 
             <p>
-                <b>User type:   {userTypeDictObj[hexRegVars[0]  && hexRegVars[0]['results'][0] && hexRegVars[0]['HEX_600'] === selectedHex.properties.HEX_600
+                <b>Who Reported:   {userTypeDictObj[hexRegVars[0]  && hexRegVars[0]['results'][0] && hexRegVars[0]['HEX_600'] === selectedHex.properties.HEX_600
                 && hexRegVars[0]['results'][0]['user_type']]}
                 </b>
             </p>
         {/* just need the following 3 rows for debugging, will remove them ultimately */}
             <p>
-                <b> Frequency: </b>   
+                <b>Repeated Users: </b>   
                 {freqDictObj[hexRegVars[0] && hexRegVars[0]['results'][0] && hexRegVars[0]['HEX_600'] === selectedHex.properties.HEX_600 
                 && hexRegVars[0]['results'][0]['frequency']]}
             </p>

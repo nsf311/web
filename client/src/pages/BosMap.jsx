@@ -344,43 +344,43 @@ const BosMap = () => {
 
                                 <div className="col-11 mx-auto my-3">
                                   <SelectForms
-                                    options={userTypeDict}
-                                    label="User Type"
-                                    onChange={setUser}
-                                    value={selectedUser}
-                                  ></SelectForms>
-                                </div>
-                                <div className="col-11 mx-auto my-3">
-                                  <SelectForms
-                                    options={freqDict}
-                                    label="Frequency"
-                                    onChange={setFrequency}
-                                    value={selectedFrequency}
-                                  ></SelectForms>
-                                </div>
-                                <div className="col-11 mx-auto my-3">
-                                  <SelectForms
                                     options={SubjectDict}
-                                    label="Subject"
+                                    label="Subject:"
                                     onChange={setSubject}
                                     value={selectedSubject}
                                   ></SelectForms>
                                 </div>
-                                <div className="col-11 mx-auto my-3 mb-auto">
+                                <div className="col-11 mx-auto my-3">
                                   <SelectForms
                                     options={DVDict}
-                                    label="Dependent Variable (Color coded by)"
+                                    label="Outcomes:"
                                     onChange={setDV}
                                     value={selectedDV}
                                   ></SelectForms>
                                 </div>
+                                <div className="col-11 mx-auto my-3">
+                                  <SelectForms
+                                      options={IVDict}
+                                      label="Predictors:"
+                                      onChange={setIV}
+                                      value={selectedIV}
+                                    ></SelectForms>
+                                </div>
                                 <div className="col-11 mx-auto my-3 mb-auto">
                                   <SelectForms
-                                    options={IVDict}
-                                    label="Independent Variable"
-                                    onChange={setIV}
-                                    value={selectedIV}
-                                  ></SelectForms>
+                                      options={userTypeDict}
+                                      label="Who Reported?"
+                                      onChange={setUser}
+                                      value={selectedUser}
+                                    ></SelectForms>
+                                </div>
+                                <div className="col-11 mx-auto my-3 mb-auto">
+                                  <SelectForms
+                                      options={freqDict}
+                                      label="Repeated Users:"
+                                      onChange={setFrequency}
+                                      value={selectedFrequency}
+                                    ></SelectForms>
                                 </div>
 
                                 <div className="col-12">
@@ -452,27 +452,27 @@ const BosMap = () => {
               </div>
               <div className="col-11 mx-auto my-3">
                 <SelectForms
+                  options={SubjectDict}
+                  label="Subject:"
+                  onChange={setSubject}
+                  value={selectedSubject}
+                ></SelectForms>
+              </div>
+              <div className="col-11 mx-auto my-3">
+                <SelectForms
                   options={userTypeDict}
-                  label="User Type"
+                  label="Who Reported?"
                   onChange={setUser}
                   value={selectedUser}
                 ></SelectForms>
               </div>
               <div className="col-11 mx-auto my-3">
                 <SelectForms
-                  options={freqDict}
-                  label="Frequency"
-                  onChange={setFrequency}
-                  value={selectedFrequency}
-                ></SelectForms>
-              </div>
-              <div className="col-11 mx-auto my-3">
-                <SelectForms
-                  options={SubjectDict}
-                  label="Subject"
-                  onChange={setSubject}
-                  value={selectedSubject}
-                ></SelectForms>
+                    options={freqDict}
+                    label="Repeated Users"
+                    onChange={setFrequency}
+                    value={selectedFrequency}
+                  ></SelectForms>
               </div>
               <div className="col-11 mx-auto my-3">
                 <HexRegression
