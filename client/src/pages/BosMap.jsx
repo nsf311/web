@@ -2,15 +2,13 @@ import React, { useState, useEffect } from "react";
 import { MapContainer, GeoJSON, TileLayer, MapConsumer } from "react-leaflet";
 import bosHexes from "../core/data/hexagon_600m_311_pop_20200707.json";
 
-import closeArrow from "../assets/icons8-double-left.gif";
-import openArrow from "../assets/icons8-double-right.gif";
-
+import { closeArrow, openArrow } from "../assets";
 import Collapse from "react-bootstrap/Collapse";
 
-import HexRegression from "../components/HexRegression";
+import HexRegression from "../shared/HexRegression";
 import bos311Service from "../core/services/bos311.service";
-import RegressionPlt from "../components/RegressionPlt";
-import Legend from "../components/graph/Legend";
+import RegressionPlt from "../shared/RegressionPlt";
+import Legend from "../shared/graph/Legend";
 
 import { max, min } from "d3";
 
@@ -46,7 +44,7 @@ import {
   NUM_OF_HEX_COLORS,
 } from "../core/constants/map-contants";
 
-const bosCenter = [42.360081, -71.058884];
+const bosCenter = [42.320081, -71.1589];
 // component style - SASS variables
 // https://coreui.io/react/docs/components/offcanvas/#coffcanvas
 
@@ -301,9 +299,8 @@ const BosMap = () => {
         >
           <MapContainer
             style={{ minHeight: "83vh", maxHeight: "100%" }}
-            zoom={11}
+            zoom={12}
             center={bosCenter}
-            // scrollWheelZoom={false}
             whenCreated={setMap}
           >
             <MapConsumer>
@@ -317,14 +314,20 @@ const BosMap = () => {
                           className="col-12 bg-white"
                           onMouseEnter={() => {
                             map.dragging.disable();
+                            map.touchZoom.disable();
+                            map.boxZoom.disable();
+                            map.doubleClickZoom.disable();
                           }}
                           onMouseLeave={() => {
-                            map.dragging.disable();
+                            map.dragging.enable();
+                            map.touchZoom.enable();
+                            map.boxZoom.enable();
+                            map.doubleClickZoom.enable();
                           }}
                         >
                           <div id="regression-dialog">
                             <div
-                              className="direction-right overflow-auto"
+                              className="overflow-auto"
                               style={{ height: "83vh" }}
                             >
                               <div className="direction-left overflow-auto">
@@ -360,27 +363,27 @@ const BosMap = () => {
                                 </div>
                                 <div className="col-11 mx-auto my-3">
                                   <SelectForms
-                                      options={IVDict}
-                                      label="Predictors:"
-                                      onChange={setIV}
-                                      value={selectedIV}
-                                    ></SelectForms>
+                                    options={IVDict}
+                                    label="Predictors:"
+                                    onChange={setIV}
+                                    value={selectedIV}
+                                  ></SelectForms>
                                 </div>
                                 <div className="col-11 mx-auto my-3 mb-auto">
                                   <SelectForms
-                                      options={userTypeDict}
-                                      label="Who Reported?"
-                                      onChange={setUser}
-                                      value={selectedUser}
-                                    ></SelectForms>
+                                    options={userTypeDict}
+                                    label="Who Reported?"
+                                    onChange={setUser}
+                                    value={selectedUser}
+                                  ></SelectForms>
                                 </div>
                                 <div className="col-11 mx-auto my-3 mb-auto">
                                   <SelectForms
-                                      options={freqDict}
-                                      label="Repeated Users:"
-                                      onChange={setFrequency}
-                                      value={selectedFrequency}
-                                    ></SelectForms>
+                                    options={freqDict}
+                                    label="Repeated Users:"
+                                    onChange={setFrequency}
+                                    value={selectedFrequency}
+                                  ></SelectForms>
                                 </div>
 
                                 <div className="col-12">
@@ -468,11 +471,11 @@ const BosMap = () => {
               </div>
               <div className="col-11 mx-auto my-3">
                 <SelectForms
-                    options={freqDict}
-                    label="Repeated Users"
-                    onChange={setFrequency}
-                    value={selectedFrequency}
-                  ></SelectForms>
+                  options={freqDict}
+                  label="Repeated Users"
+                  onChange={setFrequency}
+                  value={selectedFrequency}
+                ></SelectForms>
               </div>
               <div className="col-11 mx-auto my-3">
                 <HexRegression

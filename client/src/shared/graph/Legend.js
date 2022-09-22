@@ -18,7 +18,7 @@ import {
 
 import Draggable from "react-draggable";
 
-import dragIcon from "../.././assets/drag-icon.png";
+import { dragIcon } from "../.././assets";
 
 const COLORS = [
   COLOR_11,
@@ -86,14 +86,12 @@ const Legend = ({ maxDV, minDV, step, map, position }) => {
               variant="danger rounded-pill"
               className="my-3"
               onClick={() => {
-                map?.setView([42.360081, -71.058884], 11);
+                map?.setView([42.320081, -71.1589], 12);
               }}
             >
               Refresh
             </Button>
           </div>
-          {/* Future development */}
-          {/* <div className="container"></div> */}
         </div>
       </Draggable>
     </div>

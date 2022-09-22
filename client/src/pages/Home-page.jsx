@@ -1,8 +1,7 @@
 import React from "react";
 // import { Button } from "react-bootstrap";
 import Helmet from "react-helmet";
-import binoculars from "../assets/binoculars.png";
-import map_img from "../assets/map-image.png";
+import { binoculars, map_img } from "../assets";
 export function HomePage() {
   return (
     <>
