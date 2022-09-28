@@ -3,35 +3,125 @@ const offcanvasStyle = {
 };
 
 const userTypeDict = [
-  { Name: "Residents Only", Value: "non_gov" },
-  { Name: "Residents and unsure", Value: "non_gov_unsure" },
   { Name: "Residents and Government Employees", Value: "all" },
+  { Name: "Residents Only", Value: "non_gov" },
+  // { Name: "Residents and Unsure", Value: "non_gov_unsure" },
 ];
 
 const userTypeDictObj = {
-  non_gov: "Residents Only",
-  non_gov_unsure: "Residents and unsure",
   all: "Residents and Government Employees",
+  non_gov: "Residents Only",
+  // non_gov_unsure: "Residents and Unsure",
 };
 
 const freqDict = [
-  { Name: "Both one-time and repeat users", Value: "all" },
-  { Name: "Repeat users only", Value: "heavy" },
+  { Name: "Both One-time and Repeat Users", Value: "all" },
+  { Name: "Repeat Users Only", Value: "heavy" },
 ];
 
 const freqDictObj = {
-  all: "Both one-time and repeat users",
-  heavy: "Repeat users only",
+  all: "Both One-time and Repeat Users",
+  heavy: "Repeat Users Only",
 };
 
 const DVDict = [
-  { Name: "Total number of reports", Value: "HEX_total_reporting" },
-  { Name: "Total number of 311 users", Value: "HEX_total_user" },
-  // Mobility
+  // Reporting Frequency
+  { Name: "Number of 311 Reports", 
+    Value: "HEX_total_reporting"
+  },
+
+  // User Volume
+  { Name: "Number of 311 Users per Capita", 
+    Value: "HEX_total_user" 
+  },
+
+  // {
+  //   Name: "Weighted number of reporting in 2015",
+  //   Value: "HEX_weighted_num_reporting_2015",
+  // },
+
+  // User Mobility
+  // {
+  //   Name: "User Mobility (variations in reporting locations)",
+  //   Value: "HEX_weighted_radius_of_gyration",
+  // },
+
+  // {
+  //   Name: "Weighted average distance between reported locations",
+  //   Value: "HEX_weighted_average_distance",
+  // },
+
+  // Territoriality
+  // {
+  //   Name: "Territoriality (distance from user’s home)",
+  //   Value: "HEX_weighted_median_home_distance",
+  // },
+  // {
+  //   Name: "Weighted number of hexagons covered",
+  //   Value: "HEX_weighted_HEX_coverage",
+  // },
+  // {
+  //   Name: "Weighted max home distance",
+  //   Value: "HEX_weighted_max_home_distance",
+  // },
+  // {
+  //   Name: "Weighted mean home distance",
+  //   Value: "HEX_weighted_mean_home_distance",
+  // },
+
+  // Topic Variety
+  // {
+  //   Name: "Topic Variety (number of reporting types covered)",
+  //   Value: "HEX_weighted_subject_coverage",
+  // },
+  // { Name: "Weighted subject reversed HHI", 
+  //   Value: "HEX_weighted_subject_hhi" 
+  // },
+  
+  // {
+  //   Name: "Number of 311 reports per 100 population",
+  //   Value: "HEX_normalized_total_311_per_100",
+  // },
+];
+
+const DVDictObj = {
+  HEX_total_reporting: "Number of 311 Reports",
+  HEX_total_user: "Number of 311 Users per Capita",
+
+  // HEX_weighted_radius_of_gyration: "User Mobility (variations in reporting locations)",
+  // HEX_weighted_median_home_distance: "Territoriality (distance from user’s home)",
+  // HEX_weighted_subject_coverage: "Topic Variety (number of reporting types covered)",
+
+  // HEX_weighted_average_distance:
+  //   "Weighted average distance between reported locations",
+  // HEX_weighted_HEX_coverage: "Weighted number of hexagons covered",
+  // HEX_weighted_max_home_distance: "Weighted max home distance",
+  // HEX_weighted_mean_home_distance: "Weighted mean home distance",
+  // HEX_weighted_subject_hhi: "Weighted subject reversed HHI",
+  // HEX_weighted_num_reporting_2015: "Weighted number of reporting in 2015",
+  // HEX_normalized_total_311_per_100: "Number of 311 reports per 100 population",
+};
+
+const IVDict = [
+  { Name: "Poverty Index", 
+    Value: "poverty_index" 
+  },
+
+  // Reporting Frequency
+  { Name: "Reporting Frequency (number of reports)", 
+    Value: "HEX_total_reporting"
+  },
+  // {
+  //   Name: "Weighted number of reporting in 2015",
+  //   Value: "HEX_weighted_num_reporting_2015",
+  // },
+
+  // User Mobility
   {
-    Name: "Mobility",
+    Name: "User Mobility (variations in reporting locations)",
     Value: "HEX_weighted_radius_of_gyration",
   },
+
   // {
   //   Name: "Weighted average distance between reported locations",
   //   Value: "HEX_weighted_average_distance",
@@ -39,9 +129,13 @@ const DVDict = [
 
   // Territoriality
   {
-    Name: "Weighted number of hexagons covered",
-    Value: "HEX_weighted_HEX_coverage",
+    Name: "Territoriality (distance from user’s home)",
+    Value: "HEX_weighted_median_home_distance",
   },
+  // {
+  //   Name: "Weighted number of hexagons covered",
+  //   Value: "HEX_weighted_HEX_coverage",
+  // },
   // {
   //   Name: "Weighted max home distance",
   //   Value: "HEX_weighted_max_home_distance",
@@ -50,108 +144,43 @@ const DVDict = [
   //   Name: "Weighted mean home distance",
   //   Value: "HEX_weighted_mean_home_distance",
   // },
-  {
-    Name: "Median distance from home",
-    Value: "HEX_weighted_median_home_distance",
-  },
 
-  // Variety
+  // Topic Variety
   {
-    Name: "Weighted number of subjects reported",
+    Name: "Topic Variety (number of reporting types covered)",
     Value: "HEX_weighted_subject_coverage",
   },
-  { Name: "Weighted subject reversed HHI", Value: "HEX_weighted_subject_hhi" },
-
-  {
-    Name: "Weighted number of reporting in 2015",
-    Value: "HEX_weighted_num_reporting_2015",
-  },
-  {
-    Name: "Number of 311 reports per 100 population",
-    Value: "HEX_normalized_total_311_per_100",
-  },
-];
-
-const DVDictObj = {
-  HEX_total_reporting: "Total number of reports",
-  HEX_total_user: "Total number of 311 users",
-  HEX_weighted_radius_of_gyration: "Mobility",
-  HEX_weighted_average_distance:
-    "Weighted average distance between reported locations",
-  HEX_weighted_HEX_coverage: "Weighted number of hexagons covered",
-  HEX_weighted_max_home_distance: "Weighted max home distance",
-  HEX_weighted_mean_home_distance: "Weighted mean home distance",
-  HEX_weighted_median_home_distance: "Median distance from home",
-  HEX_weighted_subject_coverage: "Weighted number of subjects reported",
-  HEX_weighted_subject_hhi: "Weighted subject reversed HHI",
-  HEX_weighted_num_reporting_2015: "Weighted number of reporting in 2015",
-  HEX_normalized_total_311_per_100: "Number of 311 reports per 100 population",
-};
-
-const IVDict = [
-  { Name: "Poverty Index", Value: "poverty_index" },
-  { Name: "Total number of reports", Value: "HEX_total_reporting" },
-  { Name: "Total number of 311 users", Value: "HEX_total_user" },
-  // Mobility
-  {
-    Name: "Mobility",
-    Value: "HEX_weighted_radius_of_gyration",
-  },
-  {
-    Name: "Weighted average distance between reported locations",
-    Value: "HEX_weighted_average_distance",
-  },
-
-  // Territoriality
-  {
-    Name: "Weighted number of hexagons covered",
-    Value: "HEX_weighted_HEX_coverage",
-  },
-  // {
-  //   Name: "Weighted max home distance",
-  //   Value: "HEX_weighted_max_home_distance",
+  // { Name: "Weighted subject reversed HHI", 
+  //   Value: "HEX_weighted_subject_hhi" 
   // },
+
+  // User Volume
+  { Name: "User Volume (number of users per capita)", 
+    Value: "HEX_total_user" 
+  },
+  
   // {
-  //   Name: "Weighted mean home distance",
-  //   Value: "HEX_weighted_mean_home_distance",
+  //   Name: "Number of 311 reports per 100 population",
+  //   Value: "HEX_normalized_total_311_per_100",
   // },
-  {
-    Name: "Median distance from home",
-    Value: "HEX_weighted_median_home_distance",
-  },
-
-  // Variety
-  {
-    Name: "Weighted number of subjects reported",
-    Value: "HEX_weighted_subject_coverage",
-  },
-  { Name: "Weighted subject reversed HHI", Value: "HEX_weighted_subject_hhi" },
-
-  {
-    Name: "Weighted number of reporting in 2015",
-    Value: "HEX_weighted_num_reporting_2015",
-  },
-  {
-    Name: "Number of 311 reports per 100 population",
-    Value: "HEX_normalized_total_311_per_100",
-  },
 ];
 
 const IVDictObj = {
   poverty_index: "Poverty Index",
-  HEX_total_reporting: "Total number of reports",
-  HEX_total_user: "Total number of 311 users",
-  HEX_weighted_radius_of_gyration: "Mobility",
-  HEX_weighted_average_distance:
-    "Weighted average distance between reported locations",
-  HEX_weighted_HEX_coverage: "Weighted number of hexagons covered",
-  HEX_weighted_max_home_distance: "Weighted max home distance",
-  HEX_weighted_mean_home_distance: "Weighted mean home distance",
-  HEX_weighted_median_home_distance: "Median distance from home",
-  HEX_weighted_subject_coverage: "Weighted number of subjects reported",
-  HEX_weighted_subject_hhi: "Weighted subject reversed HHI",
-  HEX_weighted_num_reporting_2015: "Weighted number of reporting in 2015",
-  HEX_normalized_total_311_per_100: "Number of 311 reports per 100 population",
+  HEX_total_reporting: "Reporting Frequency (number of reports)",
+  HEX_weighted_radius_of_gyration: "User Mobility (variations in reporting locations)",
+  HEX_weighted_median_home_distance: "Territoriality (distance from user’s home)",
+  HEX_weighted_subject_coverage: "Topic Variety (number of reporting types covered)",
+  HEX_total_user: "User Volume (number of users per capita)",
+
+  // HEX_weighted_average_distance:
+  //   "Weighted average distance between reported locations",
+  // HEX_weighted_HEX_coverage: "Weighted number of hexagons covered",
+  // HEX_weighted_max_home_distance: "Weighted max home distance",
+  // HEX_weighted_mean_home_distance: "Weighted mean home distance",
+  // HEX_weighted_subject_hhi: "Weighted subject reversed HHI",
+  // HEX_weighted_num_reporting_2015: "Weighted number of reporting in 2015",
+  // HEX_normalized_total_311_per_100: "Number of 311 reports per 100 population",
 }; // end of IVDictObj
 
 const SubjectDict = [
@@ -202,7 +231,9 @@ const SubjectDictObj = {
 
 const ReportTypeDict = [
   { Name: "All report types", Value: "all" },
-  { Name: "Missed trash/ recycling/ yard waste/ bulk item", Value: "MISSED_TRASH_and_RECYCLING_and_YARD_WASTE_and_BULK_ITEM" },
+  { Name: "Missed trash/ recycling/ yard waste/ bulk item", 
+    Value: "MISSED_TRASH_and_RECYCLING_and_YARD_WASTE_and_BULK_ITEM" 
+  },
   {
     Name: "Schedule a bulk item pickup",
     Value: "SCHEDULE_A_BULK_ITEM_PICKUP",
@@ -224,6 +255,25 @@ const ReportTypeDictObj = {
   SCHEDULE_A_BULK_ITEM_PICKUP_SS: "Schedule a bulk item pickup ss",
   UNSATISFACTORY_LIVING_CONDITIONS: "Unsatisfactory living conditions"
 }; // end of ReportTypetDictObj
+
+
+const ReasonDict = [
+  { Name: "All Report Types", Value: "all" },
+  { Name: "Sanitation (e.g., trash)", Value: "Sanitation"},
+  { Name: "Housing (e.g., no utilities)", Value: "Housing"},
+  { Name: "Highway Maintenance (e.g., potholes)", Value: "Highway_Maintenance"},
+  { Name: "Code Enforcement (e.g., illegal parking)", Value: "Code_Enforcement"},
+  { Name: "Trees (e.g., fallen trees)", Value: "Trees"},
+];
+
+const ReasonDictObj = {
+  all: "All Report Types",
+  Sanitation: "Sanitation (e.g., trash)",
+  Housing: "Housing (e.g., no utilities)",
+  Highway_Maintenance: "Highway Maintenance (e.g., potholes)",
+  Code_Enforcement: "Code Enforcement (e.g., illegal parking)",
+  Trees: "Trees (e.g., fallen trees)"
+}; // end of ReasonDictObj
 
 
 
@@ -271,5 +321,7 @@ export {
   userTypeDict,
   userTypeDictObj,
   ReportTypeDictObj,
-  ReportTypeDict
+  ReportTypeDict,
+  ReasonDict,
+  ReasonDictObj
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { userTypeDictObj, freqDictObj, ReportTypeDictObj } from '../core/constants/map-contants';
+import { userTypeDictObj, freqDictObj, ReasonDictObj } from '../core/constants/map-contants';
 const HexRegression = ({ selectedHex, hexRegVars }) => {
     const hexRegVarsAll = hexRegVars.map((d) => d.results)
    
@@ -10,10 +10,10 @@ const HexRegression = ({ selectedHex, hexRegVars }) => {
                 <b>Hexagon number: </b>
                 {selectedHex?.properties?.HEX_600}
             </p>
-            <p>
+            {/* <p>
                 <b># of 311: </b>
                 {selectedHex && selectedHex.properties && selectedHex.properties.num_311}
-            </p>
+            </p> */}
 
             <p>
                 <b>Who Reported:   {userTypeDictObj[hexRegVars[0]  && hexRegVars[0]['results'][0] && hexRegVars[0]['HEX_600'] === selectedHex.properties.HEX_600
@@ -28,12 +28,54 @@ const HexRegression = ({ selectedHex, hexRegVars }) => {
             </p>
 
             <p>
-                <b> Report type: </b>   
-                {ReportTypeDictObj[hexRegVars[0] && hexRegVars[0]['results'][0] && hexRegVars[0]['HEX_600'] === selectedHex.properties.HEX_600 
-                && hexRegVars[0]['results'][0]['report_type']]}
+                <b> Report Type: </b>   
+                {ReasonDictObj[hexRegVars[0] && hexRegVars[0]['results'][0] && hexRegVars[0]['HEX_600'] === selectedHex.properties.HEX_600 
+                && hexRegVars[0]['results'][0]['reason']]}
+            </p>
+
+            <p>
+                <b> Reporting Frequency (number of reports): </b>
+                {hexRegVars[0] && hexRegVars[0]['results'][0] &&
+                    hexRegVars[0]['HEX_600'] === selectedHex.properties.HEX_600 && 
+                    hexRegVars[0]['results'][0]['HEX_total_reporting']}
+            </p>
+
+            <p>
+                <b> User Mobility (variations in reporting locations: </b>
+                {hexRegVars[0] && hexRegVars[0]['results'][0] &&
+                    hexRegVars[0]['HEX_600'] === selectedHex.properties.HEX_600 && 
+                    hexRegVars[0]['results'][0]['HEX_weighted_radius_of_gyration']}
+            </p>
+
+            <p>
+                <b> Territoriality (distance from user’s home): </b>
+                {hexRegVars[0] && hexRegVars[0]['results'][0] &&
+                    hexRegVars[0]['HEX_600'] === selectedHex.properties.HEX_600 && 
+                    hexRegVars[0]['results'][0]['HEX_weighted_median_home_distance']}
+            </p>
+
+            <p>
+                <b> Topic Variety (# of reporting types covered): </b>
+                {hexRegVars[0] && hexRegVars[0]['results'][0] &&
+                    hexRegVars[0]['HEX_600'] === selectedHex.properties.HEX_600 && 
+                    hexRegVars[0]['results'][0]['HEX_weighted_subject_coverage']}
+            </p>
+
+            <p>
+                <b> User Volume (# of users per capita): </b>
+                {hexRegVars[0] && hexRegVars[0]['results'][0] &&
+                    hexRegVars[0]['HEX_600'] === selectedHex.properties.HEX_600 && 
+                    hexRegVars[0]['results'][0]['HEX_total_user']}
+            </p>
+
+            <p>
+                <b> HEX poverty index: </b>
+                {hexRegVars[0] && hexRegVars[0]['results'][0] &&
+                    hexRegVars[0]['HEX_600'] === selectedHex.properties.HEX_600 && 
+                    hexRegVars[0]['results'][0]['poverty_index']}
             </p>
             
-            <p>
+            {/* <p>
                 <b> HEX weighted average distance: </b>
                 {hexRegVars[0] && hexRegVars[0]['results'][0] &&
                     hexRegVars[0]['HEX_600'] === selectedHex.properties.HEX_600 && 
@@ -52,70 +94,30 @@ const HexRegression = ({ selectedHex, hexRegVars }) => {
                 {hexRegVars[0] && hexRegVars[0]['results'][0] &&
                     hexRegVars[0]['HEX_600'] === selectedHex.properties.HEX_600 && 
                     hexRegVars[0]['results'][0]['HEX_weighted_max_home_distance']}
-            </p>
+            </p> */}
 
-            <p>
-                <b> HEX weighted median distance: </b>
-                {hexRegVars[0] && hexRegVars[0]['results'][0] &&
-                    hexRegVars[0]['HEX_600'] === selectedHex.properties.HEX_600 && 
-                    hexRegVars[0]['results'][0]['HEX_weighted_median_home_distance']}
-            </p>
-            
-            <p>
-                <b> HEX weighted radius of gyration: </b>
-                {hexRegVars[0] && hexRegVars[0]['results'][0] &&
-                    hexRegVars[0]['HEX_600'] === selectedHex.properties.HEX_600 && 
-                    hexRegVars[0]['results'][0]['HEX_weighted_radius_of_gyration']}
-            </p>
-
-            <p>
+            {/* <p>
                 <b> HEX weighted num reporting 2015: </b>
                 {hexRegVars[0] && hexRegVars[0]['results'][0] &&
                     hexRegVars[0]['HEX_600'] === selectedHex.properties.HEX_600 && 
                     hexRegVars[0]['results'][0]['HEX_weighted_num_reporting_2015']}
-            </p>
+            </p> */}
 
-            <p>
+            {/* <p>
                 <b> HEX weighted HEX coverage: </b>
                 {hexRegVars[0] && hexRegVars[0]['results'][0] &&
                     hexRegVars[0]['HEX_600'] === selectedHex.properties.HEX_600 && 
                     hexRegVars[0]['results'][0]['HEX_weighted_HEX_coverage']}
-            </p>
+            </p> */}
 
-            <p>
-                <b> HEX weighted subject coverage: </b>
-                {hexRegVars[0] && hexRegVars[0]['results'][0] &&
-                    hexRegVars[0]['HEX_600'] === selectedHex.properties.HEX_600 && 
-                    hexRegVars[0]['results'][0]['HEX_weighted_subject_coverage']}
-            </p>
+            
 
-            <p>
+            {/* <p>
                 <b> HEX weighted subject hhi: </b>
                 {hexRegVars[0] && hexRegVars[0]['results'][0] &&
                     hexRegVars[0]['HEX_600'] === selectedHex.properties.HEX_600 && 
                     hexRegVars[0]['results'][0]['HEX_weighted_subject_hhi']}
-            </p>
-
-            <p>
-                <b> HEX total reporting: </b>
-                {hexRegVars[0] && hexRegVars[0]['results'][0] &&
-                    hexRegVars[0]['HEX_600'] === selectedHex.properties.HEX_600 && 
-                    hexRegVars[0]['results'][0]['HEX_total_reporting']}
-            </p>
-
-            <p>
-                <b> HEX total user: </b>
-                {hexRegVars[0] && hexRegVars[0]['results'][0] &&
-                    hexRegVars[0]['HEX_600'] === selectedHex.properties.HEX_600 && 
-                    hexRegVars[0]['results'][0]['HEX_total_user']}
-            </p>
-
-            <p>
-                <b> HEX poverty index: </b>
-                {hexRegVars[0] && hexRegVars[0]['results'][0] &&
-                    hexRegVars[0]['HEX_600'] === selectedHex.properties.HEX_600 && 
-                    hexRegVars[0]['results'][0]['poverty_index']}
-            </p>
+            </p> */}
 
         </div>
       );

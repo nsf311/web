@@ -30,6 +30,7 @@ import {
   IVDictObj,
   DVDictObj,
   ReportTypeDict,
+  ReasonDict,
   COLOR_1,
   COLOR_2,
   COLOR_3,
@@ -61,13 +62,14 @@ const BosMap = () => {
   const [map, setMap] = useState(null);
 
   // variables' states
-  const [selectedUser, setUser] = useState("non_gov");
+  const [selectedUser, setUser] = useState("all");
   const [selectedFrequency, setFrequency] = useState("all");
   const [selectedDV, setDV] = useState("HEX_total_reporting");
   const [selectedIV, setIV] = useState("poverty_index");
   // const [selectedSubject, setSubject] = useState("all");
-  const [selectedReportType, setReportType] = useState("all");
+  // const [selectedReportType, setReportType] = useState("all");
 
+  const [selectedReason, setReason] = useState("all");
   const [position, setPosition] = useState(null);
 
   // sidebar for each individual hexagon
@@ -113,7 +115,7 @@ const BosMap = () => {
   useEffect(() => {
     RegDataByFilter();
     getHexRegVarsByFilter(hexNum);
-  }, [selectedUser, selectedFrequency, selectedReportType]);
+  }, [selectedUser, selectedFrequency, selectedReason]);
 
   /*
     - update the DV to geojson data when DV or regression data is changed
@@ -218,7 +220,7 @@ const BosMap = () => {
         hexNum,
         selectedUser,
         selectedFrequency,
-        selectedReportType
+        selectedReason
       )
       .then((response) => {
         console.log(response.data)
@@ -231,7 +233,7 @@ const BosMap = () => {
 
   const RegDataByFilter = () => {
     bos311Service
-      .findRegVarByFilter(selectedUser, selectedFrequency, selectedReportType)
+      .findRegVarByFilter(selectedUser, selectedFrequency, selectedReason)
       .then((response) => {
         setRegData(response.data);
         setRegressionGraph(true);
@@ -350,16 +352,16 @@ const BosMap = () => {
 
                                 <div className="col-11 mx-auto my-3">
                                   <SelectForms
-                                    options={ReportTypeDict}
-                                    label="Report type:"
-                                    onChange={setReportType}
-                                    value={selectedReportType}
+                                    options={ReasonDict}
+                                    label="Report Type:"
+                                    onChange={setReason}
+                                    value={selectedReason}
                                   ></SelectForms>
                                 </div>
                                 <div className="col-11 mx-auto my-3">
                                   <SelectForms
                                     options={DVDict}
-                                    label="Outcomes:"
+                                    label="311 Performance Metrics (DV)"
                                     onChange={setDV}
                                     value={selectedDV}
                                   ></SelectForms>
@@ -367,7 +369,7 @@ const BosMap = () => {
                                 <div className="col-11 mx-auto my-3">
                                   <SelectForms
                                     options={IVDict}
-                                    label="Predictors:"
+                                    label="User and Community Characteristics (IV):"
                                     onChange={setIV}
                                     value={selectedIV}
                                   ></SelectForms>
@@ -458,10 +460,10 @@ const BosMap = () => {
               </div>
               <div className="col-11 mx-auto my-3">
                 <SelectForms
-                  options={ReportTypeDict}
-                  label="Report type:"
-                  onChange={setReportType}
-                  value={selectedReportType}
+                  options={ReasonDict}
+                  label="Report Type:"
+                  onChange={setReason}
+                  value={selectedReason}
                 ></SelectForms>
               </div>
               <div className="col-11 mx-auto my-3">
