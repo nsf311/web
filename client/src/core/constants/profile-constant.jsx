@@ -1,4 +1,4 @@
-import defaultprofile from "../../assets/default-profile.png";
+import { defaultprofile } from "../../assets";
 
 export const PROFILE = [
   {
