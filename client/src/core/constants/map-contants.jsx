@@ -200,6 +200,36 @@ const SubjectDictObj = {
   Civil_Rights: "Civil Rights",
 }; // end of SubjectDictObj
 
+const ReportTypeDict = [
+  { Name: "All report types", Value: "all" },
+  { Name: "Missed trash/ recycling/ yard waste/ bulk item", Value: "MISSED_TRASH_and_RECYCLING_and_YARD_WASTE_and_BULK_ITEM" },
+  {
+    Name: "Schedule a bulk item pickup",
+    Value: "SCHEDULE_A_BULK_ITEM_PICKUP",
+  },
+  {
+    Name: "Request for recycling cart",
+    Value: "REQUEST_FOR_RECYCLING_CART",
+  },
+  { Name: "Schedule a bulk item pickup ss", Value: "SCHEDULE_A_BULK_ITEM_PICKUP_SS" },
+  { Name: "Unsatisfactory living conditions", Value: "UNSATISFACTORY_LIVING_CONDITIONS" },
+  
+];
+
+const ReportTypeDictObj = {
+  all: "All report types",
+  MISSED_TRASH_and_RECYCLING_and_YARD_WASTE_and_BULK_ITEM: "Missed trash/ recycling/ yard waste/ bulk item",
+  SCHEDULE_A_BULK_ITEM_PICKUP: "Schedule a bulk item pickup",
+  REQUEST_FOR_RECYCLING_CART: "Request for recycling cart",
+  SCHEDULE_A_BULK_ITEM_PICKUP_SS: "Schedule a bulk item pickup ss",
+  UNSATISFACTORY_LIVING_CONDITIONS: "Unsatisfactory living conditions"
+}; // end of ReportTypetDictObj
+
+
+
+
+
+
 const COLOR_1 = "#ffe6e6";
 const COLOR_2 = "#ffb6b6";
 const COLOR_3 = "#ff8686";
@@ -240,4 +270,6 @@ export {
   SubjectDictObj,
   userTypeDict,
   userTypeDictObj,
+  ReportTypeDictObj,
+  ReportTypeDict
 };

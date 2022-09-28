@@ -1,5 +1,5 @@
 import React from 'react';
-import { userTypeDictObj, freqDictObj, SubjectDictObj } from '../core/constants/map-contants';
+import { userTypeDictObj, freqDictObj, ReportTypeDictObj } from '../core/constants/map-contants';
 const HexRegression = ({ selectedHex, hexRegVars }) => {
     const hexRegVarsAll = hexRegVars.map((d) => d.results)
    
@@ -13,7 +13,6 @@ const HexRegression = ({ selectedHex, hexRegVars }) => {
             <p>
                 <b># of 311: </b>
                 {selectedHex && selectedHex.properties && selectedHex.properties.num_311}
-                {/* {console.log(hexRegVars)} */}
             </p>
 
             <p>
@@ -29,9 +28,9 @@ const HexRegression = ({ selectedHex, hexRegVars }) => {
             </p>
 
             <p>
-                <b> Subject: </b>   
-                {SubjectDictObj[hexRegVars[0] && hexRegVars[0]['results'][0] && hexRegVars[0]['HEX_600'] === selectedHex.properties.HEX_600 
-                && hexRegVars[0]['results'][0]['subject']]}
+                <b> Report type: </b>   
+                {ReportTypeDictObj[hexRegVars[0] && hexRegVars[0]['results'][0] && hexRegVars[0]['HEX_600'] === selectedHex.properties.HEX_600 
+                && hexRegVars[0]['results'][0]['report_type']]}
             </p>
             
             <p>
