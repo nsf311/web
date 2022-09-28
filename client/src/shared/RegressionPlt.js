@@ -35,6 +35,7 @@ const RegressionPlt = ({
   // const listHex = RegDataSelectedUser.map( (d) => d.HEX_600);
   // const hexResults = RegDataSelectedUser.map( (d) => d.results);
   const variables_data = RegDataSelectedUser.map((d) => d.results);
+  console.log(RegDataSelectedUser)
   const hexDV = variables_data.map(getHexDV);
   const hexIV = variables_data.map(getHexIV);
 

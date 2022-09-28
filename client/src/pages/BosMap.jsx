@@ -29,6 +29,7 @@ import {
   SubjectDict,
   IVDictObj,
   DVDictObj,
+  ReportTypeDict,
   COLOR_1,
   COLOR_2,
   COLOR_3,
@@ -64,7 +65,8 @@ const BosMap = () => {
   const [selectedFrequency, setFrequency] = useState("all");
   const [selectedDV, setDV] = useState("HEX_total_reporting");
   const [selectedIV, setIV] = useState("poverty_index");
-  const [selectedSubject, setSubject] = useState("all");
+  // const [selectedSubject, setSubject] = useState("all");
+  const [selectedReportType, setReportType] = useState("all");
 
   const [position, setPosition] = useState(null);
 
@@ -111,7 +113,7 @@ const BosMap = () => {
   useEffect(() => {
     RegDataByFilter();
     getHexRegVarsByFilter(hexNum);
-  }, [selectedUser, selectedFrequency, selectedSubject]);
+  }, [selectedUser, selectedFrequency, selectedReportType]);
 
   /*
     - update the DV to geojson data when DV or regression data is changed
@@ -151,8 +153,8 @@ const BosMap = () => {
         try {
           bosHexes.features[hex_idx].properties.dvValue =
             RegData[reg_idx]["results"][0][selectedDV];
-          console.log(bosHexes.features[hex_idx].properties.dvValue);
-          console.log(hex_idx);
+          // console.log(bosHexes.features[hex_idx].properties.dvValue);
+          // console.log(hex_idx);
         } catch {
           bosHexes.features[hex_idx].properties.dvValue = null;
         }
@@ -216,9 +218,10 @@ const BosMap = () => {
         hexNum,
         selectedUser,
         selectedFrequency,
-        selectedSubject
+        selectedReportType
       )
       .then((response) => {
+        console.log(response.data)
         setHexRegVars(response.data);
       })
       .catch((e) => {
@@ -228,7 +231,7 @@ const BosMap = () => {
 
   const RegDataByFilter = () => {
     bos311Service
-      .findRegVarByFilter(selectedUser, selectedFrequency, selectedSubject)
+      .findRegVarByFilter(selectedUser, selectedFrequency, selectedReportType)
       .then((response) => {
         setRegData(response.data);
         setRegressionGraph(true);
@@ -347,10 +350,10 @@ const BosMap = () => {
 
                                 <div className="col-11 mx-auto my-3">
                                   <SelectForms
-                                    options={SubjectDict}
-                                    label="Subject:"
-                                    onChange={setSubject}
-                                    value={selectedSubject}
+                                    options={ReportTypeDict}
+                                    label="Report type:"
+                                    onChange={setReportType}
+                                    value={selectedReportType}
                                   ></SelectForms>
                                 </div>
                                 <div className="col-11 mx-auto my-3">
@@ -455,10 +458,10 @@ const BosMap = () => {
               </div>
               <div className="col-11 mx-auto my-3">
                 <SelectForms
-                  options={SubjectDict}
-                  label="Subject:"
-                  onChange={setSubject}
-                  value={selectedSubject}
+                  options={ReportTypeDict}
+                  label="Report type:"
+                  onChange={setReportType}
+                  value={selectedReportType}
                 ></SelectForms>
               </div>
               <div className="col-11 mx-auto my-3">

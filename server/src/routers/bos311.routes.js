@@ -6,8 +6,8 @@ module.exports = app=>{
 
     router.get("/:id", bos311Hex.findOne);
     router.get("/hex_num/:HEX_600", bos311Hex.findByHexNum);
-    router.get("/reg_res_filtered/:user_type/:frequency/:subject", bos311Hex.findRegVarByFilter);
-    router.get("/hex_vars_filtered/:HEX_600/:user_type/:frequency/:subject", bos311Hex.findHexVarByFilter)
+    router.get("/reg_res_filtered/:user_type/:frequency/:report_type", bos311Hex.findRegVarByFilter);
+    router.get("/hex_vars_filtered/:HEX_600/:user_type/:frequency/:report_type", bos311Hex.findHexVarByFilter)
     
     app.use('/bos311/hex_data', router);
 };
