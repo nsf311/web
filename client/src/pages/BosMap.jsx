@@ -5,7 +5,7 @@ import bosHexes from "../core/data/hexagon_600m_311_pop_20200707.json";
 import { closeArrow, openArrow } from "../assets";
 import Collapse from "react-bootstrap/Collapse";
 
-import HexRegression from "../shared/HexRegression";
+import { SelectForms } from "../shared/form-controller";
 import bos311Service from "../core/services/bos311.service";
 import RegressionPlt from "../shared/RegressionPlt";
 import Legend from "../shared/graph/Legend";
@@ -16,9 +16,9 @@ import { makeKey } from "../core/lib/makeKey";
 
 import { Button } from "react-bootstrap";
 
-import { SelectForms } from "../shared/form-controller";
-
 import { Helmet } from "react-helmet";
+
+import { HexModal } from "../shared/HexModal";
 
 import {
   // offcanvasStyle,
@@ -223,7 +223,7 @@ const BosMap = () => {
         selectedReason
       )
       .then((response) => {
-        console.log(response.data)
+        console.log(response.data);
         setHexRegVars(response.data);
       })
       .catch((e) => {
@@ -295,13 +295,7 @@ const BosMap = () => {
         <title>Boston 311 | Map</title>
       </Helmet>
       <div className="row">
-        <div
-          className={
-            showHexOffcanvas
-              ? "position-relative col-12 col-lg-9"
-              : "position-relative col"
-          }
-        >
+        <div className={"position-relative col"}>
           <MapContainer
             style={{ minHeight: "83vh", maxHeight: "100%" }}
             zoom={12}
@@ -430,7 +424,7 @@ const BosMap = () => {
               minDV={minDV}
               step={step}
               map={map}
-              position={position}
+              // position={position}
             />
             <TileLayer
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -444,53 +438,21 @@ const BosMap = () => {
             ></GeoJSON>
           </MapContainer>
         </div>
-        <Collapse in={showHexOffcanvas} className="col-12 col-lg-3">
-          <div id="hexagon-dialog">
-            <div className="overflow-auto" style={{ height: "83vh" }}>
-              <div className="col-11 mx-auto d-flex mt-2">
-                <h3 className="text-center text-warning col-10">
-                  Hexagon Subject
-                </h3>
-                <Button
-                  className="btn btn-warning bg-opacity-10 btn-close ml-auto col py-2 rounded-pill"
-                  onClick={() => setShowHexOffcanvas(false)}
-                >
-                  <span className="visually-hidden">Close</span>
-                </Button>
-              </div>
-              <div className="col-11 mx-auto my-3">
-                <SelectForms
-                  options={ReasonDict}
-                  label="Report Type:"
-                  onChange={setReason}
-                  value={selectedReason}
-                ></SelectForms>
-              </div>
-              <div className="col-11 mx-auto my-3">
-                <SelectForms
-                  options={userTypeDict}
-                  label="Who Reported?"
-                  onChange={setUser}
-                  value={selectedUser}
-                ></SelectForms>
-              </div>
-              <div className="col-11 mx-auto my-3">
-                <SelectForms
-                  options={freqDict}
-                  label="Repeated Users"
-                  onChange={setFrequency}
-                  value={selectedFrequency}
-                ></SelectForms>
-              </div>
-              <div className="col-11 mx-auto my-3">
-                <HexRegression
-                  selectedHex={selectedHex}
-                  hexRegVars={hexRegVars}
-                />
-              </div>
-            </div>
-          </div>
-        </Collapse>
+        <HexModal
+          show={showHexOffcanvas}
+          selectedHex={selectedHex}
+          hexRegVars={hexRegVars}
+          onHide={() => setShowHexOffcanvas(false)}
+          setReason={setReason}
+          setFrequency={setFrequency}
+          selectedFrequency={selectedFrequency}
+          freqDict={freqDict}
+          userTypeDict={userTypeDict}
+          setUser={setUser}
+          selectedUser={selectedUser}
+          ReasonDict={ReasonDict}
+          selectedReason={selectedReason}
+        />
       </div>
     </>
   );

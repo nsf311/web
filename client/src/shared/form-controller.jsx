@@ -20,7 +20,7 @@ export const SelectForms = ({ id, options, label, value, onChange }) => {
           {label}{" "}
         </label>
         <Form.Select
-          className="form-control"
+          className="form-control rounded-pill my-2"
           id={id}
           onChange={onChangeFunc}
           value={selected}

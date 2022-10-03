@@ -8,7 +8,7 @@ export function HomePage() {
       <Helmet>
         <title>Boston 311 | Homepage</title>
       </Helmet>
-      <div className="col-11 mx-auto shadow-lg">
+      <div className="col-11 mx-auto">
         <div className="row m-4">
           <div className="col-6 my-auto">
             <h2 className="text-start text-dark fs-1 fw-bold">
