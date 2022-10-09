@@ -20,6 +20,8 @@ import { Helmet } from "react-helmet";
 
 import { HexModal } from "../shared/HexModal";
 
+
+
 import {
   // offcanvasStyle,
   userTypeDict,
@@ -46,7 +48,7 @@ import {
   NUM_OF_HEX_COLORS,
 } from "../core/constants/map-contants";
 
-const bosCenter = [42.320081, -71.1589];
+const bosCenter = [42.320081, -71.08];
 // component style - SASS variables
 // https://coreui.io/react/docs/components/offcanvas/#coffcanvas
 
@@ -83,24 +85,24 @@ const BosMap = () => {
   const handleRegOffcanvasShow = () => setShowRegOffcanvas(true);
 
   // sidebar for Hexagon Graph expand close the Regression Graph.
-  useEffect(() => {
-    if (showHexOffcanvas) {
-      setShowRegOffcanvas(false);
-    } else {
-    }
-    if (showRegOffcanvas) {
-      setPosition({ x: 1250, y: 0 });
-    }
-  }, [showHexOffcanvas]);
+  // useEffect(() => {
+  //   if (showHexOffcanvas) {
+  //     setShowRegOffcanvas(false);
+  //   } else {
+  //   }
+  //   if (showRegOffcanvas) {
+  //     setPosition({ x: 1250, y: 0 });
+  //   }
+  // }, [showHexOffcanvas]);
 
-  useEffect(() => {
-    if (showRegOffcanvas) {
-      setShowHexOffcanvas(false);
-      setPosition({ x: 1250, y: 0 });
-    } else {
-      setPosition({ x: 21, y: 21 });
-    }
-  }, [showRegOffcanvas]);
+  // useEffect(() => {
+  //   if (showRegOffcanvas) {
+  //     setShowHexOffcanvas(false);
+  //     setPosition({ x: 1250, y: 0 });
+  //   } else {
+  //     setPosition({ x: 21, y: 21 });
+  //   }
+  // }, [showRegOffcanvas]);
 
   // dropdown text states
 
@@ -295,128 +297,85 @@ const BosMap = () => {
         <title>Boston 311 | Map</title>
       </Helmet>
       <div className="row">
-        <div className={"position-relative col"}>
+        <Collapse in={showRegOffcanvas} className="col-12 col-lg-3 pe-0 mx-0">
+          <div id="regression-dialog">
+            <div className="overflow-auto" style={{ height: "83vh" }}>
+              <div className="direction-left overflow-auto mx-2">
+                <div className="col-11 mx-auto d-flex mt-2">
+                  {/* <Button
+                      className="btn btn-warning bg-opacity-10 btn-close ml-auto col py-2 rounded-pill"
+                      onClick={() => setShowRegOffcanvas(false)}
+                    >
+                      <span className="visually-hidden">Close</span>
+                    </Button> */}
+                </div>
+
+                <div className="col-11 mx-auto my-3">
+                  <SelectForms
+                    options={ReasonDict}
+                    label="Report Type:"
+                    onChange={setReason}
+                    value={selectedReason}
+                  ></SelectForms>
+                </div>
+                <div className="col-11 mx-auto my-3">
+                  <SelectForms
+                    options={DVDict}
+                    label="311 Performance Metrics (DV)"
+                    onChange={setDV}
+                    value={selectedDV}
+                  ></SelectForms>
+                </div>
+                <div className="col-11 mx-auto my-3">
+                  <SelectForms
+                    options={IVDict}
+                    label="User and Community Characteristics (IV):"
+                    onChange={setIV}
+                    value={selectedIV}
+                  ></SelectForms>
+                </div>
+                <div className="col-11 mx-auto my-3 mb-auto">
+                  <SelectForms
+                    options={userTypeDict}
+                    label="Who Reported?"
+                    onChange={setUser}
+                    value={selectedUser}
+                  ></SelectForms>
+                </div>
+                <div className="col-11 mx-auto my-3 mb-auto">
+                  <SelectForms
+                    options={freqDict}
+                    label="Repeated Users:"
+                    onChange={setFrequency}
+                    value={selectedFrequency}
+                  ></SelectForms>
+                </div>
+
+                <div className="col-12">
+                  {regressionGraph === true && (
+                    <RegressionPlt
+                      RegDataSelectedUser={RegData}
+                      RegDataDV={selectedDV}
+                      DVName={DVDictObj[selectedDV]}
+                      RegDataIV={selectedIV}
+                      IVName={IVDictObj[selectedIV]}
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </Collapse>
+        <div className={"col ps-0"}>
           <MapContainer
-            style={{ minHeight: "83vh", maxHeight: "100%" }}
+            style={{ minHeight: "84vh", maxHeight: "100%" }}
             zoom={12}
             center={bosCenter}
             whenCreated={setMap}
           >
             <MapConsumer>
               {(map) => {
-                return (
-                  <>
-                    <div className="position-absolute top-50 start-0 translate-middle-y show-on-mapcontainer">
-                      <div className="d-flex">
-                        <Collapse
-                          in={showRegOffcanvas}
-                          className="col-12 bg-white"
-                          onMouseEnter={() => {
-                            map.dragging.disable();
-                            map.touchZoom.disable();
-                            map.boxZoom.disable();
-                            map.doubleClickZoom.disable();
-                          }}
-                          onMouseLeave={() => {
-                            map.dragging.enable();
-                            map.touchZoom.enable();
-                            map.boxZoom.enable();
-                            map.doubleClickZoom.enable();
-                          }}
-                        >
-                          <div id="regression-dialog">
-                            <div
-                              className="overflow-auto"
-                              style={{ height: "83vh" }}
-                            >
-                              <div className="direction-left overflow-auto">
-                                <div className="col-11 mx-auto d-flex mt-2">
-                                  <h3 className="text-center text-warning col-10">
-                                    Regression Graph
-                                  </h3>
-                                  <Button
-                                    className="btn btn-warning bg-opacity-10 btn-close ml-auto col py-2 rounded-pill"
-                                    onClick={() => setShowRegOffcanvas(false)}
-                                  >
-                                    <span className="visually-hidden">
-                                      Close
-                                    </span>
-                                  </Button>
-                                </div>
-
-                                <div className="col-11 mx-auto my-3">
-                                  <SelectForms
-                                    options={ReasonDict}
-                                    label="Report Type:"
-                                    onChange={setReason}
-                                    value={selectedReason}
-                                  ></SelectForms>
-                                </div>
-                                <div className="col-11 mx-auto my-3">
-                                  <SelectForms
-                                    options={DVDict}
-                                    label="311 Performance Metrics (DV)"
-                                    onChange={setDV}
-                                    value={selectedDV}
-                                  ></SelectForms>
-                                </div>
-                                <div className="col-11 mx-auto my-3">
-                                  <SelectForms
-                                    options={IVDict}
-                                    label="User and Community Characteristics (IV):"
-                                    onChange={setIV}
-                                    value={selectedIV}
-                                  ></SelectForms>
-                                </div>
-                                <div className="col-11 mx-auto my-3 mb-auto">
-                                  <SelectForms
-                                    options={userTypeDict}
-                                    label="Who Reported?"
-                                    onChange={setUser}
-                                    value={selectedUser}
-                                  ></SelectForms>
-                                </div>
-                                <div className="col-11 mx-auto my-3 mb-auto">
-                                  <SelectForms
-                                    options={freqDict}
-                                    label="Repeated Users:"
-                                    onChange={setFrequency}
-                                    value={selectedFrequency}
-                                  ></SelectForms>
-                                </div>
-
-                                <div className="col-12">
-                                  {regressionGraph === true && (
-                                    <RegressionPlt
-                                      RegDataSelectedUser={RegData}
-                                      RegDataDV={selectedDV}
-                                      DVName={DVDictObj[selectedDV]}
-                                      RegDataIV={selectedIV}
-                                      IVName={IVDictObj[selectedIV]}
-                                    />
-                                  )}
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </Collapse>
-                        <button
-                          className="btn rounded-start rounded-pill btn-sm p-0"
-                          onClick={() => {
-                            graphBtnOnclick();
-                          }}
-                        >
-                          <img
-                            src={showRegOffcanvas ? closeArrow : openArrow}
-                            alt="regression icon"
-                            width={40}
-                            className="rounded-start rounded-pill "
-                          />
-                        </button>
-                      </div>
-                    </div>
-                  </>
-                );
+                return <></>;
               }}
             </MapConsumer>
             <Legend

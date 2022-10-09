@@ -8,7 +8,7 @@ function HexModal(props) {
   return (
     <Modal
       {...props}
-      size="lg"
+      size="xl"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
@@ -21,8 +21,7 @@ function HexModal(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div className="row">
-          <div className="col-12 col-lg-6 border-end border-warning">
+          {/* <div className="col-12 col-lg-6 border-end border-warning">
             <div className="col-12 mx-auto my-3">
               <SelectForms
                 options={props.ReasonDict}
@@ -47,19 +46,13 @@ function HexModal(props) {
                 value={props.selectedFrequency}
               ></SelectForms>
             </div>
+          </div> */}
+          <div className="my-3">
+            <HexRegression
+              selectedHex={props.selectedHex}
+              hexRegVars={props.hexRegVars}
+            />
           </div>
-          <div
-            className="col-12 col-lg-6 overflow-auto"
-            style={{ height: "600px" }}
-          >
-            <div className="col-12 mx-auto my-3">
-              <HexRegression
-                selectedHex={props.selectedHex}
-                hexRegVars={props.hexRegVars}
-              />
-            </div>
-          </div>
-        </div>
       </Modal.Body>
     </Modal>
   );

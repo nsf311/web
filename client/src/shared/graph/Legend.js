@@ -81,15 +81,15 @@ const Legend = ({ maxDV, minDV, step, map, position }) => {
             {Math.round(((maxDV - 10 * step + Number.EPSILON) * 100) / 100)}
           </div>
           <div style={{ "--color": COLOR_NULL }}>NULL</div>
-          <div className="col-10 mx-auto py-4">
+          <div className="py-4">
             <Button
-              variant="danger rounded-pill"
-              className="my-3"
+              variant="danger rounded-pill btn-sm"
+              className="my-2"
               onClick={() => {
-                map?.setView([42.320081, -71.1589], 12);
+                map?.setView([42.320081, -71.08], 12);
               }}
             >
-              Refresh
+              View Boston
             </Button>
           </div>
         </div>

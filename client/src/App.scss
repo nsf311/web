@@ -2,21 +2,23 @@
 @import "./styles/leaflet.scss";
 @import "./styles/animation.scss";
 @import "./styles/button.scss";
+@import "./styles/table.scss";
 
-$orange-color: #fa9917;
+$light-orange-color: #f0cfa3;
+$orange-color: #F7941D;
 // Update for text-responsiveness
-h1 {
-  font-size: 5.9vw;
-}
-h2 {
-  font-size: 3.0vh;
-}
-p {
-  font-size: 3vmin;
-}
+// h1 {
+//   font-size: 5.9vw;
+// }
+// h2 {
+//   font-size: 3.0vh;
+// }
+// p {
+//   font-size: 3vmin;
+// }
 
 body {
-  font-size: calc(0.75em + 1vmin);
+  font-size: calc(0.45em + 1vmin);
 }
 
 .text-shadow {
@@ -40,6 +42,13 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: right;
+}
+
+.navlinks:hover {
+  background-color: $orange-color !important;
+  animation: pulse-motion 2s ease 0s;
+  @extend .rounded-pill, .px-3, .text-white;
+  
 }
 
 .show-on-mapcontainer {

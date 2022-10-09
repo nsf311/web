@@ -35,7 +35,7 @@ const RegressionPlt = ({
   // const listHex = RegDataSelectedUser.map( (d) => d.HEX_600);
   // const hexResults = RegDataSelectedUser.map( (d) => d.results);
   const variables_data = RegDataSelectedUser.map((d) => d.results);
-  console.log(RegDataSelectedUser)
+  console.log(RegDataSelectedUser);
   const hexDV = variables_data.map(getHexDV);
   const hexIV = variables_data.map(getHexIV);
 
@@ -72,45 +72,51 @@ const RegressionPlt = ({
             {console.log(y_axis)} */
   }
   return (
-    <div className="px-2">
-      <h5 className="text-center border-bottom pb-2">
-        {" "}
-        <small className="text-primary">{DVName}</small> <strong>vs</strong>{" "}
-        <small className="text-danger">{IVName}</small>
-      </h5>
-      <svg
-        width={width + margin.right + margin.left}
-        height={height + margin.top + margin.bottom}
-        className="chart"
+    <svg
+      width={width + margin.right + margin.left}
+      height={height + margin.top + margin.bottom}
+      className="chart mx-3"
+    >
+      <g
+        transform={"translate(" + margin.left + "," + margin.top + ")"}
+        width={width}
+        height={height}
+        className="main"
       >
-        <g
-          transform={"translate(" + margin.left + "," + margin.top + ")"}
-          width={width}
-          height={height}
-          className="main"
+        <RenderCircles data={xy_data} scale={{ x_axis, y_axis }} />
+
+        <Axis
+          axis="x"
+          transform={"translate(0," + height + ")"}
+          scale={axisBottom().scale(x_axis)}
+        />
+        <text
+          textAnchor="end"
+          className="fw-bold"
+          fontSize="15"
+          x={width}
+          y={height + margin.top + 10}
         >
-          <RenderCircles data={xy_data} scale={{ x_axis, y_axis }} />
+          {IVName}
+        </text>
 
-          <Axis
-            axis="x"
-            transform={"translate(0," + height + ")"}
-            scale={axisBottom().scale(x_axis)}
-          />
-          <text textAnchor="end" x={width} y={height + margin.top + 10}>
-            {IVName}
-          </text>
-
-          <Axis
-            axis="y"
-            transform={"translate(0,0)"}
-            scale={axisLeft().scale(y_axis)}
-          />
-          <text textAnchor="end" x={-40} y={-47} transform="rotate(-90)">
-            {DVName}
-          </text>
-        </g>
-      </svg>
-    </div>
+        <Axis
+          axis="y"
+          transform={"translate(0,0)"}
+          scale={axisLeft().scale(y_axis)}
+        />
+        <text
+          textAnchor="end"
+          className="fw-bold"
+          x={-12}
+          y={-49}
+          fontSize="15"
+          transform="rotate(-90)"
+        >
+          {DVName}
+        </text>
+      </g>
+    </svg>
   );
 };
 
