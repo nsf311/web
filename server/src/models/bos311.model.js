@@ -5,7 +5,7 @@ module.exports = mongoose =>{
             results:[{
                 user_type: String,
                 frequency: String,
-                report_type: String,
+                reason: String,
                 HEX_weighted_average_distance: Number,
                 HEX_weighted_mean_home_distance: Number,
                 HEX_weighted_max_home_distance: Number,
