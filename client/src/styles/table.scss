@@ -1,0 +1,22 @@
+#bostontable {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #bostontable td, #bostontable th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  #bostontable tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #bostontable tr:hover {background-color: #ddd;}
+  
+  #bostontable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #fa9917 !important;
+    color: white;
+  }
