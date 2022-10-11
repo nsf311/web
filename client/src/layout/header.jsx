@@ -7,7 +7,7 @@ export const HeaderNav = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light px-4">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light px-4 bg-white">
       <a
         className="navbar-brand text-shadow text-warning fw-bold fs-5 px-4"
         href="/"
