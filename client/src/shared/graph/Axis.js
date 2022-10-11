@@ -4,7 +4,7 @@ const Axis = ({axis, transform, scale}) =>{
     
     const ref = useRef(null);
  
-    console.log(ref)
+    // console.log(ref)
     // select(ref.current).call(scale);
     useEffect(() => {
         select(ref.current).call(scale);

@@ -21,10 +21,10 @@ import Draggable from "react-draggable";
 import { dragIcon } from "../.././assets";
 
 const COLORS = [
-  COLOR_11,
-  COLOR_10,
-  COLOR_9,
-  COLOR_8,
+  // COLOR_11,
+  // COLOR_10,
+  // COLOR_9,
+  // COLOR_8,
   COLOR_7,
   COLOR_6,
   COLOR_5,
@@ -44,7 +44,6 @@ const Legend = ({ maxDV, minDV, step, map, position }) => {
       <Draggable
         position={pos}
         onDrag={(e, trackp) => {
-          console.log("dragging: ", trackp.x, trackp.y, trackp);
           setPos(null);
           map.dragging.disable();
         }}
@@ -78,10 +77,10 @@ const Legend = ({ maxDV, minDV, step, map, position }) => {
           <div style={{ "--color": COLOR_1 }}>
             {" "}
             {0.0} -{" "}
-            {Math.round(((maxDV - 10 * step + Number.EPSILON) * 100) / 100)}
+            {Math.round(((maxDV - 6 * step + Number.EPSILON) * 100) / 100)}
           </div>
           <div style={{ "--color": COLOR_NULL }}>NULL</div>
-          <div className="py-4">
+          {/* <div className="py-4">
             <Button
               variant="danger rounded-pill btn-sm"
               className="my-2"
@@ -91,7 +90,7 @@ const Legend = ({ maxDV, minDV, step, map, position }) => {
             >
               View Boston
             </Button>
-          </div>
+          </div> */}
         </div>
       </Draggable>
     </div>
