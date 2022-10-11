@@ -327,31 +327,45 @@ const BosMap = () => {
                     value={selectedDV}
                   ></SelectForms>
                 </div>
-                <div className="col-11 mx-auto my-3">
-                  <SelectForms
-                    options={IVDict}
-                    label="User and Community Characteristics (IV):"
-                    onChange={setIV}
-                    value={selectedIV}
-                  ></SelectForms>
-                </div>
-                <div className="col-11 mx-auto my-3 mb-auto">
-                  <SelectForms
-                    options={userTypeDict}
-                    label="Who Reported?"
-                    onChange={setUser}
-                    value={selectedUser}
-                  ></SelectForms>
-                </div>
-                <div className="col-11 mx-auto my-3 mb-auto">
-                  <SelectForms
-                    options={freqDict}
-                    label="Repeated Users:"
-                    onChange={setFrequency}
-                    value={selectedFrequency}
-                  ></SelectForms>
-                </div>
 
+                <div className="col-11 mx-auto my-3 mb-auto">
+                  <label
+                    className="fw-bold h3"
+                    for="who_reported repeated_users"
+                  >
+                    311 User Types
+                  </label>
+                  <div className="col-11 mx-auto">
+                    <SelectForms
+                      options={userTypeDict}
+                      label="Who Reported?"
+                      id={"who_reported"}
+                      onChange={setUser}
+                      value={selectedUser}
+                    ></SelectForms>
+                    <SelectForms
+                      options={freqDict}
+                      label="Repeated Users:"
+                      id={"repeated_users"}
+                      onChange={setFrequency}
+                      value={selectedFrequency}
+                    ></SelectForms>
+                  </div>
+                </div>
+                <div className="col-11 mx-auto my-3">
+                  <label className="fw-bold h3" for="user_community_char">
+                    Visualizing Relationships
+                  </label>
+                  <div className="col-11 mx-auto">
+                    <SelectForms
+                      options={IVDict}
+                      id={"user_community_char"}
+                      label="User and Community Characteristics (IV):"
+                      onChange={setIV}
+                      value={selectedIV}
+                    ></SelectForms>
+                  </div>
+                </div>
                 <div className="col-12">
                   {regressionGraph === true && (
                     <RegressionPlt
