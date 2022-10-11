@@ -116,7 +116,7 @@ const HexRegression = ({ selectedHex, hexRegVars }) => {
           </td>
         </tr>
         <tr>
-          <td>HEX poverty index: </td>
+          <td>Poverty index: </td>
           <td>
             {hexRegVars[0] &&
               hexRegVars[0]["results"][0] &&

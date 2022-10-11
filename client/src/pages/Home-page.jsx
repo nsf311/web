@@ -9,7 +9,7 @@ export function HomePage() {
       <Helmet>
         <title>Boston 311 | Homepage</title>
       </Helmet>
-      <div className="col-11 mx-auto">
+      <div className="container-xl px-3 px-md-4 px-lg-5 mt-4">
         <div>
           <div className="row m-4">
             <div className="col-6 my-auto">

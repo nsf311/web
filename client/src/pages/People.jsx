@@ -9,7 +9,7 @@ export function PeoplePage() {
       <Helmet>
         <title>Boston 311 | People</title>
       </Helmet>
-      <div className="col-11 mx-auto p-4">
+      <div className="container-xl px-3 px-md-4 px-lg-5 mt-4">
         <h2 className="mb-4 fw-bold">
           MEET THE <span className="text-warning">PEOPLE</span> BEHIND <br />{" "}
           BOSTON 311 INFORMATION DESERTS.

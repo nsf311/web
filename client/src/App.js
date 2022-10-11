@@ -33,9 +33,7 @@ function App() {
             </Route>
           </Switch>
         </BrowserRouter>
-        <div className="mt-auto">
-          <FooterNav />
-        </div>
+        <FooterNav />
       </div>
     </>
   );
