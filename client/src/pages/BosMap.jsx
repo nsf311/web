@@ -20,8 +20,6 @@ import { Helmet } from "react-helmet";
 
 import { HexModal } from "../shared/HexModal";
 
-
-
 import {
   // offcanvasStyle,
   userTypeDict,
@@ -179,29 +177,32 @@ const BosMap = () => {
       // console.log(maxDV - 11 * step)
       // console.log(maxDV - 2 * step)
       // console.log(maxDV)
-      return d > Math.round((maxDV - 2 * step + Number.EPSILON) * 100) / 100
-        ? COLOR_11
-        : d > Math.round((maxDV - 3 * step + Number.EPSILON) * 100) / 100
-        ? COLOR_10
-        : d > Math.round((maxDV - 4 * step + Number.EPSILON) * 100) / 100
-        ? COLOR_9
-        : d > Math.round((maxDV - 5 * step + Number.EPSILON) * 100) / 100
-        ? COLOR_8
-        : d > Math.round((maxDV - 6 * step + Number.EPSILON) * 100) / 100
-        ? COLOR_7
-        : d > Math.round((maxDV - 7 * step + Number.EPSILON) * 100) / 100
-        ? COLOR_6
-        : d > Math.round((maxDV - 8 * step + Number.EPSILON) * 100) / 100
-        ? COLOR_5
-        : d > Math.round((maxDV - 9 * step + Number.EPSILON) * 100) / 100
-        ? COLOR_4
-        : d > Math.round((maxDV - 10 * step + Number.EPSILON) * 100) / 100
-        ? COLOR_3
-        : d > Math.round((maxDV - 11 * step + Number.EPSILON) * 100) / 100
-        ? COLOR_2
-        : d >= Math.round((maxDV - 12 * step + Number.EPSILON) * 100) / 100
-        ? COLOR_1
-        : COLOR_NULL;
+      return (
+        // d > Math.round((maxDV - 2 * step + Number.EPSILON) * 100) / 100
+        // ? COLOR_11
+        // : d > Math.round((maxDV - 3 * step + Number.EPSILON) * 100) / 100
+        // ? COLOR_10
+        // : d > Math.round((maxDV - 4 * step + Number.EPSILON) * 100) / 100
+        // ? COLOR_9
+        // : d > Math.round((maxDV - 5 * step + Number.EPSILON) * 100) / 100
+        // ? COLOR_8
+        // :
+        d > Math.round((maxDV - 6 * step + Number.EPSILON) * 100) / 100
+          ? COLOR_7
+          : d > Math.round((maxDV - 7 * step + Number.EPSILON) * 100) / 100
+          ? COLOR_6
+          : d > Math.round((maxDV - 8 * step + Number.EPSILON) * 100) / 100
+          ? COLOR_5
+          : d > Math.round((maxDV - 9 * step + Number.EPSILON) * 100) / 100
+          ? COLOR_4
+          : d > Math.round((maxDV - 10 * step + Number.EPSILON) * 100) / 100
+          ? COLOR_3
+          : d > Math.round((maxDV - 11 * step + Number.EPSILON) * 100) / 100
+          ? COLOR_2
+          : d >= Math.round((maxDV - 12 * step + Number.EPSILON) * 100) / 100
+          ? COLOR_1
+          : COLOR_NULL
+      );
     }
   };
 
@@ -361,6 +362,17 @@ const BosMap = () => {
                       IVName={IVDictObj[selectedIV]}
                     />
                   )}
+                </div>
+                <div className="text-center">
+                  <Button
+                    variant="danger rounded-pill btn-sm"
+                    className="my-2"
+                    onClick={() => {
+                      map?.setView([42.320081, -71.08], 12);
+                    }}
+                  >
+                    View Boston
+                  </Button>
                 </div>
               </div>
             </div>
