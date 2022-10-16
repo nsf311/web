@@ -301,29 +301,31 @@ const BosMap = () => {
         <div className="row d-flex">
           <Collapse in={showRegOffcanvas} className="col-12 col-lg-3 pe-0 mx-0">
             <div id="regression-dialog">
-              <div className="overflow-auto" style={{ height: "100vh" }}>
+              <div className="overflow-auto" style={{ height: "90vh" }}>
                 <div className="direction-left overflow-auto mx-2 my-3">
-                  <label
-                    className="fw-bold h3"
-                    htmlFor="reason_dv performance_dv"
-                  >
-                    Report Types and Performances
-                  </label>
-                  <div className="col-11 mx-auto">
-                    <SelectForms
-                      options={ReasonDict}
-                      label="Report Type"
-                      id="reason_dv"
-                      onChange={setReason}
-                      value={selectedReason}
-                    ></SelectForms>
-                    <SelectForms
-                      options={DVDict}
-                      label="311 Performance Metrics (DV)"
-                      id="performance_dv"
-                      onChange={setDV}
-                      value={selectedDV}
-                    ></SelectForms>
+                  <div className="col-11 mx-auto my-3 mb-auto">
+                    <label
+                      className="fw-bold h3"
+                      htmlFor="reason_dv performance_dv"
+                    >
+                      Report Types and Performances
+                    </label>
+                    <div className="col-11 mx-auto">
+                      <SelectForms
+                        options={ReasonDict}
+                        label="Report Type"
+                        id="reason_dv"
+                        onChange={setReason}
+                        value={selectedReason}
+                      ></SelectForms>
+                      <SelectForms
+                        options={DVDict}
+                        label="311 Performance Metrics (DV)"
+                        id="performance_dv"
+                        onChange={setDV}
+                        value={selectedDV}
+                      ></SelectForms>
+                    </div>
                   </div>
 
                   <div className="col-11 mx-auto my-3 mb-auto">
