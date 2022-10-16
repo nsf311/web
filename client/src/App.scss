@@ -5,7 +5,20 @@
 @import "./styles/table.scss";
 
 $light-orange-color: #f0cfa3;
-$orange-color: #F7941D;
+$orange-color: #f7941d;
+@font-face {
+  font-family: "Rubik-VariableFont_wght";
+  src: local("Rubik-VariableFont_wght"), url(./fonts/Rubik-VariableFont_wght.ttf) format("ttf");
+}
+body {
+  font: 400 20px/1.5 "Manrope",sans-serif;
+}
+
+.container-l {
+  min-height: 100vh;
+  @extend .d-flex, .flex-column;
+}
+
 // Update for text-responsiveness
 // h1 {
 //   font-size: 5.9vw;
@@ -16,11 +29,6 @@ $orange-color: #F7941D;
 // p {
 //   font-size: 3vmin;
 // }
-
-body {
-  font-size: calc(0.45em + 1vmin);
-}
-
 .text-shadow {
   text-shadow: 10px 9px 4px #444444;
 }
@@ -48,7 +56,6 @@ body {
   background-color: $orange-color !important;
   animation: pulse-motion 2s ease 0s;
   @extend .rounded-pill, .px-3, .text-white;
-  
 }
 
 .show-on-mapcontainer {
@@ -82,7 +89,7 @@ body {
   align-items: center;
   height: 20px;
   padding: 0 5px;
-  @extend .text-white;
+  // @extend .text-white;
 }
 .legend > div::before {
   content: "";
@@ -108,12 +115,10 @@ body {
 }
 
 .map-container {
-
-  @extend .rounded, .border, .border-primary;;
+  @extend .rounded, .border, .border-primary;
   box-shadow: 20px 20px 19px 8px #60a0ff;
   &:hover {
     @extend .rounded, .border-0;
     box-shadow: 20px 9px 17px 1px #7cb1ff;
   }
-
 }

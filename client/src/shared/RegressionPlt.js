@@ -75,7 +75,7 @@ const RegressionPlt = ({
     <svg
       width={width + margin.right + margin.left}
       height={height + margin.top + margin.bottom}
-      className="chart mx-3"
+      className="chart mx-auto d-block"
     >
       <g
         transform={"translate(" + margin.left + "," + margin.top + ")"}
@@ -92,7 +92,6 @@ const RegressionPlt = ({
         />
         <text
           textAnchor="end"
-          className="fw-bold"
           fontSize="15"
           x={width}
           y={height + margin.top + 10}
@@ -107,7 +106,6 @@ const RegressionPlt = ({
         />
         <text
           textAnchor="end"
-          className="fw-bold"
           x={-12}
           y={-49}
           fontSize="15"

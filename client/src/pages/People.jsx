@@ -14,14 +14,17 @@ export function PeoplePage() {
           MEET THE <span className="text-warning">PEOPLE</span> BEHIND <br />{" "}
           BOSTON 311 INFORMATION DESERTS.
         </h2>
-        {profiles.map((profile) => (
-          <div className="my-2">
-            {" "}
-            <span className="text-warning fs-4 fw-bold">
-              {profile.name},
-            </span>{" "}
-            <span className="fs-6">{profile.intro}</span>{" "}
-          </div>
+        {profiles.map((profile, k) => (
+          <>
+            <div className="text-warning fs-5 fw-bold" key={'title' + k}>{profile.title}</div>
+            <ul style={{ listStyleType: "circle" }} key={profile.title}>
+              {profile.teams.map((member, i) => (
+                <li className="my-2" key={i.toString()}>
+                  {member.name} {member.school}
+                </li>
+              ))}
+            </ul>
+          </>
         ))}
       </div>
     </>
