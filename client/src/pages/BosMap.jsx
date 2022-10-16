@@ -301,7 +301,7 @@ const BosMap = () => {
         <div className="row d-flex">
           <Collapse in={showRegOffcanvas} className="col-12 col-lg-3 pe-0 mx-0">
             <div id="regression-dialog">
-              <div className="overflow-auto" style={{ height: "90vh" }}>
+              <div className="overflow-auto" style={{ height: "100vh" }}>
                 <div className="direction-left overflow-auto mx-2 my-3">
                   <div className="col-11 mx-auto my-3 mb-auto">
                     <label
