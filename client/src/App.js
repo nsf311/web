@@ -15,7 +15,7 @@ function App() {
   return (
     <div className="container-l">
       <HeaderNav />
-        <main className="mb-auto">
+        <main className="mb-auto h-100">
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={HomePage} />

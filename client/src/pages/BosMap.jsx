@@ -298,10 +298,10 @@ const BosMap = () => {
         <title>Boston 311 | Map</title>
       </Helmet>
       <div className="container-fluid">
-        <div className="row">
+        <div className="row d-flex">
           <Collapse in={showRegOffcanvas} className="col-12 col-lg-3 pe-0 mx-0">
             <div id="regression-dialog">
-              <div className="overflow-auto" style={{ height: "83vh" }}>
+              <div className="overflow-auto" style={{ height: "100vh" }}>
                 <div className="direction-left overflow-auto mx-2 my-3">
                   <label
                     className="fw-bold h3"
@@ -392,7 +392,8 @@ const BosMap = () => {
           </Collapse>
           <div className={"col ps-0"}>
             <MapContainer
-              style={{ minHeight: "84vh", maxHeight: "100%" }}
+              style={{ height: "100%" }}
+              className="h-100"
               zoom={12}
               center={bosCenter}
               whenCreated={setMap}
