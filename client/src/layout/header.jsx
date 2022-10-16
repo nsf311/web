@@ -7,12 +7,12 @@ export const HeaderNav = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light px-4 bg-white">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light px-4 bg-white border-bottom border-warning">
       <a
         className="navbar-brand text-shadow text-warning fw-bold fs-5 px-4"
         href="/"
       >
-        <img src={logo} width="250" className="img-fluid" alt="logo" />
+        <img src={logo} width="200" className="img-fluid" alt="logo" />
       </a>
       <button
         className="navbar-toggler"

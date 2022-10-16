@@ -2,84 +2,138 @@ import { defaultprofile } from "../../assets";
 
 export const PROFILE = [
   {
-    name: "Myeong Lee",
-    image: defaultprofile,
-    intro:
-      "Project Lead and Developer for Boston 311 Information Deserts (George Mason University)",
-    description: "",
+    title: "Project Lead",
+    teams: [
+      {
+        name: "Myeong Lee",
+        image: defaultprofile,
+        school: "(George Mason University)",
+      },
+    ],
   },
   {
-    name: "Susan Winter",
-    image: defaultprofile,
-    intro: "PIs (University of Maryland, College Park)",
-    description: "",
+    title: "PIs",
+    teams: [
+      {
+        name: "Susan Winter",
+        image: defaultprofile,
+        school: "(University of Maryland, College Park)",
+      },
+      {
+        name: "Erik Johnston",
+        image: defaultprofile,
+        school: "(Arizona State University)",
+      },
+      {
+        name: "Eric Gordon",
+        image: defaultprofile,
+        school: "(Emerson College)",
+      },
+    ],
   },
   {
-    name: "Erik Johnston",
-    image: defaultprofile,
-    intro: "(Arizona State University)",
-    description: "",
+    title: "Postdoctoral Researcher",
+    teams: [
+      {
+        name: "John Harlow",
+        image: defaultprofile,
+        school: "(Arizona State University)",
+      },
+    ],
   },
   {
-    name: "Julia Hsin-Ping Hsu",
-    image: defaultprofile,
-    intro:
-      "Ph.D. Students (George Mason University) and Developer for Boston 311 Information Deserts.",
-    description: "",
+    title: "Ph.D. Students",
+    teams: [
+      {
+        name: "Jieshu Wang",
+        image: defaultprofile,
+        school: "(Arizona State University)",
+      },
+      {
+        name: "Julia H.P. Hsu",
+        image: defaultprofile,
+        school: "(George Mason University)",
+      },
+      {
+        name: "Shawn Janzen",
+        image: defaultprofile,
+        school: "(University of Maryland, College Park)",
+      },
+      {
+        name: "Samantha Whitman",
+        image: defaultprofile,
+        school: "(Arizona State University)",
+      },
+    ],
   },
   {
-    name: "Jieshu Wang",
-    image: defaultprofile,
-    intro: "Ph.D. Students (Arizona State University)",
-    description: "",
+    title: "Undergraduate Researcher",
+    teams: [
+      {
+        name: "Joel Adeniji",
+        image: defaultprofile,
+        school: "(George Mason University)",
+      },
+    ],
   },
   {
-    name: "Samantha Whitman",
-    image: defaultprofile,
-    intro: "Ph.D. Students (Arizona State University)",
-    description: "",
+    title: "UX/UI Designer",
+    teams: [
+      {
+        name: "Marina Lee",
+        image: defaultprofile,
+        school: "(Consultant)",
+      },
+    ],
   },
   {
-    name: "Shawn Janzen",
-    image: defaultprofile,
-    intro: "Ph.D. Students  (University of Maryland, College Park)",
-    description: "",
+    title: "REU Students",
+    teams: [
+      {
+        name: "Tanay Gandhi",
+        image: defaultprofile,
+        school: "(Arizona State University)",
+      },
+      {
+        name: "Ajay Yadav",
+        image: defaultprofile,
+        school: "(Arizona State University)",
+      },
+      {
+        name: "Vishesh Gupta",
+        image: defaultprofile,
+        school: "(Arizona State University)",
+      },
+      {
+        name: "Zuzana Skvarkova",
+        image: defaultprofile,
+        school: "(Arizona State University)",
+      },
+    ],
   },
   {
-    name: "Joel Adeniji",
-    image: defaultprofile,
-    intro:
-      "Undergraduate Researcher (George Mason University) and Developer for Boston 311 Information Deserts.",
-    description: "",
-  },
-  {
-    name: "Marina Lee",
-    image: defaultprofile,
-    intro: "UX Designer for Boston 311 Information Deserts. (Consultant)",
-    description: "",
-  },
-  {
-    name: "Ajay Yadav",
-    image: defaultprofile,
-    intro: "REU Student (Arizona State University)",
-    description: "",
-  },
-  {
-    name: "Tanay Gandhi",
-    image: defaultprofile,
-    intro: "REU Student (Arizona State University)",
-    description: "",
-  },
-  {
-    name: "Vishesh Gupta",
-    image: defaultprofile,
-    intro: "REU Student (Arizona State University)",
-    description: "",
-  },
-  {
-    name: "Zuzana Skvarkova",
-    image: defaultprofile,
-    intro: "REU Student (Arizona State University)",
-    description: "",
+    title: "Web Design and Development Team",
+    teams: [
+      {
+        name: "Julia H.P. Hsu",
+        image: defaultprofile,
+        school: "",
+      },
+      {
+        name: "Joel Adeniji",
+        image: defaultprofile,
+        school: "",
+      },
+      {
+        name: "Marina Lee",
+        image: defaultprofile,
+        school: "",
+      },
+      {
+        name: "Myeong Lee",
+        image: defaultprofile,
+        school: "",
+      },
+    ],
   },
 ];

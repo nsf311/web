@@ -108,9 +108,9 @@ const IVDict = [
   },
 
   // Reporting Frequency
-  { Name: "Reporting Frequency (number of reports)", 
-    Value: "HEX_total_reporting"
-  },
+  // { Name: "Reporting Frequency (number of reports)", 
+  //   Value: "HEX_total_reporting"
+  // },
   // {
   //   Name: "Weighted number of reporting in 2015",
   //   Value: "HEX_weighted_num_reporting_2015",
@@ -167,7 +167,7 @@ const IVDict = [
 
 const IVDictObj = {
   poverty_index: "Poverty Index",
-  HEX_total_reporting: "Reporting Frequency (number of reports)",
+  // HEX_total_reporting: "Reporting Frequency (number of reports)",
   HEX_weighted_radius_of_gyration: "User Mobility (variations in reporting locations)",
   HEX_weighted_median_home_distance: "Territoriality (distance from user’s home)",
   HEX_weighted_subject_coverage: "Topic Variety (number of reporting types covered)",

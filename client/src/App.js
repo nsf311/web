@@ -13,9 +13,9 @@ import PeoplePage from "./pages/People";
 
 function App() {
   return (
-    <>
+    <div className="container-l">
       <HeaderNav />
-      <div className="d-flex flex-column min-vh-100">
+        <main className="mb-auto h-100">
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={HomePage} />
@@ -33,9 +33,9 @@ function App() {
             </Route>
           </Switch>
         </BrowserRouter>
+        </main>
         <FooterNav />
-      </div>
-    </>
+    </div>
   );
 }
 
