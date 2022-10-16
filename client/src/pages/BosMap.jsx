@@ -297,147 +297,150 @@ const BosMap = () => {
       <Helmet>
         <title>Boston 311 | Map</title>
       </Helmet>
-      <div className="row">
-        <Collapse in={showRegOffcanvas} className="col-12 col-lg-3 pe-0 mx-0">
-          <div id="regression-dialog">
-            <div className="overflow-auto" style={{ height: "83vh" }}>
-              <div className="direction-left overflow-auto mx-2">
-                <div className="col-11 mx-auto d-flex mt-2">
-                  {/* <Button
-                      className="btn btn-warning bg-opacity-10 btn-close ml-auto col py-2 rounded-pill"
-                      onClick={() => setShowRegOffcanvas(false)}
+      <div className="container-fluid">
+        <div className="row d-flex">
+          <Collapse in={showRegOffcanvas} className="col-12 col-lg-3 pe-0 mx-0">
+            <div id="regression-dialog">
+              <div className="overflow-auto" style={{ height: "100vh" }}>
+                <div className="direction-left overflow-auto mx-2 my-3">
+                  <div className="col-11 mx-auto my-3 mb-auto">
+                    <label
+                      className="fw-bold h3"
+                      htmlFor="reason_dv performance_dv"
                     >
-                      <span className="visually-hidden">Close</span>
-                    </Button> */}
-                </div>
-
-                <div className="col-11 mx-auto my-3">
-                  <SelectForms
-                    options={ReasonDict}
-                    label="Report Type:"
-                    onChange={setReason}
-                    value={selectedReason}
-                  ></SelectForms>
-                </div>
-                <div className="col-11 mx-auto my-3">
-                  <SelectForms
-                    options={DVDict}
-                    label="311 Performance Metrics (DV)"
-                    onChange={setDV}
-                    value={selectedDV}
-                  ></SelectForms>
-                </div>
-
-                <div className="col-11 mx-auto my-3 mb-auto">
-                  <label
-                    className="fw-bold h3"
-                    for="who_reported repeated_users"
-                  >
-                    311 User Types
-                  </label>
-                  <div className="col-11 mx-auto">
-                    <SelectForms
-                      options={userTypeDict}
-                      label="Who Reported?"
-                      id={"who_reported"}
-                      onChange={setUser}
-                      value={selectedUser}
-                    ></SelectForms>
-                    <SelectForms
-                      options={freqDict}
-                      label="Repeated Users:"
-                      id={"repeated_users"}
-                      onChange={setFrequency}
-                      value={selectedFrequency}
-                    ></SelectForms>
+                      Report Types and Performances
+                    </label>
+                    <div className="col-11 mx-auto">
+                      <SelectForms
+                        options={ReasonDict}
+                        label="Report Type"
+                        id="reason_dv"
+                        onChange={setReason}
+                        value={selectedReason}
+                      ></SelectForms>
+                      <SelectForms
+                        options={DVDict}
+                        label="311 Performance Metrics (DV)"
+                        id="performance_dv"
+                        onChange={setDV}
+                        value={selectedDV}
+                      ></SelectForms>
+                    </div>
                   </div>
-                </div>
-                <div className="col-11 mx-auto my-3">
-                  <label className="fw-bold h3" for="user_community_char">
-                    Visualizing Relationships
-                  </label>
-                  <div className="col-11 mx-auto">
-                    <SelectForms
-                      options={IVDict}
-                      id={"user_community_char"}
-                      label="User and Community Characteristics (IV):"
-                      onChange={setIV}
-                      value={selectedIV}
-                    ></SelectForms>
+
+                  <div className="col-11 mx-auto my-3 mb-auto">
+                    <label
+                      className="fw-bold h3"
+                      htmlFor="who_reported repeated_users"
+                    >
+                      311 User Types
+                    </label>
+                    <div className="col-11 mx-auto">
+                      <SelectForms
+                        options={userTypeDict}
+                        label="Who Reported?"
+                        id={"who_reported"}
+                        onChange={setUser}
+                        value={selectedUser}
+                      ></SelectForms>
+                      <SelectForms
+                        options={freqDict}
+                        label="Repeated Users"
+                        id={"repeated_users"}
+                        onChange={setFrequency}
+                        value={selectedFrequency}
+                      ></SelectForms>
+                    </div>
                   </div>
-                </div>
-                <div className="col-12">
-                  {regressionGraph === true && (
-                    <RegressionPlt
-                      RegDataSelectedUser={RegData}
-                      RegDataDV={selectedDV}
-                      DVName={DVDictObj[selectedDV]}
-                      RegDataIV={selectedIV}
-                      IVName={IVDictObj[selectedIV]}
-                    />
-                  )}
-                </div>
-                <div className="text-center">
-                  <Button
-                    variant="danger rounded-pill btn-sm"
-                    className="my-2"
-                    onClick={() => {
-                      map?.setView([42.320081, -71.08], 12);
-                    }}
-                  >
-                    View Boston
-                  </Button>
+                  <div className="col-11 mx-auto my-3">
+                    <label className="fw-bold h3" htmlFor="user_community_char">
+                      Visualizing Relationships
+                    </label>
+                    <div className="col-11 mx-auto">
+                      <SelectForms
+                        options={IVDict}
+                        id={"user_community_char"}
+                        label="User and Community Characteristics (IV)"
+                        onChange={setIV}
+                        value={selectedIV}
+                      ></SelectForms>
+                    </div>
+                  </div>
+                  <div className="col-12">
+                    {regressionGraph === true && (
+                      <RegressionPlt
+                        RegDataSelectedUser={RegData}
+                        RegDataDV={selectedDV}
+                        DVName={DVDictObj[selectedDV]}
+                        RegDataIV={selectedIV}
+                        IVName={IVDictObj[selectedIV]}
+                      />
+                    )}
+                  </div>
+                  <div className="text-center">
+                    <Button
+                      variant="danger rounded-pill btn-sm"
+                      className="my-2"
+                      onClick={() => {
+                        map?.setView([42.320081, -71.08], 12);
+                      }}
+                    >
+                      View Boston
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
+          </Collapse>
+          <div className={"col ps-0"}>
+            <MapContainer
+              style={{ height: "100%" }}
+              className="h-100"
+              zoom={12}
+              center={bosCenter}
+              whenCreated={setMap}
+            >
+              <MapConsumer>
+                {(map) => {
+                  return <></>;
+                }}
+              </MapConsumer>
+              <Legend
+                maxDV={maxDV}
+                minDV={minDV}
+                step={step}
+                map={map}
+                DVName={DVDictObj[selectedDV]}
+                // position={position}
+              />
+              <TileLayer
+                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+              <GeoJSON
+                key={geoJsonKey}
+                style={setHexStyle}
+                data={geojsonDV.features}
+                onEachFeature={onEachHex}
+              ></GeoJSON>
+            </MapContainer>
           </div>
-        </Collapse>
-        <div className={"col ps-0"}>
-          <MapContainer
-            style={{ minHeight: "84vh", maxHeight: "100%" }}
-            zoom={12}
-            center={bosCenter}
-            whenCreated={setMap}
-          >
-            <MapConsumer>
-              {(map) => {
-                return <></>;
-              }}
-            </MapConsumer>
-            <Legend
-              maxDV={maxDV}
-              minDV={minDV}
-              step={step}
-              map={map}
-              // position={position}
-            />
-            <TileLayer
-              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            <GeoJSON
-              key={geoJsonKey}
-              style={setHexStyle}
-              data={geojsonDV.features}
-              onEachFeature={onEachHex}
-            ></GeoJSON>
-          </MapContainer>
+          <HexModal
+            show={showHexOffcanvas}
+            selectedHex={selectedHex}
+            hexRegVars={hexRegVars}
+            onHide={() => setShowHexOffcanvas(false)}
+            setReason={setReason}
+            setFrequency={setFrequency}
+            selectedFrequency={selectedFrequency}
+            freqDict={freqDict}
+            userTypeDict={userTypeDict}
+            setUser={setUser}
+            selectedUser={selectedUser}
+            ReasonDict={ReasonDict}
+            selectedReason={selectedReason}
+          />
         </div>
-        <HexModal
-          show={showHexOffcanvas}
-          selectedHex={selectedHex}
-          hexRegVars={hexRegVars}
-          onHide={() => setShowHexOffcanvas(false)}
-          setReason={setReason}
-          setFrequency={setFrequency}
-          selectedFrequency={selectedFrequency}
-          freqDict={freqDict}
-          userTypeDict={userTypeDict}
-          setUser={setUser}
-          selectedUser={selectedUser}
-          ReasonDict={ReasonDict}
-          selectedReason={selectedReason}
-        />
       </div>
     </>
   );

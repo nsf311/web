@@ -28,11 +28,7 @@ const HexRegression = ({ selectedHex, hexRegVars }) => {
           <th>Result</th>
         </tr>
         <tr>
-          <td>Hexagon number:</td>
-          <td>{selectedHex?.properties?.HEX_600}</td>
-        </tr>
-        <tr>
-          <td>Who Reported: </td>
+          <td>Who Reported </td>
           <td>
             {
               userTypeDictObj[
@@ -45,7 +41,7 @@ const HexRegression = ({ selectedHex, hexRegVars }) => {
           </td>
         </tr>
         <tr>
-          <td>Repeated Users: </td>
+          <td>Repeated Users </td>
           <td>
             {
               freqDictObj[
@@ -58,7 +54,7 @@ const HexRegression = ({ selectedHex, hexRegVars }) => {
           </td>
         </tr>
         <tr>
-          <td> Report Type: </td>
+          <td> Report Type </td>
           <td>
             {
               ReasonDictObj[
@@ -70,17 +66,17 @@ const HexRegression = ({ selectedHex, hexRegVars }) => {
             }
           </td>
         </tr>
-        <tr>
-          <td> Reporting Frequency (number of reports):</td>
+        {/* <tr>
+          <td> Reporting Frequency (number of reports)</td>
           <td>
             {hexRegVars[0] &&
               hexRegVars[0]["results"][0] &&
               hexRegVars[0]["HEX_600"] === selectedHex.properties.HEX_600 &&
               hexRegVars[0]["results"][0]["HEX_total_reporting"]}
           </td>
-        </tr>
+        </tr> */}
         <tr>
-          <td> User Mobility (variations in reporting locations):</td>
+          <td> User Mobility (variations in reporting locations)</td>
           <td>
             {hexRegVars[0] &&
               hexRegVars[0]["results"][0] &&
@@ -98,7 +94,7 @@ const HexRegression = ({ selectedHex, hexRegVars }) => {
           </td>
         </tr>
         <tr>
-          <td>Topic Variety (# of reporting types covered): </td>
+          <td>Topic Variety (# of reporting types covered) </td>
           <td>
             {hexRegVars[0] &&
               hexRegVars[0]["results"][0] &&
@@ -107,7 +103,7 @@ const HexRegression = ({ selectedHex, hexRegVars }) => {
           </td>
         </tr>
         <tr>
-          <td>User Volume (# of users per capita): </td>
+          <td>User Volume (# of users per capita) </td>
           <td>
             {hexRegVars[0] &&
               hexRegVars[0]["results"][0] &&
@@ -116,7 +112,7 @@ const HexRegression = ({ selectedHex, hexRegVars }) => {
           </td>
         </tr>
         <tr>
-          <td>Poverty index: </td>
+          <td>Poverty index </td>
           <td>
             {hexRegVars[0] &&
               hexRegVars[0]["results"][0] &&
