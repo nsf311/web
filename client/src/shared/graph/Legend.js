@@ -32,7 +32,7 @@ const Legend = ({ maxDV, minDV, step, map, position, DVName }) => {
   return (
     <>
       <div className="legend shadow rounded-lg">
-        <h6 className="text-center fs-6 text-warning mx-2"># of {DVName}</h6>
+        <h6 className="text-center fs-6 text-warning mx-2">{DVName}</h6>
         {COLORS.map((color, idx) => {
           return (
             <div key={idx} style={{ "--color": color }} className="text-white">
