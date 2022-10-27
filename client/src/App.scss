@@ -6,12 +6,12 @@
 
 $light-orange-color: #f0cfa3;
 $orange-color: #f7941d;
-@font-face {
-  font-family: "Rubik-VariableFont_wght";
-  src: local("Rubik-VariableFont_wght"), url(./fonts/Rubik-VariableFont_wght.ttf) format("ttf");
-}
+// @font-face {
+//   font-family: "Rubik-VariableFont_wght";
+//   src: local("Rubik-VariableFont_wght"), url(./fonts/Rubik-VariableFont_wght.ttf) format("ttf");
+// }
 body {
-  font: 400 20px/1.5 "Manrope",sans-serif;
+  font-family: 'Rubik', sans-serif;
 }
 
 .container-l {
