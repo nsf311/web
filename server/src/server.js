@@ -9,7 +9,7 @@ var corsOptions = {
   origin: "http://localhost:3000"
   // origin:"http://34.134.26.155"
 };
-app.use(cors(corsOptions));
+app.use(cors());
 
 db.mongoose.connect(db.url, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(()=>{
