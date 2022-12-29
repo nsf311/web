@@ -4,7 +4,7 @@ import axios from "axios";
 // consumes data on the components. React Router is used for navigating to pages.
 export default axios.create({
   // baseURL: "http://localhost:3001/bos311",
-  baseURL: "http://34.27.54.143:3000/bos311",
+  baseURL: "http://infodeserts.org:3000/bos311",
   headers: {
     "Content-type": "application/json"
   }

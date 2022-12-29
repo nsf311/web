@@ -41,6 +41,6 @@ const httpsServer = https.createServer({
   key: fs.readFileSync('/etc/letsencrypt/live/infodeserts.org/privkey.pem'),
   cert: fs.readFileSync('/etc/letsencrypt/live/infodeserts.org/fullchain.pem'),
 }, app);
-app.listen(port, () => {
+httpsServer.listen(port, () => {
   console.log('Listening on port' + port);
 });
