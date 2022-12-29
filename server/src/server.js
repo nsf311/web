@@ -11,7 +11,7 @@ var corsOptions = {
 };
 app.use(cors());
 
-db.mongoose.connect(db.url, { useNewUrlParser: true, useUnifiedTopology: true })
+db.mongoose.connect(db.url, { useNewUrlParser: true, useUnifiedTopology: true, ssl: true })
   .then(()=>{
     console.log('Connected to the database!');
   })
