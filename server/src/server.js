@@ -1,4 +1,6 @@
 const https = require('https');
+const http = require('http');
+
 const fs = require('fs');
 var express = require('express');
 var app = express();
@@ -34,7 +36,7 @@ app.get('/', (req, res) => {
 });
 require("./routers/bos311.routes")(app)
 const port = process.env.NODE_ENV === 'production' ? (process.env.PORT || 80) : 3000;
-const httpServer = http.createServer(app);
+// const httpServer = http.createServer(app);
 const httpsServer = https.createServer({
   key: fs.readFileSync('/etc/letsencrypt/live/infodeserts.org/privkey.pem'),
   cert: fs.readFileSync('/etc/letsencrypt/live/infodeserts.org/fullchain.pem'),
