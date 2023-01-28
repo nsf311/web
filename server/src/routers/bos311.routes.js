@@ -8,6 +8,6 @@ module.exports = app=>{
     router.get("/hex_num/:HEX_600", bos311Hex.findByHexNum);
     router.get("/reg_res_filtered/:user_type/:frequency/:reason", bos311Hex.findRegVarByFilter);
     router.get("/hex_vars_filtered/:HEX_600/:user_type/:frequency/:reason", bos311Hex.findHexVarByFilter)
-    
+
     app.use('/bos311/hex_data', router);
 };

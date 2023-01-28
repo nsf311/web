@@ -28,6 +28,7 @@ yarn-error.log*
 # pwd
 /src/config/db_pwd.js
 /src/config/db.config.js
+/src/config/ca.crt
 
 # data
 /src/db/hexagon.bson

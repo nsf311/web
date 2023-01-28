@@ -10,12 +10,14 @@ const db = require("./models");
 const cors = require("cors");
 
 var corsOptions = {
-  origin: "http://localhost:3000"
+  // origin: "http://localhost:3000"
   // origin:"http://34.134.26.155"
+  //origin:"https://infodeserts.org"
 };
+
 app.use(cors());
 
-db.mongoose.connect(db.url, { useNewUrlParser: true, useUnifiedTopology: true, ssl: true })
+db.mongoose.connect(db.url, { useNewUrlParser: true, useUnifiedTopology: true})
   .then(()=>{
     console.log('Connected to the database!');
   })
@@ -26,7 +28,7 @@ db.mongoose.connect(db.url, { useNewUrlParser: true, useUnifiedTopology: true, s
   ;
 
 app.get('/', (req, res) => {
-  var data = '<p>Vagrant up!</p>';
+  var data = '<p>Test for mongoDB connection</p>';
   if (db.mongoose.connection.readyState) {
     data += '<p>Connected to MongoDB!</p>';
   } else {
@@ -35,12 +37,14 @@ app.get('/', (req, res) => {
   res.send(data);
 });
 require("./routers/bos311.routes")(app)
+
 const port = process.env.NODE_ENV === 'production' ? (process.env.PORT || 80) : 3000;
 // const httpServer = http.createServer(app);
 const httpsServer = https.createServer({
   key: fs.readFileSync('/etc/letsencrypt/live/infodeserts.org/privkey.pem'),
   cert: fs.readFileSync('/etc/letsencrypt/live/infodeserts.org/fullchain.pem'),
 }, app);
+
 httpsServer.listen(port, () => {
   console.log('Listening on port' + port);
 });
