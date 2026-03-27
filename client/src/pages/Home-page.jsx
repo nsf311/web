@@ -17,7 +17,7 @@ export function HomePage() {
                 MAKING INFORMATION <br />DESERTS VISIBLE{" "}
                 <span className="text-warning">.</span>
               </h2>
-              <h3 className="pt-4">{"(Add short intro here)"}</h3>
+              <h3 className="pt-4">Boston 311 data captures how people report non-emergency issues to their city government. This map visualizes how technological innovation can lead to uneven provision of public services.</h3>
             </div>
             <div className="col-6 text-end">
               <img src={binoculars} alt="binoculars" className="px-5 img-fluid" />
