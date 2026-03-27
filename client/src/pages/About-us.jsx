@@ -13,16 +13,25 @@ export function AboutUs() {
           DESERTS.
         </h2>
         <div className="m-2">
-          <p className="fs-4 fw-bold mb-4">What Is an Information Desert?</p>
+          <p className="fs-4 fw-bold mb-4 text-warning">What Is an Information Desert?</p>
           <p className="fs-5">
-            An information desert is a place where local information is poorly
-            embedded in community infrastructures or less available than in other
-            areas. Just as food deserts describe neighborhoods with limited
-            access to healthy food, information deserts capture areas where
-            residents have fewer opportunities to access or share important local
-            information. These gaps often overlap with socioeconomic
-            disadvantages, making it harder for underserved communities to
-            participate in civic life.
+            An information desert describes a condition where the information
+            available in a local community is structurally inadequate for
+            meeting residents' needs. It goes beyond a simple lack of
+            information. In an information desert, local information may be
+            fragmented across too many disconnected sources, making it difficult
+            for people to piece together what they need. It may also be
+            transient, appearing briefly and disappearing before residents can
+            act on it. These structural problems — scarcity, fragmentation, and
+            transience — together create an environment where people struggle to
+            stay informed, even when information technically exists somewhere.
+          </p>
+          <p className="fs-5">
+            Information deserts tend to overlap with socioeconomic disadvantages.
+            Communities with fewer resources often have weaker information
+            infrastructures, which in turn limits residents' ability to
+            participate in civic life, access public services, or advocate for
+            their neighborhoods.
           </p>
 
           <p className="fs-4 fw-bold mb-4 text-warning">
@@ -47,18 +56,9 @@ export function AboutUs() {
             services.
           </p>
 
-          <p className="fs-4 fw-bold mb-4">Our Research</p>
+          <p className="fs-4 fw-bold mb-4 text-warning">Our Research</p>
           <p className="fs-5">
-            This project is a result of research funded by the National Science
-            Foundation (NSF Award{" "}
-            <a
-              href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=1816763"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              #1816763
-            </a>
-            ), led by the{" "}
+            This project is a result of research led by the{" "}
             <a
               href="https://cil.cec.gmu.edu"
               target="_blank"
@@ -66,8 +66,31 @@ export function AboutUs() {
             >
               Community Informatics Lab (CIL)
             </a>{" "}
-            at George Mason University in collaboration with the University of
-            Maryland, Arizona State University, and Emerson College.
+            at George Mason University, in collaboration with the University of
+            Maryland, Arizona State University, and Emerson College. Our team
+            combines computational methods with qualitative research to
+            understand how civic technologies shape local information
+            landscapes and how disparities in technology use become embedded in
+            urban decision-making.
+          </p>
+
+          <p className="fs-4 fw-bold mb-4 text-warning">Acknowledgment</p>
+          <p className="fs-5">
+            This material is based upon work supported by the National Science
+            Foundation under Grant No.{" "}
+            <a
+              href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=1816763"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              1816763
+            </a>{" "}
+            ("CHS: Small: Collaborative Research: Making Information Deserts
+            Visible: Computational Models, Disparities in Civic Technology Use,
+            and Urban Decision Making," 2018–2022). Any opinions, findings, and
+            conclusions or recommendations expressed in this material are those
+            of the author(s) and do not necessarily reflect the views of the
+            National Science Foundation.
           </p>
 
           <p className="fs-4 fw-bold mb-4 text-warning">Selected Publications</p>
